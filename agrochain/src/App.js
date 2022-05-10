@@ -27,6 +27,7 @@ function App() {
     const [account, setAccount] = useState(null)
     const [nft, setNFT] = useState({})
     const [marketplace, setMarketplace] = useState({})
+    const [balance, SetBalance] = useState(null)
     // MetaMask Login/Connect
     const web3Handler = async () => {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -35,6 +36,9 @@ function App() {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         // Set signer
         const signer = provider.getSigner()
+        const balances = await provider.getBalance(account);
+        SetBalance(balances)
+        console.log(accounts)
 
         window.ethereum.on('chainChanged', (chainId) => {
             window.location.reload();
@@ -44,6 +48,7 @@ function App() {
             setAccount(accounts[0])
             await web3Handler()
         })
+        
         loadContracts(signer)
     }
     const loadContracts = async (signer) => {
@@ -58,8 +63,8 @@ function App() {
     <>
           
             <Navigation web3Handler={web3Handler} account={account} />
-            
-            <Profile marketplace={marketplace} nft={nft} account={account} />
+
+            <Profile marketplace={marketplace} nft={nft} account={account} balance={balance} />
              
           <Footer />
         

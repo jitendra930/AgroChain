@@ -33,7 +33,7 @@ function renderSoldItems(items) {
 
 
 
-const Profile = ({ marketplace, nft, account }) => {
+const Profile = ({ marketplace, nft, account, balance }) => {
 	const [image, setImage] = useState('')
 	const [price, setPrice] = useState(null)
 	const [name, setName] = useState('')
@@ -197,7 +197,7 @@ const Profile = ({ marketplace, nft, account }) => {
 									<img src={profile} className="img-fluid" />
 								</div>
 								<div className="col-md-8 text-center">
-									<h2 className="mt-3 text-dark-grey">$20</h2>
+									<h2 className="mt-3 text-dark-grey">{balance} ETH</h2>
 								</div>
 							</div>
 
@@ -263,8 +263,8 @@ const Profile = ({ marketplace, nft, account }) => {
 									</ul>
 
 									<div className="tab-content mx-4" id="myTabContent">
-										<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-											<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+										<div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+											<div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
 
 
@@ -273,7 +273,7 @@ const Profile = ({ marketplace, nft, account }) => {
 														{purchases.map((item, idx) => (
 															<div className="col-6 col-sm-4 col-md-4">
 																<div className="card mx-1 mb-3">
-																	<img class="img-fluid" src={item.image} />
+																	<img className="img-fluid" src={item.image} />
 																	<div className="card-body">
 
 																		<div className="row">
@@ -310,7 +310,7 @@ const Profile = ({ marketplace, nft, account }) => {
 
 											<hr />
 										</div>
-											<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+										<div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 								
 											
 
@@ -319,7 +319,7 @@ const Profile = ({ marketplace, nft, account }) => {
 													{listedItems.map((item, idx) => (
 														<div className="col-6 col-sm-4 col-md-4">
 															<div className="card mx-1 mb-3">
-																<img class="img-fluid" src={item.image} />
+																<img className="img-fluid" src={item.image} />
 																<div className="card-body">
 
 																	<div className="row">
