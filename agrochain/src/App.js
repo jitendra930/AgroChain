@@ -6,6 +6,7 @@ import { Footer } from "./Components/Footer";
 import { NFT } from "./Components/NFT";
 import { NFTDetails } from "./Components/NFTDetails";
 import { Profile } from "./Components/Profile";
+import { Register } from "./Components/Register";
 
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
     <>
           
           <Navigation title="AGRO CHAIN" />
-          <Profile />
+          <Register />
           <Footer />
         
     </>
