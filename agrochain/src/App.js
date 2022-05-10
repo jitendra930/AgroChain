@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 import Navigation from "./Components/Navigation";
@@ -14,7 +13,7 @@ function App() {
     <>
           
           <Navigation title="AGRO CHAIN" />
-          <Register />
+          <Profile />
           <Footer />
         
     </>

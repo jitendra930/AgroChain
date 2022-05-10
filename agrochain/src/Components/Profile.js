@@ -1,6 +1,8 @@
 import React from 'react'
 
 import profile from './profile.png'
+import nft1 from './nft/nft1.png'
+import nft2 from './nft/nft2.png'
 
 
 export const Profile = () => {
@@ -77,19 +79,19 @@ export const Profile = () => {
 								<div className="col-md-12">
 									<ul className="nav nav-tabs mb-4" id="myTab" role="tablist">
 										<li className="nav-item">
-											<a className="nav-link active" id="home-tab" data-toggle="tab" href="#tokens" role="tab" aria-controls="home" aria-selected="true">
+											<a className="nav-link" id="home-tab" data-toggle="tab" href="#tokens" role="tab" aria-controls="home" aria-selected="true">
 												<strong>TOKENS</strong>
 											</a>
 										</li>
 										<li className="nav-item">
-											<a className="nav-link" id="profile-tab" data-toggle="tab" href="#nfts" role="tab" aria-controls="profile" aria-selected="false">
+											<a className="nav-link active" id="profile-tab" data-toggle="tab" href="#nfts" role="tab" aria-controls="profile" aria-selected="false">
 												<strong>NFTs</strong>
 											</a>
 										</li>
 									</ul>
 
 									<div className="tab-content mx-4" id="myTabContent">
-										<div className="tab-pane fade show active" id="tokens" role="tabpanel" aria-labelledby="tokens-tab">
+										<div className="tab-pane fade" id="tokens" role="tabpanel" aria-labelledby="tokens-tab">
 											<div className="row">
 												<div className="col-3 col-sm-2 col-md-2">
 													<img src={profile} className="img-fluid" />
@@ -114,17 +116,61 @@ export const Profile = () => {
 
 											<hr />
 										</div>
-										<div className="tab-pane fade" id="nfts" role="tabpanel" aria-labelledby="nfts-tab">
-											<div className="text-center text-dark-grey">
-												<i className="fa fa-circle-notch fa-3x fa-fw"></i>
-												<h3 className="mt-2 mb-0">No NFTs yet</h3>
-												<a href="#">Learn More</a>
-											</div>
+										<div className="tab-pane fade show active" id="nfts" role="tabpanel" aria-labelledby="nfts-tab">
+											{/*<div className="text-center text-dark-grey">*/}
+											{/*	<i className="fa fa-circle-notch fa-3x fa-fw"></i>*/}
+											{/*	<h3 className="mt-2 mb-0">No NFTs yet</h3>*/}
+											{/*	<a href="#">Learn More</a>*/}
+											{/*</div>*/}
 
-											<div className="row text-center text-muted mt-4">
-												<div className="col-md-12">
-													<p className="type-6 mb-0">Don't see your NFT?</p>
-													<a className="type-6 mt-0" href="#">+ ADD NFTs</a>
+											{/*<div className="row text-center text-muted mt-4">*/}
+											{/*	<div className="col-md-12">*/}
+											{/*		<p className="type-6 mb-0">Don't see your NFT?</p>*/}
+											{/*		<a className="type-6 mt-0" href="#">+ ADD NFTs</a>*/}
+											{/*	</div>*/}
+											{/*</div>*/}
+											<div className="row">
+												<div className="col-md-4">
+													<div className="card">
+														<div className="card-body">
+															<div className="row">
+																<div className="col-md-6">
+																	<h5 className="mb-0">Legend</h5>
+																	<p className="type-6 text-muted">Yearly Stickers</p>
+																</div>
+																<div className="col-md-6">
+																	<p className="text-right text-success my-0"><i className="fa fa-lock-open fa-sm"></i></p>
+																	<p className="text-right text-success type-7-2 my-0">3</p>
+																</div>
+															</div>
+															<div className="row">
+																<div className="col-md-12">
+																	<img className="img-fluid" src={nft1} />
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div className="col-md-4">
+													<div className="card">
+														<div className="card-body">
+															<div className="row">
+																<div className="col-md-6">
+																	<h5 className="mb-0">Team Player</h5>
+																	<p className="type-6 text-muted">Monthly Stickers</p>
+																</div>
+																<div className="col-md-6">
+																	<p className="text-right text-success my-0"><i className="fa fa-lock-open fa-sm"></i></p>
+																	<p className="text-right text-success type-7-2 my-0">600</p>
+																</div>
+															</div>
+															<div className="row">
+																<div className="col-md-12">
+																	<img className="img-fluid" src={nft2} />
+																</div>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
