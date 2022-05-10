@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 /*import { Link } from "react-router-dom";*/
+import farmer from './farmer.png'
 
 export default function Navigation(props) {
     return (
         <nav className="navbar navbar-expand-lg navbar-effects sticky-top">
-            <a className="navbar-brand super-bold">{props.title}</a>
+            <a className="navbar-brand super-bold"><img src={farmer} height="40" width="50" />  {props.title}</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i className="fa fa-bars fa-fw"></i>
             </button>
