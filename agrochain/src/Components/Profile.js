@@ -4,8 +4,55 @@ import profile from './profile.png'
 import nft1 from './nft/nft1.png'
 import nft2 from './nft/nft2.png'
 
+import { Row, Form, Button } from 'react-bootstrap'
+import { useState } from 'react'
+import { ethers } from "ethers"
+import { create as ipfsHttpClient } from 'ipfs-http-client'
+const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
-export const Profile = () => {
+
+const Profile = ({ marketplace, nft, account }) => {
+	const [image, setImage] = useState('')
+	const [price, setPrice] = useState(null)
+	const [name, setName] = useState('')
+	const [description, setDescription] = useState('')
+	const uploadToIPFS = async (event) => {
+		event.preventDefault()
+		const file = event.target.files[0]
+		if (typeof file !== 'undefined') {
+			try {
+				const result = await client.add(file)
+				console.log(result)
+				setImage(`https://ipfs.infura.io/ipfs/${result.path}`)
+			} catch (error) {
+				console.log("ipfs image upload error: ", error)
+			}
+		}
+	}
+	const createNFT = async () => {
+		console.log("NFT");
+		if (!image || !price || !name || !description) return
+		try {
+			const result = await client.add(JSON.stringify({ image, price, name, description }))
+			mintThenList(result)
+		} catch (error) {
+			console.log("ipfs uri upload error: ", error)
+		}
+	}
+	const mintThenList = async (result) => {
+		
+		const uri = `https://ipfs.infura.io/ipfs/${result.path}`
+		console.log(uri);
+		// mint nft 
+		await (await nft.mint(uri)).wait()
+		// get tokenId of new nft 
+		const id = await nft.tokenCount()
+		// approve marketplace to spend nft
+		await (await nft.setApprovalForAll(marketplace.address, true)).wait()
+		// add nft to marketplace
+		const listingPrice = ethers.utils.parseEther(price.toString())
+		await (await marketplace.makeItem(nft.address, id, listingPrice)).wait()
+	}
     return (
 		<div className="container mt-4 mb-4">
 			<div className="row">
@@ -31,7 +78,7 @@ export const Profile = () => {
 							<div className="row mt-2 text-center text-sm-left">
 								<div className="col-md-12">
 									<h3 className="mb-0">Chonga Bichi</h3>
-									<p className="mt-0 text-dark-grey">0x536493hfknjsnfh3832733</p>
+									<p className="mt-0 text-dark-grey">{account}</p>
 
 									<div className="row mt-4 text-center">
 										<div className="col-md-3 col-sm-3 col-3">
@@ -136,23 +183,28 @@ export const Profile = () => {
 															<div className="mx-2 mt-2">
 																<div className="form-group">
 																	<h6>Name: <span className="text-danger">*</span></h6>
-																	<input className="form-control" placeholder="Enter Name" />
+																	<Form.Control onChange={(e) => setName(e.target.value)} className="form-control" placeholder="Enter Name" required />
 																</div>
 																<br />
 																<div className="form-group">
 																	<h6>Link to asset:<span className="text-danger">*</span></h6>
-																	<input className="form-control" placeholder="Enter Link" type="file" id="file" accept="image/*" />
+																	<Form.Control className="form-control" placeholder="Enter Link" type="file" id="file" name="file" required accept="image/*" onChange={uploadToIPFS} />
 																	<p className="text-muted type-7 mt-1 mb-0">Link your NFT to external link so that person can view.</p>
 																</div>
 																<br />
 																<div className="form-group">
 																	<h6>Description: <span className="text-danger">*</span></h6>
-																	<textarea className="form-control" placeholder="Enter Description..."></textarea>
+																	<Form.Control onChange={(e) => setDescription(e.target.value)} className="form-control" required as="textarea" placeholder="Enter Description..." />
+																</div>
+																<br />
+																<div className="form-group">
+																	<h6>Price (ETH): <span className="text-danger">*</span></h6>
+																	<Form.Control onChange={(e) => setPrice(e.target.value)} className="form-control" required type="number" placeholder="Enter Selling Price" />
 																</div>
 															</div>
 														</div>
 														<div className="modal-footer">
-															<button type="button" className="btn btn-success">Mint</button>
+															<button onClick={createNFT} type="button" className="btn btn-success">Mint</button>
 														</div>
 													</div>
 												</div>
@@ -214,3 +266,5 @@ export const Profile = () => {
                 
     )
 }
+
+export default Profile
