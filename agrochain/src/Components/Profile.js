@@ -141,7 +141,7 @@ export const Profile = () => {
 																<br />
 																<div className="form-group">
 																	<h6>Link to asset:<span className="text-danger">*</span></h6>
-																	<input className="form-control" placeholder="Enter Link" />
+																	<input className="form-control" placeholder="Enter Link" type="file" id="file" accept="image/*" />
 																	<p className="text-muted type-7 mt-1 mb-0">Link your NFT to external link so that person can view.</p>
 																</div>
 																<br />
