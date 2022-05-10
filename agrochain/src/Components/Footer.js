@@ -2,9 +2,13 @@ import React from 'react'
 
 
 export const Footer = () => {
+    let footerStyle = {
+        position: "absolute",
+        top: "100vh",
+        width: "100%"
+    }
     return (
-        <footer className="mt-auto">
-            <br />
+        <footer className="mt-auto" style={footerStyle} >
             <br />
             <div className="container-fluid bg-blue text-white">
                 <br />
@@ -15,7 +19,6 @@ export const Footer = () => {
                                 <div className="col-md-6">
                                     <h3>Agro Chain</h3>
                                     <h6>Why only transfer? when you can request or borrow for a loan or buy NFTs or sell it out.</h6>
-                                    <br />
                                     <h6>Made with <i className="fa fa-heart fa-fw"></i> in India.</h6>
                                 </div>
 
