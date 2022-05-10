@@ -5,6 +5,7 @@ import Navigation from "./Components/Navigation";
 import { Footer } from "./Components/Footer";
 import { NFT } from "./Components/NFT";
 import { NFTDetails } from "./Components/NFTDetails";
+import { Profile } from "./Components/Profile";
 
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
     <>
           
           <Navigation title="AGRO CHAIN" />
-          <NFTDetails/>
+          <Profile />
           <Footer />
         
     </>
