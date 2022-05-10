@@ -129,6 +129,34 @@ export const Profile = () => {
 											{/*		<a className="type-6 mt-0" href="#">+ ADD NFTs</a>*/}
 											{/*	</div>*/}
 											{/*</div>*/}
+											<div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div className="modal-dialog">
+													<div className="modal-content">
+														<div className="modal-body">
+															<div className="mx-2 mt-2">
+																<div className="form-group">
+																	<h6>Name: <span className="text-danger">*</span></h6>
+																	<input className="form-control" placeholder="Enter Name" />
+																</div>
+																<br />
+																<div className="form-group">
+																	<h6>Link to asset:<span className="text-danger">*</span></h6>
+																	<input className="form-control" placeholder="Enter Link" />
+																	<p className="text-muted type-7 mt-1 mb-0">Link your NFT to external link so that person can view.</p>
+																</div>
+																<br />
+																<div className="form-group">
+																	<h6>Description: <span className="text-danger">*</span></h6>
+																	<textarea className="form-control" placeholder="Enter Description..."></textarea>
+																</div>
+															</div>
+														</div>
+														<div className="modal-footer">
+															<button type="button" className="btn btn-success">Mint</button>
+														</div>
+													</div>
+												</div>
+											</div>
 											<div className="row">
 												<div className="col-md-4">
 													<div className="card">
