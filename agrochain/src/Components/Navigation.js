@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, NavLink } from 'react-router-dom';
 /*import { Link } from "react-router-dom";*/
 import farmer from './farmer.png'
 
@@ -12,9 +13,20 @@ const Navigation = ({ web3Handler, account }) => {
 
             <div className="collapse navbar-collapse justify-content-end text-center" id="navbarSupportedContent">
                 <ul className="navbar-nav">
+                    {account && 
+                        <li className="nav-item">
+                            <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/`}>Profile</NavLink>
+                        </li>}
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Home</a>
+                        <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/nft`}> NFT</NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/nft-details`}>NFT Detail</NavLink>
+                    </li>
+                 {!account &&
+                    <li className="nav-item">
+                        <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/signup`}>Register</NavLink>
+                    </li>}
                     <li className="nav-item">
                         <button className="nav-btn btn btn-secondary btn-sm btn-block"><i className="fa fa-sign-in-alt fa-fw"></i> Login</button>
                     </li>

@@ -395,3 +395,7 @@ a {
             padding-right: 1rem;
             text-decoration: none;
         }
+
+.active-route {
+    border-bottom: 3px solid #85c525 !important;
+}

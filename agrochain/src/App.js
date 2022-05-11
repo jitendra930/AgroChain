@@ -8,7 +8,7 @@ import MarketplaceAbi from './frontend/contractsData/Marketplace.json'
 import MarketplaceAddress from './frontend/contractsData/Marketplace-address.json'
 import NFTAbi from './frontend/contractsData/NFT.json'
 import NFTAddress from './frontend/contractsData/NFT-address.json'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ethers } from "ethers"
 import { Spinner } from 'react-bootstrap'
 
@@ -28,6 +28,7 @@ function App() {
     const [nft, setNFT] = useState({})
     const [marketplace, setMarketplace] = useState({})
     const [balance, SetBalance] = useState(null)
+
     // MetaMask Login/Connect
     const web3Handler = async () => {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -61,12 +62,15 @@ function App() {
     }
     return (
     <>
-          
-            <Navigation web3Handler={web3Handler} account={account} />
-
-            <Profile marketplace={marketplace} nft={nft} account={account} balance={balance} />
-             
-          <Footer />
+    <Navigation web3Handler={web3Handler} account={account} />
+    <Routes>
+      <Route path="/" element={<Profile />} />
+      <Route path="nft" element={<NFT />} />
+      <Route path="nft-details" element={<NFTDetails />} />
+      <Route path="signup" element={<Register />} />
+      <Route path="*" element={<NFT />} />
+    </Routes>
+    <Footer />
         
     </>
   );
