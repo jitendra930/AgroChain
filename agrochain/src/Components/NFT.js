@@ -1,13 +1,63 @@
 import React from 'react'
 
-import nft1 from './nft/nft1.png'
-import nft2 from './nft/nft2.png'
-import nft3 from './nft/nft3.png'
+import { useState, useEffect } from 'react'
+import { ethers } from "ethers"
 
 
-export const NFT = () => {
+import './loading.css';
+
+
+export const NFT = ({ marketplace, nft }) => {
+    const [loading, setLoading] = useState(true)
+    const [items, setItems] = useState([])
+    const loadMarketplaceItems = async () => {
+        // Load all unsold items
+        const itemCount = await marketplace.itemCount()
+        let items = []
+        for (let i = 1; i <= itemCount; i++) {
+            const item = await marketplace.items(i)
+            if (!item.sold) {
+                // get uri url from nft contract
+                const uri = await nft.tokenURI(item.tokenId)
+                // use uri to fetch the nft metadata stored on ipfs 
+                const response = await fetch(uri)
+                const metadata = await response.json()
+                // get total price of item (item price + fee)
+                const totalPrice = await marketplace.getTotalPrice(item.itemId)
+                // Add item to items array
+                items.push({
+                    totalPrice,
+                    itemId: item.itemId,
+                    seller: item.seller,
+                    name: metadata.name,
+                    description: metadata.description,
+                    image: metadata.image
+                })
+            }
+        }
+        setLoading(false)
+        setItems(items)
+    }
+    const buyMarketItem = async (item) => {
+        await (await marketplace.purchaseItem(item.itemId, { value: item.totalPrice })).wait()
+        loadMarketplaceItems()
+    }
+
+    useEffect(() => {
+        loadMarketplaceItems()
+    }, [])
+    if (loading) return (
+        <div className="container">
+            <div className="loader-holder">
+                <div className="holder"><div className="box"></div></div>
+                <div className="holder"><div className="box"></div></div>
+                <div className="holder"><div className="box"></div></div>
+            </div>
+        </div>
+    )
+
     return (
-        <><><><><div className="container mt-4 mb-4">
+        <><div className="container mt-4 mb-4">
             <div className="row">
                 <div className="col-md-9">
                     <h2 className="mb-0">NFTs</h2>
@@ -58,105 +108,44 @@ export const NFT = () => {
                         </div>
                         <div className="col-md-9">
                             <div className="row no-gutters">
-                                <div className="col-6 col-sm-4 col-md-4">
-                                    <div className="card mx-1 mb-3">
-                                        <img src={nft1} className="w-full" />
-                                        <div className="card-body">
+                                    {items.map((item, idx) => (
+                                        <div className="col-6 col-sm-4 col-md-4">
+                                            <div className="card mx-1 mb-3">
+                                                <img src={item.image} className="w-full" />
+                                                <div className="card-body">
 
-                                            <div className="row">
-                                                <div className="col-md-12">
-                                                    <p className="text-muted type-6 my-0">Chonga Army</p>
-                                                    <h5 className="my-0">
-                                                        <a>Space Agent</a>
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                            <div className="row mt-3">
-                                                <div className="col-md-6">
-                                                    <p className="text-success type-6 my-0">
-                                                        <i className="fab fa-ethereum"></i> 26.46
-                                                    </p>
-                                                    <p className="text-danger type-7 my-0">
-                                                        Last <i className="fab fa-ethereum"></i> 20.32
-                                                    </p>
-                                                </div>
-                                                <div className="col-md-6">
-                                                    <div className="text-end float-end mt-1">
-                                                        <button type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nft1">Buy Now</button>
+                                                    <div className="row">
+                                                        <div className="col-md-12">
+                                                            <p className="text-muted type-6 my-0">{item.name}</p>
+                                                            <h5 className="my-0">
+                                                                <a>{item.description}</a>
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row mt-3">
+                                                        <div className="col-md-6">
+                                                            <p className="text-success type-6 my-0">
+                                                                <i className="fab fa-ethereum"></i> {ethers.utils.formatEther(item.totalPrice)} ETH
+                                                            </p>
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <div className="text-end float-end mt-1">
+                                                                <button onClick={() => buyMarketItem(item)} type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nft1">Buy Now</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="col-6 col-sm-4 col-md-4">
-                                    <div className="card mx-1 mb-3">
-                                        <img src={nft2} />
-                                        <div className="card-body">
-
-                                            <div className="row">
-                                                <div className="col-md-12">
-                                                    <p className="text-muted type-6 my-0">Chonga Army</p>
-                                                    <h5 className="my-0">
-                                                        <a href="#">Alien Agent</a>
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                            <div className="row mt-3">
-                                                <div className="col-md-6">
-                                                    <p className="text-success type-6 my-0">
-                                                        <i className="fab fa-ethereum"></i> 54.82
-                                                    </p>
-                                                    <p className="text-primary type-7 my-0">
-                                                        Offer <i className="fab fa-ethereum"></i> 47.36
-                                                    </p>
-                                                </div>
-                                                <div className="col-md-6">
-                                                    <div className="text-end float-end mt-1">
-                                                        <button type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nft2">Buy Now</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-6 col-sm-4 col-md-4">
-                                    <div className="card mx-1 mb-3">
-                                        <img src={nft3} />
-                                        <div className="card-body">
-
-                                            <div className="row">
-                                                <div className="col-md-12">
-                                                    <p className="text-muted type-6 my-0">Chonga Army</p>
-                                                    <h5 className="my-0">
-                                                        <a href="#">Colour Agent</a>
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                            <div className="row mt-3">
-                                                <div className="col-md-6">
-                                                    <p className="text-success type-6 my-0">
-                                                        <i className="fab fa-ethereum"></i> 32.57
-                                                    </p>
-                                                    <p className="text-muted type-7 my-0">
-                                                        <i className="far fa-clock"></i> 21 Hours
-                                                    </p>
-                                                </div>
-                                                <div className="col-md-6">
-                                                    <div className="text-end float-end mt-1">
-                                                        <button type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nft3">Buy Now</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    ))}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div><div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        </div>
+
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-body">
@@ -183,85 +172,6 @@ export const NFT = () => {
                         </div>
                     </div>
                 </div>
-            </div></><div className="modal fade" id="nft1" tabIndex="-1" aria-labelledby="nft1Label" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <img className="img-fluid" src={nft1} />
-                                    <div className="row mt-3">
-                                        <div className="col-md-12">
-                                            <div className="d-grid gap-2">
-                                                <button className="btn btn-sm btn-primary" type="button">Buy Now</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <p className="text-muted type-6 my-0">Chonga Army</p>
-                                    <h4 className="mt-0">Space Agent</h4>
-                                    <h6 className="text-success mb-0 mt-4">Current Price:</h6>
-                                    <h4 className="text-success my-0"><i className="fab fa-ethereum"></i> 26.46</h4>
-                                    <h6 className="text-danger mt-0">Last <i className="fab fa-ethereum"></i> 20.32</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div></><div className="modal fade" id="nft2" tabIndex="-1" aria-labelledby="nft2Label" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <img className="img-fluid" src={nft2} />
-                                    <div className="row mt-3">
-                                        <div className="col-md-12">
-                                            <div className="d-grid gap-2">
-                                                <button className="btn btn-sm btn-primary" type="button">Buy Now</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <p className="text-muted type-6 my-0">Chonga Army</p>
-                                    <h4 className="mt-0">Alien Agent</h4>
-                                    <h6 className="text-success mb-0 mt-4">Current Price:</h6>
-                                    <h4 className="text-success my-0"><i className="fab fa-ethereum"></i> 54.82</h4>
-                                    <h6 className="text-primary mt-0">Offer <i className="fab fa-ethereum"></i> 47.36</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div></><div className="modal fade" id="nft3" tabIndex="-1" aria-labelledby="nft3Label" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <img className="img-fluid" src={nft3} />
-                                    <div className="row mt-3">
-                                        <div className="col-md-12">
-                                            <div className="d-grid gap-2">
-                                                <button className="btn btn-sm btn-primary" type="button">Buy Now</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <p className="text-muted type-6 my-0">Chonga Army</p>
-                                    <h4 className="mt-0">Colour Agent</h4>
-                                    <h6 className="text-success mb-0 mt-4">Current Price:</h6>
-                                    <h4 className="text-success my-0"><i className="fab fa-ethereum"></i> 32.57</h4>
-                                    <h6 className="text-muted mt-0"><i className="far fa-clock"></i> 21 Hours</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div></>
-
     )
 }
