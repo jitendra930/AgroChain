@@ -3,6 +3,9 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { ethers } from "ethers"
 
+import { Loading } from "./Loading";
+import { Block } from "./block-loading/block";
+
 
 import './loading.css';
 
@@ -47,13 +50,7 @@ export const NFT = ({ marketplace, nft, account, balance }) => {
         loadMarketplaceItems()
     }, [])
     if (loading) return (
-        <div className="container">
-            <div className="loader-holder">
-                <div className="holder"><div className="box"></div></div>
-                <div className="holder"><div className="box"></div></div>
-                <div className="holder"><div className="box"></div></div>
-            </div>
-        </div>
+        <Block />
     )
 
     return (
