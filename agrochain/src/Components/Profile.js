@@ -1,8 +1,7 @@
 import React from 'react'
 
 import profile from './profile.png'
-import nft1 from './nft/nft1.png'
-import nft2 from './nft/nft2.png'
+import './loading.css';
 
 import { Row, Col, Card, Form, Button } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
@@ -110,75 +109,19 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 		setLoading(false)
 		setListedItems(listedItems)
 		setSoldItems(soldItems)
-		console.log(listedItems);
-	}
-	const [items, setItems] = useState([])
-	const loadMarketplaceItems = async () => {
-		// Load all unsold items
-		const itemCount = await marketplace.itemCount()
-		let items = []
-		for (let i = 1; i <= itemCount; i++) {
-			const item = await marketplace.items(i)
-			if (!item.sold) {
-				// get uri url from nft contract
-				const uri = await nft.tokenURI(item.tokenId)
-				// use uri to fetch the nft metadata stored on ipfs 
-				const response = await fetch(uri)
-				const metadata = await response.json()
-				// get total price of item (item price + fee)
-				const totalPrice = await marketplace.getTotalPrice(item.itemId)
-				// Add item to items array
-				items.push({
-					totalPrice,
-					itemId: item.itemId,
-					seller: item.seller,
-					name: metadata.name,
-					description: metadata.description,
-					image: metadata.image
-				})
-			}
-		}
-		setLoading(false)
-		setItems(items)
-	}
-	const [purchases, setPurchases] = useState([])
-	const loadPurchasedItems = async () => {
-		// Fetch purchased items from marketplace by quering Offered events with the buyer set as the user
-		const filter = marketplace.filters.Bought(null, null, null, null, null, account)
-		const results = await marketplace.queryFilter(filter)
-		//Fetch metadata of each nft and add that to listedItem object.
-		const purchases = await Promise.all(results.map(async i => {
-			// fetch arguments from each result
-			i = i.args
-			// get uri url from nft contract
-			const uri = await nft.tokenURI(i.tokenId)
-			// use uri to fetch the nft metadata stored on ipfs 
-			const response = await fetch(uri)
-			const metadata = await response.json()
-			// get total price of item (item price + fee)
-			const totalPrice = await marketplace.getTotalPrice(i.itemId)
-			// define listed item object
-			let purchasedItem = {
-				totalPrice,
-				price: i.price,
-				itemId: i.itemId,
-				name: metadata.name,
-				description: metadata.description,
-				image: metadata.image
-			}
-			return purchasedItem
-		}))
-		setLoading(false)
-		setPurchases(purchases)
-	}
-	const buyMarketItem = async (item) => {
-		await (await marketplace.purchaseItem(item.itemId, { value: item.totalPrice })).wait()
-		loadMarketplaceItems()
 	}
 	useEffect(() => {
 		loadListedItems()
 	}, [])
-		
+	if (loading) return (
+		<div className="container">
+			<div className="loader-holder">
+				<div className="holder"><div className="box"></div></div>
+				<div className="holder"><div className="box"></div></div>
+				<div className="holder"><div className="box"></div></div>
+			</div>
+		</div>
+	)	
     return (
 		<div className="container mt-4 mb-4">
 			<div className="row">
@@ -265,56 +208,6 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 
 									<div className="tab-content mx-4" id="myTabContent">
 										<div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-											<div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-
-
-												<div className="col-md-9">
-													<div className="row no-gutters">
-														{purchases.map((item, idx) => (
-															<div className="col-6 col-sm-4 col-md-4">
-																<div className="card mx-1 mb-3">
-																	<img className="img-fluid" src={item.image} />
-																	<div className="card-body">
-
-																		<div className="row">
-																			<div className="col-md-12">
-																				<p className="text-muted type-6 my-0">{item.name}</p>
-																				<h5 className="my-0">
-																					<a href="#">{item.description}</a>
-																				</h5>
-																			</div>
-																		</div>
-																		<div className="row mt-3">
-																			<div className="col-md-6">
-																				<p className="text-success type-6 my-0">
-																					<i className="fab fa-ethereum"></i>{ethers.utils.formatEther(item.totalPrice)} ETH
-																				</p>
-																				<p className="text-primary type-7 my-0">
-																					Offer <i className="fab fa-ethereum"></i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)}
-																				</p>
-																			</div>
-																			<div className="col-md-6">
-																				<div className="text-end float-end mt-1">
-																					<button type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nft2">Buy Now</button>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														))}
-													</div>
-												</div>
-
-											</div>
-
-											<hr />
-										</div>
-										<div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-								
-											
-
 											<div className="col-md-9">
 												<div className="row no-gutters">
 													{listedItems.map((item, idx) => (
@@ -337,7 +230,7 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 																				<i className="fab fa-ethereum"></i>{ethers.utils.formatEther(item.totalPrice)} ETH
 																			</p>
 																			<p className="text-primary type-7 my-0">
-																				Offer <i className="fab fa-ethereum"></i> {ethers.utils.formatEther(item.totalPrice)*(100/101)}
+																				Offer <i className="fab fa-ethereum"></i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)}
 																			</p>
 																		</div>
 																		<div className="col-md-6">
@@ -352,39 +245,48 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 													))}
 												</div>
 											</div>
+										</div>							
+										<div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+											<div className="col-md-9">
+												<div className="row no-gutters">
+													{soldItems.map((item, idx) => (
+														<div className="col-6 col-sm-4 col-md-4">
+															<div className="card mx-1 mb-3">
+																<img className="img-fluid" src={item.image} />
+																<div className="card-body">
 
-													
-
-												{/*	<div className="flex justify-center">*/}
-												{/*		{listedItems.length > 0 ?*/}
-												{/*			<div className="px-5 py-3 container">*/}
-												{/*				<h2>Listed</h2>*/}
-												{/*				<Row xs={1} md={2} lg={4} className="g-4 py-3">*/}
-												{/*					{listedItems.map((item, idx) => (*/}
-												{/*						<Col key={idx} className="overflow-hidden">*/}
-												{/*							<Card>*/}
-												{/*								<Card.Img variant="top" src={item.image} />*/}
-												{/*								<Card.Footer>{ethers.utils.formatEther(item.totalPrice)} ETH</Card.Footer>*/}
-												{/*							</Card>*/}
-												{/*						</Col>*/}
-												{/*					))}*/}
-												{/*				</Row>*/}
-												{/*				{soldItems.length > 0 && renderSoldItems(soldItems)}*/}
-												{/*			</div>*/}
-												{/*			: (*/}
-												{/*				<main style={{ padding: "1rem 0" }}>*/}
-												{/*					<h2>No listed assets</h2>*/}
-												{/*				</main>*/}
-												{/*			)}*/}
-												{/*	</div>*/}
-												{/*</div>*/}
-												
+																	<div className="row">
+																		<div className="col-md-12">
+																			<p className="text-muted type-6 my-0">{item.name}</p>
+																			<h5 className="my-0">
+																				<a href="#">{item.description}</a>
+																			</h5>
+																		</div>
+																	</div>
+																	<div className="row mt-3">
+																		<div className="col-md-6">
+																			<p className="text-success type-6 my-0">
+																				<i className="fab fa-ethereum"></i>{ethers.utils.formatEther(item.totalPrice)} ETH
+																			</p>
+																		</div>
+																		<div className="col-md-6">
+																			<div className="text-end float-end mt-1">
+																				<button type="button" className="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#nft2">SOLD</button>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													))}
+												</div>
 											</div>
-										</div>
-									</div>
+											</div>
 								</div>
 							</div>
+						</div>
 					</div>
+				</div>
 					<div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div className="modal-dialog">
 							<div className="modal-content">

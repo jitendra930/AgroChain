@@ -5,11 +5,11 @@ import './loading.css';
 
 export const Loading = () => {
     return (
-        <div class="container">
-            <div class="loader-holder">
-                <div class="holder"><div class="box"></div></div>
-                <div class="holder"><div class="box"></div></div>
-                <div class="holder"><div class="box"></div></div>
+        <div className="container">
+            <div className="loader-holder">
+                <div className="holder"><div className="box"></div></div>
+                <div className="holder"><div className="box"></div></div>
+                <div className="holder"><div className="box"></div></div>
             </div>
         </div>
     )

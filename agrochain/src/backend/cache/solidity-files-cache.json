@@ -78,7 +78,7 @@
       ]
     },
     "C:\\Users\\ZEUS\\Desktop\\Intelegix Labs\\AgroChain\\agrochain\\src\\backend\\contracts\\Marketplace.sol": {
-      "lastModificationDate": 1652181132350,
+      "lastModificationDate": 1652354552478,
       "contentHash": "c05cadad1433de9500908e6c0b9c9fcd",
       "sourceName": "src/backend/contracts/Marketplace.sol",
       "solcConfig": {
@@ -553,7 +553,7 @@
       ]
     },
     "C:\\Users\\ZEUS\\Desktop\\Intelegix Labs\\AgroChain\\agrochain\\src\\backend\\contracts\\NFT.sol": {
-      "lastModificationDate": 1652181132351,
+      "lastModificationDate": 1652354552494,
       "contentHash": "1da1e8439f62c94acef6964469b6996d",
       "sourceName": "src/backend/contracts/NFT.sol",
       "solcConfig": {
