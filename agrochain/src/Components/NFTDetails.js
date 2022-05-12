@@ -6,6 +6,8 @@ import nft1 from './nft/nft1.png'
 export const NFTDetails = () => {
     return (
         <div className="container mt-4">
+            <br />
+            <br />
             <div className="row">
                 <div className="col-md-6">
                     <img className="img-fluid" src={nft1} />
