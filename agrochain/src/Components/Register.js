@@ -2,7 +2,6 @@ import React from 'react'
 
 import wheat from './wheat.jpg'
 
-
 export const Register = () => {
     return (
         <div className="container mt-4 mb-4">
@@ -43,15 +42,15 @@ export const Register = () => {
                                     <br />
                                     <div className="form-group">
                                         <h6>Contact :</h6>
-                                        <input type="text" class="form-control" id="validationDefault03" placeholder="City" required />
+                                        <input type="text" className="form-control" id="validationDefault03" placeholder="City" required />
                                     </div>
                                     <div className="form-group">
                                         <h6>City :</h6>
-                                        <input type="text" class="form-control" id="validationDefault04" placeholder="State" required />
+                                        <input type="text" className="form-control" id="validationDefault04" placeholder="State" required />
                                     </div>
                                     <div className="form-group">
                                         <h6>Zip :</h6>
-                                        <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required />
+                                        <input type="text" className="form-control" id="validationDefault05" placeholder="Zip" required />
                                     </div>
                                     
 
@@ -69,7 +68,7 @@ export const Register = () => {
 
                                     <div className="row mt-2">
                                         <div className="col-md-12">
-                                            <button type="submit" class="btn btn-success">
+                                            <button type="submit" className="btn btn-success">
                                                 <i className="fa fa-user-plus fa-fw"></i>
                                                 Create Account
                                             </button>
