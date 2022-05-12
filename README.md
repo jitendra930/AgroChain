@@ -9,7 +9,7 @@ $ git clone https://github.com/IntelegixLabs/AgroChain
 ### 2. Install Dependencies:
 
 ```
-$ cd agrochain
+$ cd AgroChain/agrochain
 $ npm install
 ```
 
