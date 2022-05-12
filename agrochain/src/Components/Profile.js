@@ -238,7 +238,7 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 
 									<div className="tab-content mx-4" id="myTabContent">
 										<div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-											<div className="col-md-9">
+											<div className="col-md-12">
 												<div className="row no-gutters">
 													{listedItems.map((item, idx) => (
 														<div className="col-6 col-sm-4 col-md-4">
@@ -280,7 +280,7 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 											</div>
 										</div>							
 										<div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-											<div className="col-md-9">
+											<div className="col-md-12">
 												<div className="row no-gutters">
 													{soldItems.map((item, idx) => (
 														<div className="col-6 col-sm-4 col-md-4">
