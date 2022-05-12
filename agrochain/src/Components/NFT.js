@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ethers } from "ethers"
 
 import { Loading } from "./Loading";
@@ -9,7 +10,11 @@ import { Loading } from "./Loading";
 import './loading.css';
 
 
+
+
+
 export const NFT = ({ marketplace, nft, account, balance }) => {
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true)
     const [items, setItems] = useState([])
     const loadMarketplaceItems = async () => {
@@ -51,6 +56,7 @@ export const NFT = ({ marketplace, nft, account, balance }) => {
     if (loading) return (
         <Loading />
     )
+
 
     return (
         <><div className="container mt-4 mb-4">
@@ -115,7 +121,7 @@ export const NFT = ({ marketplace, nft, account, balance }) => {
                                                         <div className="col-md-12">
                                                             <p className="text-muted type-6 my-0">{item.name}</p>
                                                             <h5 className="my-0">
-                                                                <a to={`/nft-details`}>{item.description}</a>
+                                                                <a onClick={() => navigate('/nft-details', { state: { nfts: item  } })}>{item.description}</a>
                                                             </h5>
                                                         </div>
                                                     </div>

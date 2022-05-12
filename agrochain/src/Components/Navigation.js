@@ -14,14 +14,11 @@ const Navigation = ({ web3Handler, account }) => {
             <div className="collapse navbar-collapse justify-content-end text-center" id="navbarSupportedContent">
                 <ul className="navbar-nav">
                     {account && 
-                        <li className="nav-item">
-                            <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/profile`}>Profile</NavLink>
-                        </li>}
+                    <li className="nav-item">
+                        <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/profile`}>Profile</NavLink>
+                    </li>}
                     <li className="nav-item">
                         <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/nft`}> NFT</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/nft-details`}>NFT Detail</NavLink>
                     </li>
                  {!account &&
                     <li className="nav-item">
