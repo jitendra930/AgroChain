@@ -4,4 +4,5 @@
 
 ```
 npx hardhat test
+npx run src/backend/scripts/deploy.js --network localhost
 ```
