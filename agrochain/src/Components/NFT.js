@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { ethers } from "ethers"
 
 import { Loading } from "./Loading";
-
-
 import './loading.css';
 
 
