@@ -18,8 +18,12 @@ import { NFT } from "./Components/NFT";
 import { NFTDetails } from "./Components/NFTDetails";
 import Profile from "./Components/Profile";
 import { Register } from "./Components/Register";
+import { Loading } from "./Components/Loading";
 
 import './App.css';
+
+
+const RpcHttpUrl = "https://mainnet.infura.io/v3/9f37c36eaea34b42a0bce7936c691b67";
 
 
 function App() {
@@ -34,12 +38,15 @@ function App() {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         setAccount(accounts[0])
         // Get provider from Metamask
+        /*const provider = new ethers.providers.JsonRpcProvider(RpcHttpUrl)*/
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         // Set signer
         const signer = provider.getSigner()
-        const balances = await provider.getBalance(account);
+        const balance = await provider.getBalance(accounts[0])
+        const balances = ethers.utils.formatEther(balance);
         SetBalance(balances)
-        console.log(accounts)
+        console.log(balances);
+
 
         window.ethereum.on('chainChanged', (chainId) => {
             window.location.reload();
@@ -64,7 +71,8 @@ function App() {
     <>
     <Navigation web3Handler={web3Handler} account={account} />
     <Routes>
-      <Route path="/" element={<Profile />} />
+      <Route path="/" element={<Loading />} />
+      <Route path="/profile" element={<Profile marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
       <Route path="nft" element={<NFT />} />
       <Route path="nft-details" element={<NFTDetails />} />
       <Route path="signup" element={<Register />} />

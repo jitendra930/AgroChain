@@ -197,14 +197,15 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 									<img src={profile} className="img-fluid" />
 								</div>
 								<div className="col-md-8 text-center">
-									<h2 className="mt-3 text-dark-grey">{balance} ETH</h2>
+									<br/>
+									<h2 className="mt-1 text-dark-grey">{balance.slice(0,5)} ETH</h2>
 								</div>
 							</div>
 
 							<div className="row mt-2 text-center text-sm-left">
 								<div className="col-md-12">
-									<h3 className="mb-0">Chonga Bichi</h3>
-									<p className="mt-0 text-dark-grey">{account}</p>
+									<h3 className="mb-0">Farmer X</h3>
+									<p className="mt-3 text-dark-grey">{account.slice(2,)}</p>
 
 									<div className="row mt-4 text-center">
 										<div className="col-md-3 col-sm-3 col-3">
