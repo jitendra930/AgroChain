@@ -219,24 +219,27 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 																	<div className="row">
 																		<div className="col-md-12">
 																			<p className="text-muted type-6 my-0">{item.name}</p>
-																			<h5 className="my-0">
-																				<a href="#">{item.description}</a>
-																			</h5>
+																			<p className="text-info type-7 my-0">
+																				{item.description}
+																			</p>
 																		</div>
 																	</div>
 																	<div className="row mt-3">
 																		<div className="col-md-6">
 																			<p className="text-success type-6 my-0">
-																				<i className="fab fa-ethereum"></i>{ethers.utils.formatEther(item.totalPrice)} ETH
+																				<i className="fab fa-ethereum"></i> {ethers.utils.formatEther(item.totalPrice)}
 																			</p>
-																			<p className="text-primary type-7 my-0">
-																				Offer <i className="fab fa-ethereum"></i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)}
-																			</p>
+																			{/*<p className="text-primary type-7 my-0">*/}
+																			{/*	Offer <i className="fab fa-ethereum"></i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)}*/}
+																			{/*</p>*/}
 																		</div>
 																		<div className="col-md-6">
-																			<div className="text-end float-end mt-1">
-																				<button type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nft2">Buy Now</button>
-																			</div>
+																			{/*<div className="text-end float-end mt-1">*/}
+																			{/*	<button type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nft2">Buy Now</button>*/}
+																			{/*</div>*/}
+																			<p className="text-danger type-6 my-0">
+																				<i className="fab fa-ethereum"></i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)} ETH
+																			</p>
 																		</div>
 																	</div>
 																</div>
@@ -258,9 +261,9 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 																	<div className="row">
 																		<div className="col-md-12">
 																			<p className="text-muted type-6 my-0">{item.name}</p>
-																			<h5 className="my-0">
-																				<a href="#">{item.description}</a>
-																			</h5>
+																			<p className="text-info type-7 my-0">
+																				{item.description}
+																			</p>
 																		</div>
 																	</div>
 																	<div className="row mt-3">

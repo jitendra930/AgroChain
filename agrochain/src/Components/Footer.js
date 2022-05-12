@@ -16,9 +16,9 @@ export const Footer = () => {
                     <div className="col-md-12">
                         <div className="container">
                             <div className="row">
-                                <div className="col-md-6">
+                                <div className="col-md-12">
                                     <h3>Agro Chain</h3>
-                                    <h6>Why only transfer? when you can request or borrow for a loan or buy NFTs or sell it out.</h6>
+                                    <h6>Invest in the Greener Future, but buying NFT from farmers, and providing them resources to invest in sustainable farming methods.</h6>
                                     <h6>Made with <i className="fa fa-heart fa-fw"></i> in India.</h6>
                                 </div>
 

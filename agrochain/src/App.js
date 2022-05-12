@@ -73,7 +73,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Loading />} />
       <Route path="/profile" element={<Profile marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
-      <Route path="nft" element={<NFT marketplace={marketplace} nft={nft} />} />
+      <Route path="nft" element={<NFT marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
       <Route path="nft-details" element={<NFTDetails />} />
       <Route path="signup" element={<Register />} />
       <Route path="*" element={<NFT />} />
