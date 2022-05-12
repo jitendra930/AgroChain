@@ -1,6 +1,7 @@
 import React from 'react'
 
 import profile from './profile.png'
+import { Loading } from "./Loading";
 import './loading.css';
 
 import { Row, Col, Card, Form, Button } from 'react-bootstrap'
@@ -49,6 +50,13 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 				console.log("ipfs image upload error: ", error)
 			}
 		}
+		if (!event.target.files || event.target.files.length === 0) {
+			setSelectedFile(undefined)
+			return
+		}
+
+		// I've kept this example simple by using the first image instead of multiple
+		setSelectedFile(event.target.files[0])
 	}
 	const createNFT = async () => {
 		console.log("NFT");
@@ -110,17 +118,39 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 		setListedItems(listedItems)
 		setSoldItems(soldItems)
 	}
+
+	const [selectedFile, setSelectedFile] = useState()
+	const [preview, setPreview] = useState()
+
+	// create a preview as a side effect, whenever selected file is changed
+	useEffect(() => {
+		if (!selectedFile) {
+			setPreview(undefined)
+			return
+		}
+
+		const objectUrl = URL.createObjectURL(selectedFile)
+		setPreview(objectUrl)
+
+		// free memory when ever this component is unmounted
+		return () => URL.revokeObjectURL(objectUrl)
+	}, [selectedFile])
+
+	const onSelectFile = e => {
+		if (!e.target.files || e.target.files.length === 0) {
+			setSelectedFile(undefined)
+			return
+		}
+
+		// I've kept this example simple by using the first image instead of multiple
+		setSelectedFile(e.target.files[0])
+	}
+
 	useEffect(() => {
 		loadListedItems()
 	}, [])
 	if (loading) return (
-		<div className="container">
-			<div className="loader-holder">
-				<div className="holder"><div className="box"></div></div>
-				<div className="holder"><div className="box"></div></div>
-				<div className="holder"><div className="box"></div></div>
-			</div>
-		</div>
+		<Loading />
 	)	
     return (
 		<div className="container mt-4 mb-4">
@@ -294,6 +324,11 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 						<div className="modal-dialog">
 							<div className="modal-content">
 								<div className="modal-body">
+									<div className="card-body sidebar-image-card-body">
+										{selectedFile && <img src={preview} className="img-fluid sidebar-image" />}
+										
+									</div>
+								
 									<div className="mx-2 mt-2">
 										<div className="form-group">
 											<h6>Name: <span className="text-danger">*</span></h6>
