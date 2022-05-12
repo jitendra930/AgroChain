@@ -7,7 +7,7 @@ import { ethers } from "ethers"
 import './loading.css';
 
 
-export const NFT = ({ marketplace, nft }) => {
+export const NFT = ({ marketplace, nft, account, balance }) => {
     const [loading, setLoading] = useState(true)
     const [items, setItems] = useState([])
     const loadMarketplaceItems = async () => {
@@ -80,12 +80,13 @@ export const NFT = ({ marketplace, nft }) => {
                         <div className="col-md-3">
                             <div className="card">
                                 <div className="mx-3 mt-3 mb-4">
-                                    <div className="d-grid gap-2">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Mint NFT
-                                        </button>
+                                    <div className="card border-secondary  mb-3" >
+                                        <div className="card-header">{account.slice(0, 12)+'...'+account.slice(29,)}</div>
+                                        <div className="card-body text-success ">
+                                            <h5 className="card-title"><i className="fab fa-ethereum"></i>   {balance.slice(0,6)} ETH</h5>
+                                            <p className="card-text">Invest in the Greener Future, but buying NFT from farmers, and providing them resources to invest in sustainable farming methods</p>
+                                        </div>
                                     </div>
-
                                     <br />
 
                                     <h6 className="text-muted">PRICE SORTING</h6>
@@ -118,7 +119,7 @@ export const NFT = ({ marketplace, nft }) => {
                                                         <div className="col-md-12">
                                                             <p className="text-muted type-6 my-0">{item.name}</p>
                                                             <h5 className="my-0">
-                                                                <a>{item.description}</a>
+                                                                <a to={`/nft-details`}>{item.description}</a>
                                                             </h5>
                                                         </div>
                                                     </div>
@@ -145,33 +146,6 @@ export const NFT = ({ marketplace, nft }) => {
             </div>
         </div>
 
-            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <div className="mx-2 mt-2">
-                                <div className="form-group">
-                                    <h6>Name: <span className="text-danger">*</span></h6>
-                                    <input className="form-control" placeholder="Enter Name" />
-                                </div>
-                                <br />
-                                <div className="form-group">
-                                    <h6>Link to asset:<span className="text-danger">*</span></h6>
-                                    <input className="form-control" placeholder="Enter Link" />
-                                    <p className="text-muted type-7 mt-1 mb-0">Link your NFT to external link so that person can view.</p>
-                                </div>
-                                <br />
-                                <div className="form-group">
-                                    <h6>Description: <span className="text-danger">*</span></h6>
-                                    <textarea className="form-control" placeholder="Enter Description..."></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-success">Mint</button>
-                        </div>
-                    </div>
-                </div>
-            </div></>
+        </>
     )
 }
