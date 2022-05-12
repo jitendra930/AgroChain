@@ -281,7 +281,7 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 													))}
 												</div>
 											</div>
-											</div>
+										</div>
 								</div>
 							</div>
 						</div>
