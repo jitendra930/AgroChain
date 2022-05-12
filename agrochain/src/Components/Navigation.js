@@ -15,7 +15,7 @@ const Navigation = ({ web3Handler, account }) => {
                 <ul className="navbar-nav">
                     {account && 
                         <li className="nav-item">
-                            <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/`}>Profile</NavLink>
+                            <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/profile`}>Profile</NavLink>
                         </li>}
                     <li className="nav-item">
                         <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/nft`}> NFT</NavLink>
