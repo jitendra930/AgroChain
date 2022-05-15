@@ -183,28 +183,28 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 
 									<div className="row mt-4 text-center">
 										<div className="col-md-3 col-sm-3 col-3">
-											<button className="btn btn-primary btn-sm">
+											<button className="btn btn-success btn-sm">
 												<i className="fa fa-arrow-down fa-fw"></i>
 											</button>
-											<p className="small text-primary">Receive</p>
+											<p className="small text-success">Receive</p>
 										</div>
 										<div className="col-md-3 col-sm-3 col-3">
-											<button className="btn btn-primary btn-sm">
+											<button className="btn btn-danger btn-sm">
 												<i className="fa fa-arrow-up fa-fw"></i>
 											</button>
-											<p className="small text-primary">Send</p>
+											<p className="small text-danger">Send</p>
 										</div>
 										<div className="col-md-3 col-sm-3 col-3">
-											<button className="btn btn-primary btn-sm">
+											<button className="btn btn-secondary btn-sm">
 												<i className="fa fa-credit-card fa-fw"></i>
 											</button>
-											<p className="small text-primary">Buy</p>
+											<p className="small text-secondary">Buy</p>
 										</div>
 										<div className="col-md-3 col-sm-3 col-3">
-											<button className="btn btn-primary btn-sm">
+											<button className="btn btn-warning btn-sm">
 												<i className="fa fa-exchange-alt fa-fw"></i>
 											</button>
-											<p className="small text-primary">Swap</p>
+											<p className="small text-warning">Swap</p>
 										</div>
 									</div>
 								</div>
