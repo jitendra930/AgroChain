@@ -35,21 +35,21 @@ $ npx hardhat node
 `$ npm run start`
 
 
-### 3. Project Architecture
+### 8. Project Architecture
 
 <p align="center">
   <img src="DATA/0.png" width="450" height="650" />
 </p>
 
-### 5. Application Screenshots
+### 9. Application Screenshots
 
 <br />
 <p align="center">
   <img src="DATA/1.png" width="400"/>
-  <img src="DATA/2.PNG" width="400"/>
-  <img src="DATA/3.PNG" width="400"/>
-  <img src="DATA/4.PNG" width="400"/>
-  <img src="DATA/5.PNG" width="400"/>	
+  <img src="DATA/2.png" width="400"/>
+  <img src="DATA/3.png" width="400"/>
+  <img src="DATA/4.png" width="400"/>
+  <img src="DATA/5.png" width="400"/>	
 </p>
 <br />
 
