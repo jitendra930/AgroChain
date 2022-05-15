@@ -1,85 +1,9 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "C:\\Users\\ZEUS\\Desktop\\NFTs_Tutorial\\src\\backend\\contracts\\NFT.sol": {
-      "lastModificationDate": 1651598292740,
-      "contentHash": "1da1e8439f62c94acef6964469b6996d",
-      "sourceName": "src/backend/contracts/NFT.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "NFT"
-      ]
-    },
-    "C:\\Users\\ZEUS\\Desktop\\NFTs_Tutorial\\src\\backend\\contracts\\Marketplace.sol": {
-      "lastModificationDate": 1651598226066,
-      "contentHash": "c05cadad1433de9500908e6c0b9c9fcd",
-      "sourceName": "src/backend/contracts/Marketplace.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC721/IERC721.sol",
-        "@openzeppelin/contracts/security/ReentrancyGuard.sol",
-        "hardhat/console.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "Marketplace"
-      ]
-    },
     "C:\\Users\\ZEUS\\Desktop\\Intelegix Labs\\AgroChain\\agrochain\\src\\backend\\contracts\\Marketplace.sol": {
-      "lastModificationDate": 1652354552478,
-      "contentHash": "c05cadad1433de9500908e6c0b9c9fcd",
+      "lastModificationDate": 1652586843805,
+      "contentHash": "e7f547a9d8716512d11389d74d8b1be7",
       "sourceName": "src/backend/contracts/Marketplace.sol",
       "solcConfig": {
         "version": "0.8.4",
