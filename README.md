@@ -1,4 +1,15 @@
-# AgroChain
+<h1 align="center">AgroChain</h1>
+
+	
+<strong>ArgoChain </strong>is an NFT application Based on Ethereum Blockchain written in Solidity Smart Contract, and using the power of React Frontend, and ether.js to interact with the Smart Contract present in the Ethereum Blockchain, a user can Upload & Mint (In IPFs), buy and Sell NFT, in the ArgoChain NFT marketplace.
+
+
+## Features
+- Mint NFT.
+- Sell NFT in Marketplace.
+- Buy NFT from Marketplace.
+- User Dashboard to view all the NFT Minted, sold, and Purchased.
+
 
 ### 1. Clone/Download the Repository
 
