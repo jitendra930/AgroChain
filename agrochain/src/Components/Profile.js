@@ -11,25 +11,6 @@ import { create as ipfsHttpClient } from 'ipfs-http-client'
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
 
-function renderSoldItems(items) {
-	return (
-		<>
-			<h2>Sold</h2>
-			<Row xs={1} md={2} lg={4} className="g-4 py-3">
-				{items.map((item, idx) => (
-					<Col key={idx} className="overflow-hidden">
-						<Card>
-							<Card.Img variant="top" src={item.image} />
-							<Card.Footer>
-								For {ethers.utils.formatEther(item.totalPrice)} ETH - Recieved {ethers.utils.formatEther(item.price)} ETH
-							</Card.Footer>
-						</Card>
-					</Col>
-				))}
-			</Row>
-		</>
-	)
-}
 
 
 
@@ -54,8 +35,6 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 			setSelectedFile(undefined)
 			return
 		}
-
-		// I've kept this example simple by using the first image instead of multiple
 		setSelectedFile(event.target.files[0])
 	}
 	const createNFT = async () => {
@@ -85,12 +64,15 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 	const [loading, setLoading] = useState(true)
 	const [listedItems, setListedItems] = useState([])
 	const [soldItems, setSoldItems] = useState([])
+	const [purchasedItems, setPurchasedItems] = useState([])
 	const loadListedItems = async () => {
 		// Load all sold items that the user listed
 		const itemCount = await marketplace.itemCount()
 		let listedItems = []
 		let soldItems = []
+		let purchasedItems = [] 
 		for (let indx = 1; indx <= itemCount; indx++) {
+			console.log(marketplace.items(indx))
 			const i = await marketplace.items(indx)
 			if (i.seller.toLowerCase() === account) {
 				// get uri url from nft contract
@@ -113,16 +95,37 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 				// Add listed item to sold items array if sold
 				if (i.sold) soldItems.push(item)
 			}
+
+			if (i.owner.toLowerCase() === account && i.sold) {
+				// get uri url from nft contract
+				const uri = await nft.tokenURI(i.tokenId)
+				// use uri to fetch the nft metadata stored on ipfs 
+				const response = await fetch(uri)
+				const metadata = await response.json()
+				// get total price of item (item price + fee)
+				const totalPrice = await marketplace.getTotalPrice(i.itemId)
+				// define listed item object
+				let item = {
+					totalPrice,
+					price: i.price,
+					itemId: i.itemId,
+					name: metadata.name,
+					description: metadata.description,
+					image: metadata.image
+				}
+				purchasedItems.push(item)
+			}
 		}
 		setLoading(false)
 		setListedItems(listedItems)
 		setSoldItems(soldItems)
+		setPurchasedItems(purchasedItems)
 	}
 
 	const [selectedFile, setSelectedFile] = useState()
 	const [preview, setPreview] = useState()
 
-	// create a preview as a side effect, whenever selected file is changed
+
 	useEffect(() => {
 		if (!selectedFile) {
 			setPreview(undefined)
@@ -132,7 +135,6 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 		const objectUrl = URL.createObjectURL(selectedFile)
 		setPreview(objectUrl)
 
-		// free memory when ever this component is unmounted
 		return () => URL.revokeObjectURL(objectUrl)
 	}, [selectedFile])
 
@@ -142,7 +144,6 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 			return
 		}
 
-		// I've kept this example simple by using the first image instead of multiple
 		setSelectedFile(e.target.files[0])
 	}
 
@@ -177,33 +178,33 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 
 							<div className="row mt-2 text-center text-sm-left">
 								<div className="col-md-12">
-									<h3 className="mb-0">Farmer X</h3>
+									<h3 className="mb-0">User</h3>
 									<p className="mt-3 text-dark-grey">{account.slice(2,)}</p>
 
 									<div className="row mt-4 text-center">
 										<div className="col-md-3 col-sm-3 col-3">
-											<button className="btn btn-primary btn-sm">
+											<button className="btn btn-success btn-sm">
 												<i className="fa fa-arrow-down fa-fw"></i>
 											</button>
-											<p className="small text-primary">Receive</p>
+											<p className="small text-success">Receive</p>
 										</div>
 										<div className="col-md-3 col-sm-3 col-3">
-											<button className="btn btn-primary btn-sm">
+											<button className="btn btn-danger btn-sm">
 												<i className="fa fa-arrow-up fa-fw"></i>
 											</button>
-											<p className="small text-primary">Send</p>
+											<p className="small text-danger">Send</p>
 										</div>
 										<div className="col-md-3 col-sm-3 col-3">
-											<button className="btn btn-primary btn-sm">
+											<button className="btn btn-secondary btn-sm">
 												<i className="fa fa-credit-card fa-fw"></i>
 											</button>
-											<p className="small text-primary">Buy</p>
+											<p className="small text-secondary">Buy</p>
 										</div>
 										<div className="col-md-3 col-sm-3 col-3">
-											<button className="btn btn-primary btn-sm">
+											<button className="btn btn-warning btn-sm">
 												<i className="fa fa-exchange-alt fa-fw"></i>
 											</button>
-											<p className="small text-primary">Swap</p>
+											<p className="small text-warning">Swap</p>
 										</div>
 									</div>
 								</div>
@@ -226,12 +227,17 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 									<ul className="nav nav-tabs mb-4" id="myTab" role="tablist">
 										<li className="nav-item" role="presentation">
 											<a className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
-												<strong>NFTs</strong>
+												<strong>Minted NFTs</strong>
 											</a>
 										</li>
 										<li className="nav-item" role="presentation">
 											<a className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
 												<strong>Sold NFTs</strong>
+											</a>
+										</li>
+										<li className="nav-item" role="presentation">
+											<a className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
+												<strong>Purchased NFTs</strong>
 											</a>
 										</li>
 									</ul>
@@ -298,13 +304,52 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 																	</div>
 																	<div className="row mt-3">
 																		<div className="col-md-6">
+																			<p className="text-danger type-6 my-0">
+																				<i className="fab fa-ethereum"></i>{ethers.utils.formatEther(item.totalPrice)} ETH
+																			</p>
+																			<p className="text-success type-6 my-0">
+																				<i className="fab fa-ethereum"></i>{ethers.utils.formatEther(item.price)} ETH Recived
+																			</p>
+																		</div>
+																		<div className="col-md-6">
+																			<div className="text-end float-end mt-1">
+																				<button type="button" className="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#nft2" disabled>SOLD</button>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													))}
+												</div>
+											</div>
+										</div>
+										<div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+											<div className="col-md-12">
+												<div className="row no-gutters">
+													{purchasedItems.map((item, idx) => (
+														<div className="col-6 col-sm-4 col-md-4">
+															<div className="card mx-1 mb-3">
+																<img className="img-fluid" src={item.image} />
+																<div className="card-body">
+
+																	<div className="row">
+																		<div className="col-md-12">
+																			<p className="text-muted type-6 my-0">{item.name}</p>
+																			<p className="text-info type-7 my-0">
+																				{item.description}
+																			</p>
+																		</div>
+																	</div>
+																	<div className="row mt-3">
+																		<div className="col-md-6">
 																			<p className="text-success type-6 my-0">
 																				<i className="fab fa-ethereum"></i>{ethers.utils.formatEther(item.totalPrice)} ETH
 																			</p>
 																		</div>
 																		<div className="col-md-6">
 																			<div className="text-end float-end mt-1">
-																				<button type="button" className="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#nft2">SOLD</button>
+																				<button type="button" className="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#nft2" disabled>BOUGHT</button>
 																			</div>
 																		</div>
 																	</div>

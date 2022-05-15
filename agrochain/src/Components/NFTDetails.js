@@ -5,8 +5,6 @@ import { useLocation } from 'react-router-dom'
 
 import { ethers } from "ethers"
 
-import { NFT } from "./NFT";
-
 
 
 
