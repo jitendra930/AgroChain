@@ -74,6 +74,18 @@ namespace Pollution.API.Controllers
                         var contents = await httpResponseMessage?.Content?.ReadAsStringAsync();
 
                         var result = JsonConvert.DeserializeObject<Response>(contents);
+
+                        //TODO: need to calculate average based on current month and previous 3 months
+                        if (result != null)
+                        {
+                            var a = result.PollutionData
+                                .GroupBy(x => x.DateTime.Year)
+                                .ToLookup(t => t.Key, t => new
+                                {
+                                    Average = t.Average(t => t.Main.AQI)
+                                });
+                        }
+
                         return result;
                     }
                 }
