@@ -30,7 +30,22 @@ namespace Pollution.API.Models
         public Components Pollutants { get; set; }
 
         [JsonProperty("dt")]
-        public long DateTime { get; set; }
+        public long UnixDateTime { get; set; }
+
+        public DateTime DateTime
+        {
+            get
+            {
+                return UnixTimeStampToDateTime(UnixDateTime);
+            }
+        }
+
+        private DateTime UnixTimeStampToDateTime(long unixTimeStamp)
+        {
+            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dateTime;
+        }
     }
 
     public partial class Main

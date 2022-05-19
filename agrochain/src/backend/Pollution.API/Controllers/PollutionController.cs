@@ -2,9 +2,10 @@
 using Newtonsoft.Json;
 using Pollution.API.Models;
 
+//https://openweathermap.org/api/air-pollution#:~:text=Air%20Pollution%20API%20concept,-Air%20Pollution%20API&text=Besides%20basic%20Air%20Quality%20Index,PM2.5%20and%20PM10).
 namespace Pollution.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class PollutionController : ControllerBase
     {
@@ -23,14 +24,44 @@ namespace Pollution.API.Controllers
             _urlPath = @"data/2.5/air_pollution/history";
         }
 
-        //https://localhost:7081/api/Pollution?lat=50&lon=50&startDatetime=2020-11-27T20:21:00&endDatetime=2020-11-30T20:21:00
+        //https://localhost:7081/api/Pollution/GetPolltionHistory?lat=50&lon=50&startDatetime=2020-11-27T20:21:00&endDatetime=2021-11-30T20:21:00
         [HttpGet(Name = "GetPolltionHistory")]
-        //TODO: discuss the return type
         public async Task<Response> GetPolltionHistory(double lat, double lon, string startDatetime, string endDatetime)
         {
             var startTimeInUnix = ConvertDateTimeToUnix(startDatetime);
             var endTimeInUnix = ConvertDateTimeToUnix(endDatetime);
-            
+
+            var completeUrl = _baseUrl + _urlPath + $"?lat={lat}&lon={lon}&start={startTimeInUnix}&end={endTimeInUnix}&appid={_apiKey}";
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    using (var httpResponseMessage = await client.GetAsync(completeUrl))
+                    {
+                        httpResponseMessage?.EnsureSuccessStatusCode();
+                        var contents = await httpResponseMessage?.Content?.ReadAsStringAsync();
+
+                        var result = JsonConvert.DeserializeObject<Response>(contents);
+                        return result;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Something went wrong while using http client");
+                throw;
+            }
+        }
+
+        [HttpGet(Name = "GetAveragePolltionHistory")]
+        public async Task<Response> GetAveragePolltionHistory(double lat, double lon, string currentDate)
+        {
+            DateTime.TryParse(currentDate, out DateTime temp);
+            var startDatetime = temp.AddYears(-3).ToString("s");
+            var startTimeInUnix = ConvertDateTimeToUnix(startDatetime);
+            var endTimeInUnix = ConvertDateTimeToUnix(currentDate);
+
             var completeUrl = _baseUrl + _urlPath + $"?lat={lat}&lon={lon}&start={startTimeInUnix}&end={endTimeInUnix}&appid={_apiKey}";
 
             try
