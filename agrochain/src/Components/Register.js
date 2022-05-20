@@ -1,9 +1,31 @@
-import React from 'react'
+import { Row, Col, Card, Form, Button } from 'react-bootstrap'
+import { useState, useEffect, React } from 'react'
+import {
+    Routes,
+    Route
+} from "react-router-dom";
+
+import { Loading } from "./Loading";
 
 
 import wheat from './wheat.jpg'
 
-export const Register = ({ account }) => {
+export const Register = ({ marketplace, nft, account }) => {
+    const [farmerId, setfarmerId] = useState('')
+    const [name, setname] = useState('')
+    const [govtid, setgovtid] = useState('')
+    const [location, setlocation] = useState('')
+    const [contact, setcontact] = useState('')
+    const [pin, setpin] = useState('')
+
+    const RegisterFarmer = async () => {
+
+        console.log(farmerId, name, govtid, location, contact, pin);
+        
+        await (await marketplace.create_Farmer(account, name, govtid, location, contact, pin)).wait();
+        /*<Route path="/" element={<Loading />} />*/
+    }
+
     return (
         <div className="container mt-4 mb-4">
             <br />
@@ -25,33 +47,33 @@ export const Register = ({ account }) => {
                                         </p>
                                     <div className="form-group">
                                          <h6>Public Crypto Id :</h6>
-                                        <input type="text" className="form-control" value={account} required disabled />
+                                        <Form.Control onChange={(e) => setfarmerId(e.target.value)} type="text" className="form-control" value={account} required disabled />
                                     </div>
                                     <div className="form-group">
                                             <h6>User Name :</h6>
-                                        <input type="text" className="form-control" placeholder="Enter User Name" required />
+                                        <Form.Control onChange={(e) => setname(e.target.value)} type="text" className="form-control" placeholder="Enter User Name" required />
                                     </div>
                                     <div className="form-group">
                                         <h6> AADHAR NUMBER/ PAN CARD :</h6>
-                                        <input type="text" className="form-control" placeholder="ENTER AADHAR NUMBER/ PAN CARD" required />
+                                        <Form.Control onChange={(e) => setgovtid(e.target.value)} className="form-control" placeholder="ENTER AADHAR NUMBER/ PAN CARD" required />
                                     </div>
                                     <div className="form-group">
                                         <h6> Latitude/ Longitude :<span className="float-right"></span></h6>
-                                        <input type="password" className="form-control" placeholder="Enter Latitude/ Longitude" required />
+                                        <Form.Control onChange={(e) => setlocation(e.target.value)} className="form-control" placeholder="Enter Latitude/ Longitude" required />
                                     </div>
                                     <br />
                                     <br />
                                     <div className="form-group">
                                         <h6>Contact :</h6>
-                                        <input type="text" className="form-control" id="validationDefault03" placeholder="Enter City" required />
+                                        <Form.Control onChange={(e) => setcontact(e.target.value)} className="form-control" id="validationDefault03" placeholder="Enter City" required />
                                     </div>
-                                    <div className="form-group">
-                                        <h6>City :</h6>
-                                        <input type="text" className="form-control" id="validationDefault04" placeholder="Enter State" required />
-                                    </div>
+                                    {/*<div className="form-group">*/}
+                                    {/*    <h6>City :</h6>*/}
+                                    {/*    <input type="text" className="form-control" id="validationDefault04" placeholder="Enter State" required />*/}
+                                    {/*</div>*/}
                                     <div className="form-group">
                                         <h6>PIN :</h6>
-                                        <input type="text" className="form-control" id="validationDefault05" placeholder="Enter Zip" required />
+                                        <Form.Control onChange={(e) => setpin(e.target.value)} type="text" className="form-control" id="validationDefault05" placeholder="Enter Zip" required />
                                     </div>
                                     
 
@@ -69,7 +91,7 @@ export const Register = ({ account }) => {
 
                                     <div className="row mt-2">
                                         <div className="col-md-12">
-                                            <button type="submit" className="btn btn-success">
+                                            <button onClick={RegisterFarmer}  className="btn btn-success">
                                                 <i className="fa fa-user-plus fa-fw"></i>
                                                 Create Account
                                             </button>
