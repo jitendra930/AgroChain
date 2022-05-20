@@ -2,10 +2,71 @@ import React from 'react'
 
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { ethers } from "ethers"
 
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
 import { Loading } from "./Loading";
 
-import { ethers } from "ethers"
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
+
+export const options = {
+    responsive: true,
+    plugins: {
+        legend: {
+            position: 'top',
+        },
+        title: {
+            display: true,
+            text: 'Chart.js Line Chart',
+        },
+    },
+};
+
+const labels = ['2017', '2018', '2019', '2020', '2021', '2022'];
+
+export const data = {
+    labels,
+    datasets: [
+        {
+            label: 'Dataset 1',
+            data: [200,180,70,10,70, 50],
+            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        },
+        {
+            label: 'Dataset 2',
+            data: [70,50,70,100,20, 30],
+            borderColor: 'rgb(53, 162, 235)',
+            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        },
+    ],
+};
+
+
+
+
+
+
+
 
 
 
@@ -55,7 +116,7 @@ export const NFTDetails = ({ marketplace }) => {
                     <p className="text-muted">
                         {nfts.description}
                     </p>
-                    <p className="mt-3 text-dark-grey"><i className="fa fa-address-book"></i> {contact} <i className="fa fa-compass" aria-hidden="true"></i> {location} <i className="fa fa-map-marker"></i> {pin}</p>
+                    <p className="mt-3 text-grey"> <i class="fa fa-copyright" aria-hidden="true"> {farmername} </i> <i className="fa fa-id-card" aria-hidden="true"></i> {govtid} <i className="fa fa-address-book"></i> {contact} <i className="fa fa-compass" aria-hidden="true"></i> {location} <i className="fa fa-map-marker"></i> {pin}</p>
                     <br />
                     <h4 className="text-success mb-0">Current Price:</h4>
                     <h2 className="text-success my-0">
@@ -64,6 +125,8 @@ export const NFTDetails = ({ marketplace }) => {
                     <h4 className="text-danger mt-1">
                         Last <i className="fab fa-ethereum"></i> {ethers.utils.formatEther(nfts.totalPrice)}
                     </h4>
+
+                    <Line options={options} data={data} />
                     <br />
                     <div className="row">
                         <div className="col-md-6">
