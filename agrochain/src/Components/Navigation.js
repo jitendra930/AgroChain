@@ -22,7 +22,7 @@ const Navigation = ({ web3Handler, account }) => {
                     </li>
                  {!account &&
                     <li className="nav-item">
-                        <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/signup`}>Register</NavLink>
+                        <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/register`}>Register</NavLink>
                     </li>}
                     <li className="nav-item">
                         <button className="nav-btn btn btn-secondary btn-sm btn-block"><i className="fa fa-sign-in-alt fa-fw"></i> Login</button>
