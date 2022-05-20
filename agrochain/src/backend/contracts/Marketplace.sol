@@ -14,6 +14,15 @@ contract Marketplace is ReentrancyGuard {
     uint public immutable feePercent; // the fee percentage on sales 
     uint public itemCount; 
 
+    struct Farmer {
+        address Id;
+        string name;
+        string govtId;
+        string location;
+        string contact;
+        string pin;
+    }
+
     struct Item {
         uint itemId;
         IERC721 nft;
@@ -24,8 +33,19 @@ contract Marketplace is ReentrancyGuard {
         bool sold;
     }
 
+
     // itemId -> Item
     mapping(uint => Item) public items;
+    mapping(address => Farmer) public farmers;
+
+    event FarmerAdded(
+        address Id,
+        string name,
+        string govtId,
+        string location,
+        string contact,
+        string pin
+    );
 
     event Offered(
         uint itemId,
@@ -46,6 +66,25 @@ contract Marketplace is ReentrancyGuard {
     constructor(uint _feePercent) {
         feeAccount = payable(msg.sender);
         feePercent = _feePercent;
+    }
+
+    function create_Farmer(address _id, string memory _name, string memory _govtId, string memory _location, string memory _contact, string memory _pin) external {
+        farmers[_id] = Farmer (
+            _id,
+            _name,
+            _govtId,
+            _location,
+            _contact,
+            _pin
+        );
+        emit FarmerAdded(
+            _id,
+            _name,
+            _govtId,
+            _location,
+            _contact,
+            _pin
+        );
     }
 
     // Make item to offer on the marketplace
