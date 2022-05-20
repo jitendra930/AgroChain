@@ -19,6 +19,13 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 	const [price, setPrice] = useState(null)
 	const [name, setName] = useState('')
 	const [description, setDescription] = useState('')
+	const [farmerId, setfarmerId] = useState('')
+	const [farmername, setfarmername] = useState('')
+	const [govtid, setgovtid] = useState('')
+	const [location, setlocation] = useState('')
+	const [contact, setcontact] = useState('')
+	const [pin, setpin] = useState('')
+	const nft_name = govtid + ' ' + new Date().getDate() + '/' + new Date().toLocaleString("en-US", { month: "long" }) + '/' + new Date().getFullYear()
 	const uploadToIPFS = async (event) => {
 		event.preventDefault()
 		const file = event.target.files[0]
@@ -39,7 +46,9 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 	}
 	const createNFT = async () => {
 		console.log("NFT");
-		if (!image || !price || !name || !description) return
+		console.log(nft_name);
+		const name = nft_name;
+		if (!image || !price || !nft_name || !description) return
 		try {
 			const result = await client.add(JSON.stringify({ image, price, name, description }))
 			mintThenList(result)
@@ -62,9 +71,12 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 		await (await marketplace.makeItem(nft.address, id, listingPrice)).wait()
 	}
 	const [loading, setLoading] = useState(true)
+	const [listedFarmers, setListedFarmers] = useState([])
 	const [listedItems, setListedItems] = useState([])
 	const [soldItems, setSoldItems] = useState([])
 	const [purchasedItems, setPurchasedItems] = useState([])
+
+
 	const loadListedItems = async () => {
 		// Load all sold items that the user listed
 		const itemCount = await marketplace.itemCount()
@@ -116,6 +128,14 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 				purchasedItems.push(item)
 			}
 		}
+		const fam = await marketplace.farmers(account)
+		setfarmername(fam.name)
+		setgovtid(fam.govtId)
+		setlocation(fam.location)
+		setcontact(fam.contact)
+		setpin(fam.pin)
+
+
 		setLoading(false)
 		setListedItems(listedItems)
 		setSoldItems(soldItems)
@@ -171,15 +191,19 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 									<img src={profile} className="img-fluid" />
 								</div>
 								<div className="col-md-8 text-center">
-									<br/>
-									<h2 className="mt-1 text-dark-grey">{balance.slice(0,5)} ETH</h2>
+									<br />
+									<h2 className="mt-1 text-dark-grey">{balance.slice(0, 5)} ETH</h2>
 								</div>
 							</div>
 
 							<div className="row mt-2 text-center text-sm-left">
 								<div className="col-md-12">
-									<h3 className="mb-0">User</h3>
+								<h3 className="mb-0">{farmername}</h3>
 									<p className="mt-3 text-dark-grey">{account.slice(2,)}</p>
+									<p className="mt-3 text-dark-grey"><i className="fa fa-id-card" aria-hidden="true"></i> {govtid}</p>
+									<p className="mt-3 text-dark-grey"><i className="fa fa-compass" aria-hidden="true"></i> {location}</p>
+									<p className="mt-3 text-dark-grey"><i className="fa fa-address-book"></i> {contact}</p>
+									<p className="mt-4 text-dark-grey"><i className="fa fa-map-marker"></i> {pin}</p>
 
 									<div className="row mt-4 text-center">
 										<div className="col-md-3 col-sm-3 col-3">
@@ -210,6 +234,7 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 								</div>
 							</div>
 						</div>
+					
 					</div>
 					<div className="d-grid gap-2">
 						<button type="button" className="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -377,7 +402,7 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 									<div className="mx-2 mt-2">
 										<div className="form-group">
 											<h6>Name: <span className="text-danger">*</span></h6>
-											<Form.Control onChange={(e) => setName(e.target.value)} className="form-control" placeholder="Enter Name" required />
+											<Form.Control onChange={(e) => setName(e.target.value)} className="form-control" placeholder="Enter Name" value={govtid + ' ' + new Date().getDate() + '/' + new Date().toLocaleString("en-US", { month: "long" }) + '/' + new Date().getFullYear() } required disabled />
 										</div>
 										<br />
 										<div className="form-group">

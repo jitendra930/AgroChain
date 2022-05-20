@@ -18,6 +18,7 @@ import Profile from "./Components/Profile";
 import { Register } from "./Components/Register";
 import { Loading } from "./Components/Loading";
 
+
 import './App.css';
 
 
@@ -71,11 +72,10 @@ function App() {
     <Routes>
       <Route path="/" element={<Loading />} />
       <Route path="/profile" element={<Profile marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
-      <Route path="/register" element={<Register account={account} />} />
+      <Route path="/register" element={<Register marketplace={marketplace} nft={nft} account={account} account={account} />} />
       <Route path="nft" element={<NFT marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
       <Route path="nft-details" element={<NFTDetails marketplace={marketplace} />} />
-      <Route path="signup" element={<Register />} />
-      <Route path="*" element={<NFT />} />
+      <Route path="*" element={<Loading />} />
     </Routes>
     <Footer />
         
