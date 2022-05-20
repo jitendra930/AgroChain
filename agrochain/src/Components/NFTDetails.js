@@ -126,7 +126,7 @@ export const NFTDetails = ({ marketplace }) => {
                         Last <i className="fab fa-ethereum"></i> {ethers.utils.formatEther(nfts.totalPrice)}
                     </h4>
 
-                    <Line options={options} data={data} />
+                    
                     <br />
                     <div className="row">
                         <div className="col-md-6">
@@ -145,6 +145,16 @@ export const NFTDetails = ({ marketplace }) => {
                                 </button>
                             </div>
                         </div>
+                    </div>
+
+                    
+                </div>
+                <div className="row">
+                    <div className="col-md-6">
+                        <Line options={options} data={data} />
+                    </div>
+                    <div className="col-md-6">
+                        <Line options={options} data={data} />
                     </div>
                 </div>
             </div>
