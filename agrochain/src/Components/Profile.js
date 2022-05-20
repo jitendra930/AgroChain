@@ -25,6 +25,7 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 	const [location, setlocation] = useState('')
 	const [contact, setcontact] = useState('')
 	const [pin, setpin] = useState('')
+	const nft_name = govtid + ' ' + new Date().getDate() + '/' + new Date().toLocaleString("en-US", { month: "long" }) + '/' + new Date().getFullYear()
 	const uploadToIPFS = async (event) => {
 		event.preventDefault()
 		const file = event.target.files[0]
@@ -45,7 +46,9 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 	}
 	const createNFT = async () => {
 		console.log("NFT");
-		if (!image || !price || !name || !description) return
+		console.log(nft_name);
+		const name = nft_name;
+		if (!image || !price || !nft_name || !description) return
 		try {
 			const result = await client.add(JSON.stringify({ image, price, name, description }))
 			mintThenList(result)
@@ -197,8 +200,8 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 								<div className="col-md-12">
 								<h3 className="mb-0">{farmername}</h3>
 									<p className="mt-3 text-dark-grey">{account.slice(2,)}</p>
-									<p className="mt-3 text-dark-grey"><i class="fa fa-id-card" aria-hidden="true"></i> {govtid}</p>
-									<p className="mt-3 text-dark-grey"><i class="fa fa-compass" aria-hidden="true"></i> {location}</p>
+									<p className="mt-3 text-dark-grey"><i className="fa fa-id-card" aria-hidden="true"></i> {govtid}</p>
+									<p className="mt-3 text-dark-grey"><i className="fa fa-compass" aria-hidden="true"></i> {location}</p>
 									<p className="mt-3 text-dark-grey"><i className="fa fa-address-book"></i> {contact}</p>
 									<p className="mt-4 text-dark-grey"><i className="fa fa-map-marker"></i> {pin}</p>
 
@@ -399,7 +402,7 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 									<div className="mx-2 mt-2">
 										<div className="form-group">
 											<h6>Name: <span className="text-danger">*</span></h6>
-											<Form.Control onChange={(e) => setName(e.target.value)} className="form-control" placeholder="Enter Name" required />
+											<Form.Control onChange={(e) => setName(e.target.value)} className="form-control" placeholder="Enter Name" value={govtid + ' ' + new Date().getDate() + '/' + new Date().toLocaleString("en-US", { month: "long" }) + '/' + new Date().getFullYear() } required disabled />
 										</div>
 										<br />
 										<div className="form-group">

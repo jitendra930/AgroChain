@@ -3,6 +3,8 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
+import { Loading } from "./Loading";
+
 import { ethers } from "ethers"
 
 
@@ -11,9 +13,33 @@ import { ethers } from "ethers"
 export const NFTDetails = ({ marketplace }) => {
     const { state } = useLocation();
     const { nfts } = state;
+    const [farmername, setfarmername] = useState('')
+    const [govtid, setgovtid] = useState('')
+    const [location, setlocation] = useState('')
+    const [contact, setcontact] = useState('')
+    const [pin, setpin] = useState('')
+    const [loading, setLoading] = useState(true)
+
+    const LoadFarmer = async () => {
+
+        const fam = await marketplace.farmers(nfts.seller)
+        setfarmername(fam.name)
+        setgovtid(fam.govtId)
+        setlocation(fam.location)
+        setcontact(fam.contact)
+        setpin(fam.pin)
+        setLoading(false)
+    }
+
     const buyMarketItem = async (nfts) => {
         await (await marketplace.purchaseItem(nfts.itemId, { value: nfts.totalPrice })).wait()
     }
+    useEffect(() => {
+        LoadFarmer()
+    }, [])
+    if (loading) return (
+        <Loading />
+    )
     return (
         <div className="container mt-4">
             <br />
@@ -29,6 +55,7 @@ export const NFTDetails = ({ marketplace }) => {
                     <p className="text-muted">
                         {nfts.description}
                     </p>
+                    <p className="mt-3 text-dark-grey"><i className="fa fa-address-book"></i> {contact} <i className="fa fa-compass" aria-hidden="true"></i> {location} <i className="fa fa-map-marker"></i> {pin}</p>
                     <br />
                     <h4 className="text-success mb-0">Current Price:</h4>
                     <h2 className="text-success my-0">
