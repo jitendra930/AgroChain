@@ -1,5 +1,4 @@
 import {
-    BrowserRouter,
     Routes,
     Route
 } from "react-router-dom";
@@ -8,9 +7,8 @@ import MarketplaceAbi from './frontend/contractsData/Marketplace.json'
 import MarketplaceAddress from './frontend/contractsData/Marketplace-address.json'
 import NFTAbi from './frontend/contractsData/NFT.json'
 import NFTAddress from './frontend/contractsData/NFT-address.json'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ethers } from "ethers"
-import { Spinner } from 'react-bootstrap'
 
 import Navigation from "./Components/Navigation";
 import { Footer } from "./Components/Footer";
@@ -23,11 +21,11 @@ import { Loading } from "./Components/Loading";
 import './App.css';
 
 
-const RpcHttpUrl = "https://mainnet.infura.io/v3/9f37c36eaea34b42a0bce7936c691b67";
+/*const RpcHttpUrl = "https://mainnet.infura.io/v3/9f37c36eaea34b42a0bce7936c691b67";*/
 
 
 function App() {
-    const [loading, setLoading] = useState(true)
+    const [setLoading] = useState(true)
     const [account, setAccount] = useState(null)
     const [nft, setNFT] = useState({})
     const [marketplace, setMarketplace] = useState({})
@@ -73,6 +71,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Loading />} />
       <Route path="/profile" element={<Profile marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
+      <Route path="/register" element={<Register account={account} />} />
       <Route path="nft" element={<NFT marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
       <Route path="nft-details" element={<NFTDetails marketplace={marketplace} />} />
       <Route path="signup" element={<Register />} />

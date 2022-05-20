@@ -2,7 +2,7 @@ import React from 'react'
 
 import wheat from './wheat.jpg'
 
-export const Register = () => {
+export const Register = ({ account }) => {
     return (
         <div className="container mt-4 mb-4">
             <br />
@@ -24,7 +24,7 @@ export const Register = () => {
                                         </p>
                                     <div className="form-group">
                                          <h6>Public Crypto Id :</h6>
-                                        <input type="text" className="form-control" value= "USER NAME" required disabled />
+                                        <input type="text" className="form-control" value={account} required disabled />
                                     </div>
                                     <div className="form-group">
                                             <h6>User Name :</h6>
