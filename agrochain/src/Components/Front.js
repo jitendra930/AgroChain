@@ -26,7 +26,7 @@ export const Front = () => {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="video-load">
-                                            <video id="home-video" autoplay loop>
+                                            <video id="home-video" loop muted autoPlay controls=''>
                                                 <source src={carbon} type="video/mp4" />
                                             </video>
                                             </div>
