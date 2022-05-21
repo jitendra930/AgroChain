@@ -17,6 +17,7 @@ import { NFTDetails } from "./Components/NFTDetails";
 import Profile from "./Components/Profile";
 import { Register } from "./Components/Register";
 import { Loading } from "./Components/Loading";
+import { Front } from "./Components/Front";
 
 
 import './App.css';
@@ -70,12 +71,13 @@ function App() {
     <>
     <Navigation web3Handler={web3Handler} account={account} />
     <Routes>
-      <Route path="/" element={<Loading />} />
-      <Route path="/profile" element={<Profile marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
-      <Route path="/register" element={<Register marketplace={marketplace} nft={nft} account={account} account={account} />} />
-      <Route path="nft" element={<NFT marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
-      <Route path="nft-details" element={<NFTDetails marketplace={marketplace} />} />
-      <Route path="*" element={<Loading />} />
+        <Route path="/" element={<Loading />} />
+        <Route path="/front" element={<Front />} />
+        <Route path="/profile" element={<Profile marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
+        <Route path="/register" element={<Register marketplace={marketplace} nft={nft} account={account} account={account} />} />
+        <Route path="nft" element={<NFT marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
+        <Route path="nft-details" element={<NFTDetails marketplace={marketplace} />} />
+        <Route path="*" element={<Loading />} />
     </Routes>
     <Footer />
         
