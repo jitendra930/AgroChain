@@ -2,7 +2,7 @@
 
 namespace Pollution.API.Models
 {
-    public partial class Response
+    public partial class ApiResult
     {
         [JsonProperty("coord")]
         public Coord LocationCoordinates { get; set; }
