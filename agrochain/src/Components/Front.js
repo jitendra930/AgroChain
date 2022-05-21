@@ -14,8 +14,8 @@ export const Front = () => {
                     <div className="container">
                         <div className="row pt-4 pb-3">
                             <div className="col-md-12 text-center">
-                                <h1 className="super-bold display-4 home-head">INVESTOPIA</h1>
-                                <p className="p-lg text-blue">Protecting Elders Against Financial Abuse</p>
+                                <h1 className="super-bold display-4 home-head">Agro Chain</h1>
+                                <p className="p-lg text-blue">Invest in Farmers for a Greener Future.</p>
                             </div>
                         </div>
                     </div>
@@ -34,9 +34,9 @@ export const Front = () => {
                                     <div className="col-md-6 mt-2">
                                         <div className="text-center text-sm-center text-md-left">
                                             <p className="p-lg">
-                                                    As people continue to live longer,
-                                                    the population of older folks facing cognitive issues will continue to rise,
-                                                    and elder financial abuse will become increasingly more common.
+                                                    Invest in the Greener Future,
+                                                    buy buying NFT from farmers and ,
+                                                    providing them resources to Invest in sustainable farming methods.
                                                 </p>
 
                                                 <br />
@@ -54,9 +54,9 @@ export const Front = () => {
                         <div className="row pt-3 pb-4 text-center">
                             <div className="col-md-4">
                                 <div className="mt-5">
-                                    <h3 className="mt-4 mb-2 super-bold">Beautiful Interface</h3>
+                                    <h3 className="mt-4 mb-2 super-bold">Buy/Mint NFT</h3>
                                     <p>
-                                        Visually helps you to determine green areas or dangerous risks.
+                                        You can buy the minted NFT from Farmers, who adopted sustainable farming practices.
                                     </p>
 
                                     <img className="img-fluid" src="assets/paper-dashboard.png" />
@@ -65,9 +65,9 @@ export const Front = () => {
                                 </div>
                             <div className="col-md-4">
                                 <div className="mt-5">
-                                    <h3 className="mt-4 mb-2 super-bold">Proper Management</h3>
+                                    <h3 className="mt-4 mb-2 super-bold">Real Time Data</h3>
                                         <p>
-                                            Avoid useless investments and still enjoy your life with pleasure.
+                                            Monitor the real time pollution data coming from IOT devices installed in farmland for verification.
                                         </p>
 
                                     <img className="img-fluid" src="assets/metrics.png" />
@@ -76,9 +76,9 @@ export const Front = () => {
                                     </div>
                             <div className="col-md-4">
                                 <div className="mt-5">
-                                    <h3 className="mt-4 mb-2 super-bold">Defend Inflation</h3>
+                                    <h3 className="mt-4 mb-2 super-bold">Security and Transparency</h3>
                                             <p>
-                                                Inflation cannot be controlled but Expenses can be controlled.
+                                                All data stored in blockchain and user can buy minted Green NFT Anonymously.
                                             </p>
 
                                     <img className="img-fluid" src="assets/inflation.png" />
@@ -92,11 +92,11 @@ export const Front = () => {
                         <div className="row mt-3 text-center">
                             <div className="col-md-12">
                                 <h4>
-                                    In this Modern Era, then why you're behind ?
+                                    In this Modern Era, then why you're behind to protect the future ?
                                 </h4>
                                 <p className="p-large px-3">
-                                    Do your proper financial planning with our advanced metrics
-                                    made with current data models on financial savings and planning.
+                                    Buy NFT direct from farmers,
+                                    so that they can invest the profits directy in adopting more sustainable farming practices.
                                 </p>
                             </div>
                         </div>
