@@ -25,13 +25,13 @@ const Navigation = ({ web3Handler, account }) => {
                         <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/register`}>Register</NavLink>
                     </li>}
                     <li className="nav-item">
-                        <button className="nav-btn btn btn-secondary btn-sm btn-block"><i className="fa fa-sign-in-alt fa-fw"></i> Login</button>
+                        <NavLink className="nav-btn btn btn-secondary btn-sm btn-block" to={`/register`}><i className="fa fa-sign-in-alt fa-fw"></i> Register </NavLink>
                     </li>
                     <li className="nav-item nav-item-btn mb-2">
                         {account ? (<button
                             className="nav-btn btn btn-danger btn-sm btn-block"><a href={`https://rinkeby.etherscan.io/address/${account}`} target="_blank"
                                 rel="noopener noreferrer" > {account.slice(0, 5) + '...' + account.slice(38, 42)}</a></button>) : (
-                            <button onClick={web3Handler} className="nav-btn btn btn-success btn-sm btn-block"><i className="fa fa-user-plus fa-fw"></i> Sign Up</button>)}
+                            <button onClick={web3Handler} className="nav-btn btn btn-success btn-sm btn-block"><i className="fa fa-user-plus fa-fw"></i> Connect Wallet </button>)}
                     </li>
                 </ul>
             </div>
