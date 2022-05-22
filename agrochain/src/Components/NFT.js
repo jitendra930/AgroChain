@@ -96,7 +96,7 @@ export const NFT = ({ marketplace, nft, account, balance }) => {
                                 <Button  onClick={handleSearch}><i className="fas fa-search"></i></Button>
                             </div>
                         </div>
-                        <div className="col-md-11"><input className="form-control" placeholder="Search Product..." value={searchText} onChange={(e) => setSearchText(e.target.value)} /></div>
+                        <div className="col-md-11-mt-1"><input className="form-control" placeholder="Search Product..." value={searchText} onChange={(e) => setSearchText(e.target.value)} /></div>
                     </div>
                 </div>
             </div>
@@ -126,10 +126,10 @@ export const NFT = ({ marketplace, nft, account, balance }) => {
                                             <label className="form-check-label" htmlFor="high-to-low">High to Low</label>
                                         </div>
                                     </div>
-                                    <div className="form-group my-4">
-                                        <h6 className="text-muted">PRICE RANGE</h6>
-                                        <input type="range" className="form-control-range" />
-                                    </div>
+                                    {/*<div className="form-group my-4">*/}
+                                    {/*    <h6 className="text-muted">PRICE RANGE</h6>*/}
+                                    {/*    <input type="range" className="form-control-range" />*/}
+                                    {/*</div>*/}
                                 </div>
                             </div>
                         </div>
