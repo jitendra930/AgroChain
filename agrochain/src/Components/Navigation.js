@@ -6,7 +6,7 @@ import farmer from './farmer.png'
 const Navigation = ({ web3Handler, account }) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-effects sticky-top">
-            <a className="navbar-brand super-bold"><img src={farmer} height="40" width="50" /> AGRO CHAIN </a>
+            <NavLink className="navbar-brand super-bold" to={`/front`}><img src={farmer} height="40" width="50" /> AGRO CHAIN </NavLink>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i className="fa fa-bars fa-fw"></i>
             </button>
@@ -17,13 +17,15 @@ const Navigation = ({ web3Handler, account }) => {
                     <li className="nav-item">
                         <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/profile`}>Profile</NavLink>
                     </li>}
+                    
+                 {!account &&
+                    <li className="nav-item">
+                        <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/front`}>Home</NavLink>
+                    </li>
+                    }
                     <li className="nav-item">
                         <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/nft`}> NFT</NavLink>
                     </li>
-                 {!account &&
-                    <li className="nav-item">
-                        <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/register`}>Register</NavLink>
-                    </li>}
                     <li className="nav-item">
                         <NavLink className="nav-btn btn btn-secondary btn-sm btn-block" to={`/register`}><i className="fa fa-sign-in-alt fa-fw"></i> Register </NavLink>
                     </li>
