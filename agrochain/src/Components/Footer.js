@@ -2,11 +2,11 @@ import React from 'react'
 
 
 export const Footer = () => {
-    //let footerStyle = {
-    //    position: "absolute",
-    //    top: "100vh",
-    //    width: "100%"
-    //}
+    let footerStyle = {
+        position: "absolute",
+        top: "100vh",
+        width: "100%"
+    }
     return (
         <footer className="mt-auto" >
             <br />
