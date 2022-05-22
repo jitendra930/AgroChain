@@ -16,6 +16,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { Loading } from "./Loading";
+import { Footer } from "./Footer";
 
 
 ChartJS.register(
@@ -102,6 +103,7 @@ export const NFTDetails = ({ marketplace }) => {
         <Loading />
     )
     return (
+        <>
         <div className="container mt-4">
             <br />
             <br />
@@ -159,5 +161,7 @@ export const NFTDetails = ({ marketplace }) => {
                 </div>
             </div>
         </div>
+        <Footer />
+      </>
     )
 }

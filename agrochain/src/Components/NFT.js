@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { ethers } from "ethers"
 
 import { Loading } from "./Loading";
+import { Footer } from "./Footer";
 import './loading.css';
 
 
@@ -145,6 +146,7 @@ export const NFT = ({ marketplace, nft, account, balance }) => {
                 </div>
             </div>
         </div>
+        <Footer />
 
         </>
     )

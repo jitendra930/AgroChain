@@ -1,14 +1,10 @@
-import { Row, Col, Card, Form, Button } from 'react-bootstrap'
-import { useState, useEffect, React } from 'react'
-import {
-    Routes,
-    Route
-} from "react-router-dom";
+import { Form } from 'react-bootstrap'
+import { useState, React } from 'react'
 
-import { Loading } from "./Loading";
+import { Footer } from "./Footer";
 
+import wheat from './assets/wheat.jpg'
 
-import wheat from './wheat.jpg'
 
 export const Register = ({ marketplace, nft, account }) => {
     const [farmerId, setfarmerId] = useState('')
@@ -27,6 +23,7 @@ export const Register = ({ marketplace, nft, account }) => {
     }
 
     return (
+        <>
         <div className="container mt-4 mb-4">
             <br />
             <div className="row">
@@ -104,7 +101,9 @@ export const Register = ({ marketplace, nft, account }) => {
                         </div>
                 <div className="col-md-2"></div>
                     </div>
-                </div>
+            </div>
+            < Footer />
+            </>
 
         
     )
