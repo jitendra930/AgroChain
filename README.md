@@ -46,13 +46,19 @@ $ npx hardhat node
 
 
 ### 6. Migrate Smart Contracts
-`npx hardhat run src/backend/scripts/deploy.js --network localhost`
+```
+npx hardhat run src/backend/scripts/deploy.js --network localhost
+```
 
 ### 7. Run Tests
-`$ npx hardhat test`
+```
+$ npx hardhat test
+```
 
 ### 8. Launch Frontend
-`$ npm run start`
+```
+$ npm run start
+```
 
 
 ### 9. Project Architecture
