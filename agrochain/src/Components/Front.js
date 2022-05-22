@@ -49,7 +49,7 @@ export const Front = () => {
 
                                                 <br />
 
-                                            <a href="/tips">Read More <i className="fa fa-arrow-right fa-fw"></i></a>
+                                            <a href="/front">Read More <i className="fa fa-arrow-right fa-fw"></i></a>
                                             </div>
 
                                         </div>
