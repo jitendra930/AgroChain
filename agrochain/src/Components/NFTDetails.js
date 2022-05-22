@@ -14,10 +14,16 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
+
+import axios from 'axios';
+
 import { Line } from 'react-chartjs-2';
 import { Loading } from "./Loading";
 import { Footer } from "./Footer";
 
+const api = axios.create({
+    baseURL: `https://localhost:7081/api/Pollution/`
+})
 
 ChartJS.register(
     CategoryScale,
@@ -65,14 +71,14 @@ export const data = {
 
 
 
-
-
-
-
-
-
-
 export const NFTDetails = ({ marketplace }) => {
+
+    
+    //api.get('GetIotData?limit=100', { mode: 'cors' }).then(res => {
+    //    console.log(res.data)
+    //});
+    
+
     const { state } = useLocation();
     const { nfts } = state;
     const [farmername, setfarmername] = useState('')
