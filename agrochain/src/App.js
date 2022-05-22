@@ -8,7 +8,6 @@ import MarketplaceAbi from './frontend/contractsData/Marketplace.json'
 import MarketplaceAddress from './frontend/contractsData/Marketplace-address.json'
 import NFTAbi from './frontend/contractsData/NFT.json'
 import NFTAddress from './frontend/contractsData/NFT-address.json'
-import { useState } from 'react'
 import { ethers } from "ethers"
 
 import Navigation from "./Components/Navigation";
@@ -24,7 +23,7 @@ import './App.css';
 /*const RpcHttpUrl = "https://mainnet.infura.io/v3/9f37c36eaea34b42a0bce7936c691b67";*/
 
 function App() {
-    const [setLoading] = useState(true)
+    const [loading, setLoading] = useState(true)
     const [account, setAccount] = useState(null)
     const [nft, setNFT] = useState({})
     const [marketplace, setMarketplace] = useState({})

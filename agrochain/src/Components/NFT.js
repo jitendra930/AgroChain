@@ -5,6 +5,7 @@ import { ethers } from "ethers"
 import { Loading } from "./Loading";
 import { Footer } from "./Footer";
 import './loading.css';
+import { Button } from 'react-bootstrap';
 
 
 export const NFT = ({ marketplace, nft, account, balance }) => {
@@ -49,8 +50,14 @@ export const NFT = ({ marketplace, nft, account, balance }) => {
         loadMarketplaceItems()
     }
 
-    const handleSearch = () => {
-        setItems(nftData.filter(val => [val.name, val.description].includes(searchText)) || searchText.includes(val.name) || searchText.includes(val.description))
+    const handleSearch = () => {;
+        if(searchText) {
+            const data = nftData.filter(val =>  val.name.includes(searchText) || val.description.includes(searchText) || searchText.includes(val.name) || searchText.includes(val.description));
+            setItems(data);
+        }else {
+            setItems(nftData);
+        }
+
     };
 
     useEffect(() => {
@@ -86,7 +93,7 @@ export const NFT = ({ marketplace, nft, account, balance }) => {
                     <div className="form-group row mt-2">
                         <div className="col-md-1">
                             <div className="mt-1">
-                                <i className="fas fa-search" onClick={handleSearch}></i>
+                                <Button  onClick={handleSearch}><i className="fas fa-search"></i></Button>
                             </div>
                         </div>
                         <div className="col-md-11"><input className="form-control" placeholder="Search Product..." value={searchText} onChange={(e) => setSearchText(e.target.value)} /></div>
