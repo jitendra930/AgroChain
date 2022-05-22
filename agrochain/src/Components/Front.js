@@ -1,15 +1,17 @@
 import React from 'react'
 
-import carbon from './carbon.mp4'
+import carbon from './assets/carbon.mp4'
 import mint from './assets/mint.svg'
 import data from './assets/data.png'
 import security from './assets/security.png'
 
 import './loading.css';
+import { Footer } from "./Footer";
 
 
 export const Front = () => {
     return (
+        <>
         <div className="container-fluid">
             <div className="row">
                 <div className="col-md-12">
@@ -111,6 +113,8 @@ export const Front = () => {
                 </div>
             </div>
         </div>
+    <Footer />
+        </>
     )
 }
 

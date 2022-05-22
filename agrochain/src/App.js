@@ -11,7 +11,6 @@ import { useState } from 'react'
 import { ethers } from "ethers"
 
 import Navigation from "./Components/Navigation";
-import { Footer } from "./Components/Footer";
 import { NFT } from "./Components/NFT";
 import { NFTDetails } from "./Components/NFTDetails";
 import Profile from "./Components/Profile";
@@ -79,7 +78,6 @@ function App() {
         <Route path="nft-details" element={<NFTDetails marketplace={marketplace} />} />
         <Route path="*" element={<Loading />} />
     </Routes>
-    <Footer />
         
     </>
   );

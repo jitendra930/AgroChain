@@ -1,13 +1,16 @@
 import React from 'react'
 
-import profile from './profile.png'
-import { Loading } from "./Loading";
-import './loading.css';
-
-import { Row, Col, Card, Form, Button } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
+
 import { ethers } from "ethers"
 import { create as ipfsHttpClient } from 'ipfs-http-client'
+
+import profile from './assets/profile.png'
+import { Loading } from "./Loading";
+import { Footer } from "./Footer";
+import './loading.css';
+
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
 
@@ -173,7 +176,8 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 	if (loading) return (
 		<Loading />
 	)	
-    return (
+	return (
+		<>
 		<div className="container mt-4 mb-4">
 			<div className="row">
 				<div className="col-md-12">
@@ -432,8 +436,8 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 
 			</div>
 		</div>
-
-                
+		<Footer />
+	</>                
     )
 }
 
