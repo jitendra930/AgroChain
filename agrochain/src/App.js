@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import {
     Routes,
     Route
@@ -18,12 +19,9 @@ import { Register } from "./Components/Register";
 import { Loading } from "./Components/Loading";
 import { Front } from "./Components/Front";
 
-
 import './App.css';
 
-
 /*const RpcHttpUrl = "https://mainnet.infura.io/v3/9f37c36eaea34b42a0bce7936c691b67";*/
-
 
 function App() {
     const [setLoading] = useState(true)
@@ -31,6 +29,19 @@ function App() {
     const [nft, setNFT] = useState({})
     const [marketplace, setMarketplace] = useState({})
     const [balance, SetBalance] = useState(null)
+
+    useEffect(() => {
+        if (!!localStorage.getItem('account')) {
+            web3Handler();
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log(account);
+        if (!!account) {
+            localStorage.setItem('account', account);
+        }
+    }, [account]);
 
     // MetaMask Login/Connect
     const web3Handler = async () => {
@@ -55,7 +66,7 @@ function App() {
             setAccount(accounts[0])
             await web3Handler()
         })
-        
+
         loadContracts(signer)
     }
     const loadContracts = async (signer) => {
@@ -66,21 +77,21 @@ function App() {
         setNFT(nft)
         setLoading(false)
     }
+
     return (
-    <>
-    <Navigation web3Handler={web3Handler} account={account} />
-    <Routes>
-        <Route path="/" element={<Loading />} />
-        <Route path="/front" element={<Front />} />
-        <Route path="/profile" element={<Profile marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
-        <Route path="/register" element={<Register marketplace={marketplace} nft={nft} account={account} account={account} />} />
-        <Route path="nft" element={<NFT marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
-        <Route path="nft-details" element={<NFTDetails marketplace={marketplace} />} />
-        <Route path="*" element={<Loading />} />
-    </Routes>
-        
-    </>
-  );
+        <>
+            <Navigation web3Handler={web3Handler} account={account} />
+            <Routes>
+                <Route path="/" element={<Loading />} />
+                <Route path="/front" element={<Front />} />
+                <Route path="/profile" element={<Profile marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
+                <Route path="/register" element={<Register marketplace={marketplace} nft={nft} account={account} />} />
+                <Route path="nft" element={<NFT marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
+                <Route path="nft-details" element={<NFTDetails marketplace={marketplace} />} />
+                <Route path="*" element={<Loading />} />
+            </Routes>
+        </>
+    );
 }
 
 export default App;
