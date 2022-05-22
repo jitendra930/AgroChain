@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IOT.AzureDB;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Pollution.API.Models;
 
@@ -14,14 +16,16 @@ namespace Pollution.API.Controllers
         private readonly string _apiKey;
         private readonly string _baseUrl;
         private readonly string _urlPath;
+        private readonly IotDBContext _dbContext;
 
-        public PollutionController(ILogger<PollutionController> logger, IConfiguration configuration)
+        public PollutionController(ILogger<PollutionController> logger, IConfiguration configuration, IotDBContext dbContext)
         {
             _logger = logger;
             _configuration = configuration;
             _apiKey = _configuration["APIKey"];
             _baseUrl = _configuration["OpenWeatherURL"];
             _urlPath = @"data/2.5/air_pollution/history";
+            _dbContext = dbContext;
         }
 
         //https://localhost:7081/api/ApiResult/GetPolltionHistory?lat=50&lon=50&currentDate=2020-11-27T20:21:00
@@ -88,56 +92,12 @@ namespace Pollution.API.Controllers
             }
         }
 
-        //[HttpGet(Name = "GetAveragePolltionHistory")]
-        //public async Task<ApiResult> GetAveragePolltionHistory(double lat, double lon, string currentDate)
-        //{
-        //    DateTime.TryParse(currentDate, out DateTime temp);
-        //    var startDatetime = temp.AddYears(-2).ToString("s");
-        //    var startTimeInUnix = ConvertDateTimeToUnix(startDatetime);
-        //    var endTimeInUnix = ConvertDateTimeToUnix(currentDate);
-
-        //    var completeUrl = _baseUrl + _urlPath + $"?lat={lat}&lon={lon}&start={startTimeInUnix}&end={endTimeInUnix}&appid={_apiKey}";
-
-        //    try
-        //    {
-        //        using (var client = new HttpClient())
-        //        {
-        //            using (var httpResponseMessage = await client.GetAsync(completeUrl))
-        //            {
-        //                httpResponseMessage?.EnsureSuccessStatusCode();
-        //                var contents = await httpResponseMessage?.Content?.ReadAsStringAsync();
-
-        //                var result = JsonConvert.DeserializeObject<ApiResult>(contents);
-
-        //                //TODO: need to calculate average based on current month and previous 3 months
-        //                if (result != null)
-        //                {
-        //                    //foreach (var item in result.PollutionData)
-        //                    //{
-        //                    //    var acceptedDateTimes = 
-        //                    //    if (item.DateTime in )
-        //                    //    {
-
-        //                    //    }
-        //                    //}
-        //                    //var a = result.PollutionData
-        //                    //    .GroupBy(x => x.DateTime.Year)
-        //                    //    .ToLookup(t => t.Key, t => new
-        //                    //    {
-        //                    //        Average = t.Average(t => t.Main.AQI)
-        //                    //    });
-        //                }
-
-        //                return result;
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, "Something went wrong while using http client");
-        //        throw;
-        //    }
-        //}
+        //https://localhost:7081/api/Pollution/GetIotData?limit=5
+        [HttpGet(Name = "GetIotData/{limit}")]
+        public async Task<IEnumerable<SensorDatum>> GetIotData(int limit = 1)
+        {
+            return (await _dbContext.SensorData.OrderByDescending(x => x.EventEnqueuedUtcTime).ToListAsync()).Take(limit);
+        }
 
         private long ConvertDateTimeToUnix(string dateTime)
         {
@@ -147,3 +107,4 @@ namespace Pollution.API.Controllers
         }
     }
 }
+
