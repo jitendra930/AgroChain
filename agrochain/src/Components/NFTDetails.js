@@ -21,9 +21,11 @@ import { Line } from 'react-chartjs-2';
 import { Loading } from "./Loading";
 import { Footer } from "./Footer";
 
+
 const api = axios.create({
     baseURL: `https://localhost:7081/api/Pollution/`
 })
+
 
 ChartJS.register(
     CategoryScale,
@@ -77,6 +79,8 @@ export const NFTDetails = ({ marketplace }) => {
     //api.get('GetIotData?limit=100', { mode: 'cors' }).then(res => {
     //    console.log(res.data)
     //});
+
+    
     
 
     const { state } = useLocation();
@@ -95,9 +99,18 @@ export const NFTDetails = ({ marketplace }) => {
         setgovtid(fam.govtId)
         setlocation(fam.location)
         setcontact(fam.contact)
+        LoadPollutionData()
         setpin(fam.pin)
         setLoading(false)
     }
+
+    const LoadPollutionData = () => {
+        api.get('GetIotData?limit=100', { mode: 'cors' }).then(res => {
+            console.log(res.data)
+        });
+    }
+
+    
 
     const buyMarketItem = async (nfts) => {
         await (await marketplace.purchaseItem(nfts.itemId, { value: nfts.totalPrice })).wait()
