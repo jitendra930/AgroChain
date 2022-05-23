@@ -109,35 +109,42 @@ export const NFTDetails = ({ marketplace }) => {
         setlocation(fam.location)
         setcontact(fam.contact)
         LoadPollutionData()
+        setTimeout(() => { LoadPollutionIOTData() }, 10000);
         setpin(fam.pin)
         setLoading(false)
-    }
+}
+
+    const LoadPollutionIOTData = () => {
+    api.get('GetIotData?limit=100').then(({ data }) => {
+        console.log(data)
+        console.log(typeof data)
+        const labelsx = data.map(val => val.localDateTime.split('T')[1])
+        const datax = data.map(val => val.co2InPpm)
+        console.log(labelsx)
+        console.log(datax)
+        const dataxx = {
+            labels: labelsx,
+            datasets: [
+                {
+                    label: 'Live CO2 IOT Data',
+                    data: datax,
+                    borderColor: 'rgb(255, 99, 132, 0.4)',
+                    backgroundColor: 'rgba(255, 99, 132, 1)',
+                }
+            ],
+        }
+        setIOT(dataxx)
+        console.log(IOT)
+    });
+
+    
+}
+
+
 
     
 
     const LoadPollutionData = () => {
-        api.get('GetIotData?limit=100').then(({ data }) => {
-            console.log(data)
-            console.log(typeof data)
-            const labelsx = data.map(val => val.localDateTime.split('T')[1])
-            const datax = data.map(val => val.co2InPpm)
-            console.log(labelsx)
-            console.log(datax)
-            const dataxx = {
-                labels: labelsx,
-                datasets: [
-                    {
-                        label: 'Live CO2 IOT Data',
-                        data: datax,
-                        borderColor: 'rgb(255, 99, 132, 0.4)',
-                        backgroundColor: 'rgba(255, 99, 132, 1)',
-                    }
-                ],
-            }
-            setIOT(dataxx)
-            console.log(IOT)
-        });
-
         api.get('GetPolltionHistory?lat=56.7&lon=45.6&currentDate=23%2F05%2F2022').then(({ data }) => {
             const labelsx = data.map(val => val.DateTime.split('T')[0])
             const dataxAQI = data.map(val => val.AverageAQI)
