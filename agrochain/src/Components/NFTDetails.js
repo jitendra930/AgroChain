@@ -145,6 +145,7 @@ export const NFTDetails = ({ marketplace }) => {
     
 
     const LoadPollutionData = () => {
+        // the api needs to be updated with the dynamic latitude and longitude data
         api.get('GetPolltionHistory?lat=56.7&lon=45.6&currentDate=23%2F05%2F2022').then(({ data }) => {
             const labelsx = data.map(val => val.DateTime.split('T')[0])
             const dataxAQI = data.map(val => val.AverageAQI)
