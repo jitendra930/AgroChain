@@ -37,7 +37,7 @@ ChartJS.register(
     Legend
 );
 
-export const options = {
+export const options1 = {
     responsive: true,
     plugins: {
         legend: {
@@ -45,28 +45,35 @@ export const options = {
         },
         title: {
             display: true,
-            text: 'Chart.js Line Chart',
+            text: 'Live CO2 IOT Data',
         },
     },
 };
 
-const labels = ['2017', '2018', '2019', '2020', '2021', '2022'];
+export const options2 = {
+    responsive: true,
+    plugins: {
+        legend: {
+            position: 'top',
+        },
+        title: {
+            display: true,
+            text: 'Live Pollution Data',
+        },
+    },
+};
+
+const labels = ['2022-05-22T13:09:32.159Z', '2018', '2019', '2020', '2021', '2022'];
 
 export const data = {
     labels,
     datasets: [
         {
-            label: 'Dataset 1',
-            data: [200,180,70,10,70, 50],
+            label: 'Live CO2 IOT Data',
+            data: [135,180,70,10,70, 50],
             borderColor: 'rgb(255, 99, 132)',
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-        {
-            label: 'Dataset 2',
-            data: [70,50,70,100,20, 30],
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
+        }
     ],
 };
 
@@ -91,6 +98,8 @@ export const NFTDetails = ({ marketplace }) => {
     const [contact, setcontact] = useState('')
     const [pin, setpin] = useState('')
     const [loading, setLoading] = useState(true)
+    const [IOT, setIOT] = useState(data)
+    const [Pollution, setPollution] = useState(data)
 
     const LoadFarmer = async () => {
 
@@ -104,11 +113,107 @@ export const NFTDetails = ({ marketplace }) => {
         setLoading(false)
     }
 
+    
+
     const LoadPollutionData = () => {
-        api.get('GetIotData?limit=100', { mode: 'cors' }).then(res => {
-            console.log(res.data)
+        api.get('GetIotData?limit=100').then(({ data }) => {
+            console.log(data)
+            console.log(typeof data)
+            const labelsx = data.map(val => val.localDateTime.split('T')[1])
+            const datax = data.map(val => val.co2InPpm)
+            console.log(labelsx)
+            console.log(datax)
+            const dataxx = {
+                labels: labelsx,
+                datasets: [
+                    {
+                        label: 'Live CO2 IOT Data',
+                        data: datax,
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    }
+                ],
+            }
+            setIOT(dataxx)
+            console.log(IOT)
+        });
+
+        api.get('GetPolltionHistory?lat=56.7&lon=45.6&currentDate=23%2F05%2F2022').then(({ data }) => {
+            const labelsx = data.map(val => val.DateTime.split('T')[0])
+            const dataxAQI = data.map(val => val.AverageAQI)
+            const dataxCO = data.map(val => val.AverageCO)
+            const dataxNO = data.map(val => val.AverageNO)
+            const dataxNO2 = data.map(val => val.AverageNO2)
+            const dataxO3 = data.map(val => val.AverageO3)
+            const dataxSO2 = data.map(val => val.AverageSO2)
+            const dataxPM25 = data.map(val => val.AveragePM25)
+            const dataxPM10 = data.map(val => val.AveragePM10)
+            const dataxNH3 = data.map(val => val.AverageNH3)
+            const datapol = {
+                labels: labelsx,
+                datasets: [
+                    {
+                        label: 'AverageAQI',
+                        data: dataxAQI,
+                        borderColor: 'rgb(255, 99, 132, 0.4)',
+                        backgroundColor: 'rgba(255, 99, 132, 1)',
+                    },
+                    {
+                        label: 'AverageCO',
+                        data: dataxCO,
+                        borderColor: 'rgba(75, 192, 192, 0.4)',
+                        backgroundColor: 'rgba(75, 192, 192, 1)',
+                    },
+                    {
+                        label: 'AverageNO',
+                        data: dataxNO,
+                        borderColor: 'rgba(153, 102, 255, 0.4)',
+                        backgroundColor: 'rgba(153, 102, 255, 1)',
+                    },
+                    {
+                        label: 'AverageNO2',
+                        data: dataxNO2,
+                        borderColor: 'rgba(255, 159, 64, 0.4)',
+                        backgroundColor: 'rgba(255, 159, 64, 1)',
+                    },
+                    {
+                        label: 'AverageO3',
+                        data: dataxO3,
+                        borderColor: 'rgba(255, 99, 132, 0.4)',
+                        backgroundColor: 'rgba(255, 99, 132, 1)',
+                    },
+                    {
+                        label: 'AverageSO2',
+                        data: dataxSO2,
+                        borderColor: 'rgba(54, 162, 235, 0.4)',
+                        backgroundColor: 'rgba(54, 162, 235, 1)',
+                    },
+                    {
+                        label: 'AveragePM25',
+                        data: dataxPM25,
+                        borderColor: 'rgba(255, 206, 86, 0.4)',
+                        backgroundColor: 'rgba(255, 206, 86, 1)',
+                    },
+                    {
+                        label: 'AveragePM10',
+                        data: dataxPM10,
+                        borderColor: 'rgba(134, 220, 50, 0.4)',
+                        backgroundColor: 'rgba(134, 220, 50, 1)',
+                    },
+                    {
+                        label: 'AverageNH3',
+                        data: dataxNH3,
+                        borderColor: 'rgba(134, 156, 200, 0.4)',
+                        backgroundColor: 'rgba(134, 156, 200, 1)',
+                    },
+                ],
+            }
+            setPollution(datapol)
+            console.log(setPollution)
         });
     }
+
+    
 
     
 
@@ -167,19 +272,23 @@ export const NFTDetails = ({ marketplace }) => {
                             </div>
                         </div>
                     </div>
-
-                    
+                    <br />
+                    <br />
+                    <br />
                 </div>
+
                 <div className="row">
+                        <div className="col-md-6">
+                            <Line options={options1} data={IOT} />
+                        </div>
                     <div className="col-md-6">
-                        <Line options={options} data={data} />
-                    </div>
-                    <div className="col-md-6">
-                        <Line options={options} data={data} />
+                        <Line options={options2} data={Pollution} />
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
+            <br />
+            <br />
         <Footer />
       </>
     )
