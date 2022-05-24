@@ -1,6 +1,6 @@
 import { Form } from 'react-bootstrap'
 import { useState, React, useContext } from 'react'
-import Autocomplete, { usePlacesWidget } from "react-google-autocomplete";
+import { usePlacesWidget } from "react-google-autocomplete";
 import { Footer } from "./Footer";
 
 import wheat from './assets/wheat.jpg'
