@@ -15,7 +15,7 @@ export const Front = () => {
         <div className="container-fluid">
             <div className="row">
                 <div className="col-md-12">
-                    <div className="row mt-4 pt-5 pb-4 bg-faint-blue">
+                    <div className="row mt-4 pt-4 pb-4 bg-faint-blue">
                         <div className="col-md-12">
                             <div className="container">
                                 <div className="row">
@@ -30,7 +30,7 @@ export const Front = () => {
                                         
                                     </div>
 
-                                    <div className="col-md-4 mt-2">
+                                    <div className="col-md-4">
                                         <div className="container">
                                             <div className="row pt-4 pb-3">
                                                 <div className="col-md-12 text-center">
