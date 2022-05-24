@@ -1,14 +1,14 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ethers } from "ethers"
 import { Loading } from "./Loading";
 import { Footer } from "./Footer";
 import './loading.css';
 import { Button } from 'react-bootstrap';
+import { NftContext } from '../frontend/NftContext/NftProvider';
 
-
-export const NFT = ({ marketplace, nft, account, balance }) => {
+export const NFT = () => {
+    const { account, marketplace, nft, balance,isLoading } = useContext(NftContext);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true)
     const [items, setItems] = useState([])
@@ -50,19 +50,20 @@ export const NFT = ({ marketplace, nft, account, balance }) => {
         loadMarketplaceItems()
     }
 
-    const handleSearch = () => {;
-        if(searchText) {
-            const data = nftData.filter(val =>  val.name.includes(searchText) || val.description.includes(searchText) || searchText.includes(val.name) || searchText.includes(val.description));
+    const handleSearch = () => {
+        if (searchText) {
+            const data = nftData.filter(val => val.name.includes(searchText) || val.description.includes(searchText) || searchText.includes(val.name) || searchText.includes(val.description));
             setItems(data);
-        }else {
+        } else {
             setItems(nftData);
         }
-
     };
 
     useEffect(() => {
-        loadMarketplaceItems()
-    }, []);
+        if(isLoading) {
+            loadMarketplaceItems()
+        }
+    }, [isLoading]);
 
     const sortFilterHandler = (e) => {
         const sortFlag = e.target.value === 'true';
@@ -91,12 +92,12 @@ export const NFT = ({ marketplace, nft, account, balance }) => {
                 </div>
                 <div className="col-md-3">
                     <div className="form-group row mt-2">
-                        <div className="col-md-1">
+                        <div className="col-md-11 mt-1" style={{ paddingRight: "0px !important" }}><input className="form-control" placeholder="Search Product..." value={searchText} onChange={(e) => setSearchText(e.target.value)} /></div>
+                        <div className="col-md-1" style={{ paddingLeft: "0px !important" }} >
                             <div className="mt-1">
-                                <Button  onClick={handleSearch}><i className="fas fa-search"></i></Button>
+                                <Button onClick={handleSearch}><i className="fas fa-search"></i></Button>
                             </div>
                         </div>
-                        <div className="col-md-11-mt-1"><input className="form-control" placeholder="Search Product..." value={searchText} onChange={(e) => setSearchText(e.target.value)} /></div>
                     </div>
                 </div>
             </div>
@@ -135,10 +136,10 @@ export const NFT = ({ marketplace, nft, account, balance }) => {
                         </div>
                         <div className="col-md-9">
                             <div className="row no-gutters">
-                                {items.map((item, idx) => (
+                                {items.length > 0 && items.map((item, idx) => (
                                     <div className="col-6 col-sm-4 col-md-4" key={idx}>
                                         <div className="card mx-1 mb-3">
-                                            <img src={item.image} className="w-full" />
+                                            <img src={item.image} className="w-full" alt='nft icon' />
                                             <div className="card-body">
 
                                                 <div className="row">
@@ -165,13 +166,20 @@ export const NFT = ({ marketplace, nft, account, balance }) => {
                                         </div>
                                     </div>
                                 ))}
+                                {items.length <= 0 && (<div className="col-12 col-sm-12 col-md-12">
+                                    <div className="card mx-1 mb-3">
+                                        <div className="card-body">
+                                            <p className="text-danger text-center type-6 my-0">No Records found!</p>
+                                        </div>
+                                    </div>
+                                </div>)}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <Footer />
+            <Footer />
         </>
     )
 }

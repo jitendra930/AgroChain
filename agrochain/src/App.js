@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import {
     Routes,
     Route
@@ -15,35 +15,31 @@ import { NFT } from "./Components/NFT";
 import { NFTDetails } from "./Components/NFTDetails";
 import Profile from "./Components/Profile";
 import { Register } from "./Components/Register";
-import { Loading } from "./Components/Loading";
 import { Front } from "./Components/Front";
+import { NftContext } from "./frontend/NftContext/NftProvider";
 
 import './App.css';
 
 /*const RpcHttpUrl = "https://mainnet.infura.io/v3/9f37c36eaea34b42a0bce7936c691b67";*/
 
 function App() {
+    const { setAccount, setMarketplace, setNFT, setBalance, setIsLoading, account } = useContext(NftContext);
     const [loading, setLoading] = useState(true)
-    const [account, setAccount] = useState(null)
-    const [nft, setNFT] = useState({})
-    const [marketplace, setMarketplace] = useState({})
-    const [balance, SetBalance] = useState(null)
 
-    useEffect(() => {
-        if (!!localStorage.getItem('account')) {
-            web3Handler();
-        }
-    }, []);
+    const loadContracts = async (signer) => {
+        // Get deployed copies of contracts
+        const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer)
+        setMarketplace(marketplace)
+        const nft = new ethers.Contract(NFTAddress.address, NFTAbi.abi, signer)
+        setNFT(nft)
+        setLoading(false)
+    }
 
-    useEffect(() => {
-        console.log(account);
-        if (!!account) {
-            localStorage.setItem('account', account);
-        }
-    }, [account]);
-
-    // MetaMask Login/Connect
     const web3Handler = async () => {
+        if (!window.ethereum) {
+            alert('Install metamask extention');
+            return;
+        }
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         setAccount(accounts[0])
         // Get provider from Metamask
@@ -53,9 +49,8 @@ function App() {
         const signer = provider.getSigner()
         const balance = await provider.getBalance(accounts[0])
         const balances = ethers.utils.formatEther(balance);
-        SetBalance(balances)
+        setBalance(balances)
         console.log(balances);
-
 
         window.ethereum.on('chainChanged', (chainId) => {
             window.location.reload();
@@ -67,27 +62,44 @@ function App() {
         })
 
         loadContracts(signer)
-    }
-    const loadContracts = async (signer) => {
-        // Get deployed copies of contracts
-        const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer)
-        setMarketplace(marketplace)
-        const nft = new ethers.Contract(NFTAddress.address, NFTAbi.abi, signer)
-        setNFT(nft)
-        setLoading(false)
-    }
+    };
+
+    useEffect(() => {
+        if (!!localStorage.getItem('account')) {
+            (async () => {
+                const account = localStorage.getItem('account');
+                setAccount(account)
+                const provider = new ethers.providers.Web3Provider(window.ethereum)
+                const signer = provider.getSigner();
+                const balance = await provider.getBalance(account);
+                const balances = ethers.utils.formatEther(balance);
+                setBalance(balances)
+                const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer)
+                setMarketplace(marketplace)
+                const nft = new ethers.Contract(NFTAddress.address, NFTAbi.abi, signer)
+                setNFT(nft)
+                setIsLoading(true)
+            })();
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log(account);
+        if (!!account) {
+            localStorage.setItem('account', account);
+        }
+    }, [account]);
 
     return (
         <>
-            <Navigation web3Handler={web3Handler} account={account} />
+            <Navigation web3Handler={web3Handler} />
             <Routes>
-                <Route path="/" element={<Loading />} />
-                <Route path="/front" element={<Front />} />
-                <Route path="/profile" element={<Profile marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
-                <Route path="/register" element={<Register marketplace={marketplace} nft={nft} account={account} />} />
-                <Route path="nft" element={<NFT marketplace={marketplace} nft={nft} account={account} balance={balance} />} />
-                <Route path="nft-details" element={<NFTDetails marketplace={marketplace} />} />
-                <Route path="*" element={<Loading />} />
+                <Route path="/" element={<Front />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="nft" element={<NFT />} />
+                <Route path="nft-details" element={<NFTDetails />} />
+                <Route path="*" element={<Front />} />
             </Routes>
         </>
     );

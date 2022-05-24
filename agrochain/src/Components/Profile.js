@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { Form } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
@@ -10,14 +10,13 @@ import profile from './assets/profile.png'
 import { Loading } from "./Loading";
 import { Footer } from "./Footer";
 import './loading.css';
+import { NftContext } from '../frontend/NftContext/NftProvider'
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
+const Profile = () => {
+	const { account, nft, balance, marketplace, isLoading } = useContext(NftContext);
 
-
-
-
-const Profile = ({ marketplace, nft, account, balance }) => {
 	const [image, setImage] = useState('')
 	const [price, setPrice] = useState(null)
 	const [name, setName] = useState('')
@@ -78,7 +77,6 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 	const [listedItems, setListedItems] = useState([])
 	const [soldItems, setSoldItems] = useState([])
 	const [purchasedItems, setPurchasedItems] = useState([])
-
 
 	const loadListedItems = async () => {
 		// Load all sold items that the user listed
@@ -171,8 +169,11 @@ const Profile = ({ marketplace, nft, account, balance }) => {
 	}
 
 	useEffect(() => {
-		loadListedItems()
-	}, [])
+		if(isLoading) {
+			loadListedItems()
+		}
+	}, [isLoading]);
+
 	if (loading) return (
 		<Loading />
 	)	
