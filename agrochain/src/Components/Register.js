@@ -1,12 +1,14 @@
 import { Form } from 'react-bootstrap'
-import { useState, React } from 'react'
+import { useState, React, useContext } from 'react'
 
 import { Footer } from "./Footer";
 
 import wheat from './assets/wheat.jpg'
+import { NftContext } from '../frontend/NftContext/NftProvider';
 
 
-export const Register = ({ marketplace, nft, account }) => {
+export const Register = () => {
+    const { account, marketplace } = useContext(NftContext);
     const [farmerId, setfarmerId] = useState('')
     const [name, setname] = useState('')
     const [govtid, setgovtid] = useState('')

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
@@ -20,6 +20,7 @@ import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import { Loading } from "./Loading";
 import { Footer } from "./Footer";
+import { NftContext } from '../frontend/NftContext/NftProvider';
 
 
 const api = axios.create({
@@ -80,16 +81,8 @@ export const data = {
 
 
 
-export const NFTDetails = ({ marketplace }) => {
-
-    
-    //api.get('GetIotData?limit=100', { mode: 'cors' }).then(res => {
-    //    console.log(res.data)
-    //});
-
-    
-    
-
+export const NFTDetails = () => {
+	const {marketplace, isLoading } = useContext(NftContext);
     const { state } = useLocation();
     const { nfts } = state;
     const [farmername, setfarmername] = useState('')
@@ -229,8 +222,10 @@ export const NFTDetails = ({ marketplace }) => {
         await (await marketplace.purchaseItem(nfts.itemId, { value: nfts.totalPrice })).wait()
     }
     useEffect(() => {
-        LoadFarmer()
-    }, [])
+        if(isLoading) {
+            LoadFarmer()
+        }
+    }, [isLoading])
     if (loading) return (
         <Loading />
     )
