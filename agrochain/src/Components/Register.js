@@ -51,10 +51,10 @@ export const Register = () => {
                                     <div className="card-body form-contents">
                                         <h3 className="no-td-space">Register the Account</h3>
                                         <p className="type-7-2 text-muted">
-                                            If You already have a account then <a>Login.</a>
+                                            If You already have a account then <a href="https://metamask.io/" target="_blank">Connect Wallet.</a>
                                         </p>
                                         <div className="form-group">
-                                            <h6>Public Crypto Id :</h6>
+                                            <h6>Public Crypto Id : <a href="https://www.youtube.com/watch?v=LmWbDDaU5fE" target="_blank">(Create a Crypto Account using MetaMask)</a></h6>
                                             <Form.Control onChange={(e) => setfarmerId(e.target.value)} type="text" className="form-control" value={account} required disabled />
                                         </div>
                                         <div className="form-group">
