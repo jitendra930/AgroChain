@@ -138,8 +138,10 @@ export const NFTDetails = () => {
     
 
     const LoadPollutionData = () => {
+        const datex = new Date().getDate() + '%2F' + new Date().toLocaleString("en-US", { month: "long" }) + '%2F' + new Date().getFullYear()
+        /*console.log(datex)*/
         // the api needs to be updated with the dynamic latitude and longitude data
-        api.get('GetPolltionHistory?lat=56.7&lon=45.6&currentDate=23%2F05%2F2022').then(({ data }) => {
+        api.get('GetPolltionHistory?lat=56.7&lon=45.6&currentDate='+datex).then(({ data }) => {
             const labelsx = data.map(val => val.DateTime.split('T')[0])
             const dataxAQI = data.map(val => val.AverageAQI)
             const dataxCO = data.map(val => val.AverageCO)
