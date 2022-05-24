@@ -64,14 +64,14 @@ export const options2 = {
     },
 };
 
-const labels = ['2022-05-22T13:09:32.159Z', '2018', '2019', '2020', '2021', '2022'];
+const labels = [];
 
 export const data = {
     labels,
     datasets: [
         {
-            label: 'Live CO2 IOT Data',
-            data: [135,180,70,10,70, 50],
+            label: 'Loding Data',
+            data: [],
             borderColor: 'rgb(255, 99, 132)',
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
         }
@@ -245,7 +245,7 @@ export const NFTDetails = () => {
                     <p className="text-muted">
                         {nfts.description}
                     </p>
-                    <p className="mt-3 text-grey"> <i class="fa fa-copyright" aria-hidden="true"> {farmername} </i> <i className="fa fa-id-card" aria-hidden="true"></i> {govtid} <i className="fa fa-address-book"></i> {contact} <i className="fa fa-compass" aria-hidden="true"></i> {location} <i className="fa fa-map-marker"></i> {pin}</p>
+                        <p className="mt-3 text-grey"> <i className="fa fa-copyright" aria-hidden="true"> {farmername} </i> <i className="fa fa-id-card" aria-hidden="true"></i> {govtid} <i className="fa fa-address-book"></i> {contact} <i className="fa fa-compass" aria-hidden="true"></i> {location} <i className="fa fa-map-marker"></i> {pin}</p>
                     <br />
                     <h4 className="text-success mb-0">Current Price:</h4>
                     <h2 className="text-success my-0">
@@ -277,14 +277,19 @@ export const NFTDetails = () => {
                     </div>
                     <br />
                     <br />
-                    <br />
-                </div>
 
-                <div className="row">
+                    </div>
+
+
+                    <div className="row">
                         <div className="col-md-6">
+                            <br />
+                            <br />
                             <Line options={options1} data={IOT} />
                         </div>
-                    <div className="col-md-6">
+                        <div className="col-md-6">
+                            <br />
+                            <br />
                         <Line options={options2} data={Pollution} />
                     </div>
                 </div>
