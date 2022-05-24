@@ -73,7 +73,7 @@ export const Register = () => {
                                         <br />
                                         <div className="form-group">
                                             <h6>Contact :</h6>
-                                            <Form.Control onChange={(e) => setcontact(e.target.value)} className="form-control" id="validationDefault03" placeholder="Enter City" required />
+                                            <Form.Control onChange={(e) => setcontact(e.target.value)} className="form-control" id="validationDefault03" placeholder="Enter Contact Details" required />
                                         </div>
                                         {/*<div className="form-group">*/}
                                         {/*    <h6>City :</h6>*/}
@@ -81,12 +81,12 @@ export const Register = () => {
                                         {/*</div>*/}
                                         <div className="form-group">
                                             <h6>PIN :</h6>
-                                            <Form.Control onChange={(e) => setpin(e.target.value)} type="text" className="form-control" id="validationDefault05" placeholder="Enter Zip" required />
+                                            <Form.Control onChange={(e) => setpin(e.target.value)} type="text" className="form-control" id="validationDefault05" placeholder="Enter PIN code" required />
                                         </div>
 
 
 
-
+                                        <br />
                                         <hr />
                                         <div className="row">
                                             <div className="col-md-12">
@@ -96,7 +96,7 @@ export const Register = () => {
                                                 </p>
                                             </div>
                                         </div>
-
+                                        <br />
                                         <div className="row mt-2">
                                             <div className="col-md-12">
                                                 <button onClick={RegisterFarmer} className="btn btn-success">
