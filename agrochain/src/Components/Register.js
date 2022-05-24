@@ -67,7 +67,7 @@ export const Register = () => {
                                         </div>
                                         <div className="form-group">
                                             <h6> Address :<span className="float-right"></span></h6>
-                                            <Form.Control className="form-control" placeholder="Enter Latitude/ Longitude" ref={bootstrapRef} />
+                                            <Form.Control className="form-control" placeholder="Enter the Farm Address" ref={bootstrapRef} />
                                         </div>
                                         <br />
                                         <br />
