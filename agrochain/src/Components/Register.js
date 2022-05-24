@@ -51,10 +51,10 @@ export const Register = () => {
                                     <div className="card-body form-contents">
                                         <h3 className="no-td-space">Register the Account</h3>
                                         <p className="type-7-2 text-muted">
-                                            If You already have a account then <a>Login.</a>
+                                            If You already have a account then <a href="https://metamask.io/" target="_blank">Connect Wallet.</a>
                                         </p>
                                         <div className="form-group">
-                                            <h6>Public Crypto Id :</h6>
+                                            <h6>Public Crypto Id : <a href="https://www.youtube.com/watch?v=LmWbDDaU5fE" target="_blank">(Create a Crypto Account using MetaMask)</a></h6>
                                             <Form.Control onChange={(e) => setfarmerId(e.target.value)} type="text" className="form-control" value={account} required disabled />
                                         </div>
                                         <div className="form-group">
@@ -67,13 +67,13 @@ export const Register = () => {
                                         </div>
                                         <div className="form-group">
                                             <h6> Address :<span className="float-right"></span></h6>
-                                            <Form.Control className="form-control" placeholder="Enter Latitude/ Longitude" ref={bootstrapRef} />
+                                            <Form.Control className="form-control" placeholder="Enter the Farm Address" ref={bootstrapRef} />
                                         </div>
                                         <br />
                                         <br />
                                         <div className="form-group">
                                             <h6>Contact :</h6>
-                                            <Form.Control onChange={(e) => setcontact(e.target.value)} className="form-control" id="validationDefault03" placeholder="Enter City" required />
+                                            <Form.Control onChange={(e) => setcontact(e.target.value)} className="form-control" id="validationDefault03" placeholder="Enter Contact Details" required />
                                         </div>
                                         {/*<div className="form-group">*/}
                                         {/*    <h6>City :</h6>*/}
@@ -81,12 +81,12 @@ export const Register = () => {
                                         {/*</div>*/}
                                         <div className="form-group">
                                             <h6>PIN :</h6>
-                                            <Form.Control onChange={(e) => setpin(e.target.value)} type="text" className="form-control" id="validationDefault05" placeholder="Enter Zip" required />
+                                            <Form.Control onChange={(e) => setpin(e.target.value)} type="text" className="form-control" id="validationDefault05" placeholder="Enter PIN code" required />
                                         </div>
 
 
 
-
+                                        <br />
                                         <hr />
                                         <div className="row">
                                             <div className="col-md-12">
@@ -96,7 +96,7 @@ export const Register = () => {
                                                 </p>
                                             </div>
                                         </div>
-
+                                        <br />
                                         <div className="row mt-2">
                                             <div className="col-md-12">
                                                 <button onClick={RegisterFarmer} className="btn btn-success">
