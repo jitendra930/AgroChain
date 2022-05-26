@@ -13,6 +13,7 @@ export const Register = () => {
     const [name, setname] = useState('')
     const [govtid, setgovtid] = useState('')
     const [latitude, setLatitude] = useState('')
+    const [longitude, setLongitude] = useState('')
     const [contact, setcontact] = useState('')
     const [pin, setpin] = useState('')
 
@@ -22,14 +23,18 @@ export const Register = () => {
             types: [],
             componentRestrictions: { country: [] }
         },
-        onPlaceSelected: (place) => setLatitude(place.geometry.location.lat()),
+        onPlaceSelected: (place) => { setLatitude(place.geometry.location.lat()); setLongitude(place.geometry.location.lng()) },
     });
 
     const RegisterFarmer = async () => {
 
-        console.log(farmerId, name, govtid, latitude, contact, pin);
+        console.log(farmerId, name, govtid, latitude, longitude, contact, pin);
 
-        await (await marketplace.create_Farmer(account, name, govtid, latitude, contact, pin)).wait();
+        const lat_log = latitude.toString() + ' ' + longitude.toString();
+
+        console.log(lat_log);
+
+        await (await marketplace.create_Farmer(account, name, govtid, lat_log, contact, pin)).wait();
         /*<Route path="/" element={<Loading />} />*/
     }
 
