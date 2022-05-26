@@ -28,9 +28,9 @@ namespace Pollution.API.Controllers
             _dbContext = dbContext;
         }
 
-        //https://localhost:7081/api/ApiResult/GetPolltionHistory?lat=50&lon=50&currentDate=2020-11-27T20:21:00
-        [HttpGet(Name = "GetPolltionHistory")]
-        public async Task<string> GetPolltionHistory(double lat, double lon, string currentDate)
+        //https://localhost:7081/api/ApiResult/GetPollutionHistory?lat=50&lon=50&currentDate=2020-11-27T20:21:00
+        [HttpGet(Name = "GetPollutionHistory")]
+        public async Task<string> GetPollutionHistory(double lat, double lon, string currentDate)
         {
             DateTime.TryParse(currentDate, out DateTime temp);
             var startDatetime = temp.AddYears(-2).ToString("s");
@@ -50,7 +50,6 @@ namespace Pollution.API.Controllers
 
                         var result = JsonConvert.DeserializeObject<ApiResult>(contents);
 
-                        //TODO: add logic to get per month average
                         var res = new List<Result>();
                         if (result != null)
                         {
@@ -96,7 +95,7 @@ namespace Pollution.API.Controllers
         [HttpGet(Name = "GetIotData/{limit}")]
         public async Task<IEnumerable<SensorDatum>> GetIotData(int limit = 1)
         {
-            return (await _dbContext.SensorData.OrderByDescending(x => x.EventEnqueuedUtcTime).ToListAsync()).Take(limit);
+            return (await _dbContext.SensorData.OrderBy(x => x.EventEnqueuedUtcTime).ToListAsync()).Take(limit);
         }
 
         private long ConvertDateTimeToUnix(string dateTime)

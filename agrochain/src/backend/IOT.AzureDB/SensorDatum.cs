@@ -18,7 +18,8 @@ namespace IOT.AzureDB
 
         private DateTime UTCTimeStampToDateTime(DateTime? EventEnqueuedUtcTime)
         {
-            return DateTime.SpecifyKind(EventEnqueuedUtcTime ?? default, DateTimeKind.Utc);
+            TimeZoneInfo istZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+            return TimeZoneInfo.ConvertTimeFromUtc(EventEnqueuedUtcTime ?? default, istZone);
         }
     }
 }
