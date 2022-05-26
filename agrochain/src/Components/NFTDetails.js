@@ -141,7 +141,6 @@ export const NFTDetails = () => {
     const LoadPollutionData = () => {
         const datex = new Date().getDate() + '%2F' + new Date().toLocaleString("en-US", { month: "long" }) + '%2F' + new Date().getFullYear()
         /*console.log(datex)*/
-        // the api needs to be updated with the dynamic latitude and longitude data
         console.log(location);
         const locationarr = location.split(" ");
         const lat = locationarr[0];
