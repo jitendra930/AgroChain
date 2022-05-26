@@ -101,17 +101,18 @@ export const NFTDetails = () => {
         setgovtid(fam.govtId)
         setlocation(fam.location)
         setcontact(fam.contact)
-        LoadPollutionData()
+        /*LoadPollutionData()*/
         setTimeout(() => { LoadPollutionIOTData() }, 10000);
+        setTimeout(() => { LoadPollutionData() }, 10000);
         setpin(fam.pin)
         setLoading(false)
-}
+    }
 
     const LoadPollutionIOTData = () => {
     api.get('GetIotData?limit=100').then(({ data }) => {
         console.log(data)
         console.log(typeof data)
-        const labelsx = data.map(val => val.localDateTime.split('T')[1])
+        const labelsx = data.map(val => val.localDateTime.replace('T', ' ').replace('Z','').slice(0, -4))
         const datax = data.map(val => val.co2InPpm)
         console.log(labelsx)
         console.log(datax)
@@ -141,7 +142,12 @@ export const NFTDetails = () => {
         const datex = new Date().getDate() + '%2F' + new Date().toLocaleString("en-US", { month: "long" }) + '%2F' + new Date().getFullYear()
         /*console.log(datex)*/
         // the api needs to be updated with the dynamic latitude and longitude data
-        api.get('GetPolltionHistory?lat=56.7&lon=45.6&currentDate='+datex).then(({ data }) => {
+        console.log(location);
+        const locationarr = location.split(" ");
+        const lat = locationarr[0];
+        const log = locationarr[1];
+        console.log(lat, log);
+        api.get('GetPolltionHistory?lat='+lat+'&lon='+log+'&currentDate='+datex).then(({ data }) => {
             const labelsx = data.map(val => val.DateTime.split('T')[0])
             const dataxAQI = data.map(val => val.AverageAQI)
             const dataxCO = data.map(val => val.AverageCO)
@@ -238,11 +244,23 @@ export const NFTDetails = () => {
             <br />
             <div className="row">
                 <div className="col-md-6">
-                    <img className="img-fluid" src={nfts.image} />
+                    <div className="card">
+                        <div className="card-body">
+                            <div>
+                                <img className="img-fluid" src={nfts.image} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="col-md-6">
-                    <h4 className="text-muted my-0 mt-4">{nfts.seller}</h4>
-                    <h2 className="mt-0">{nfts.name}</h2>
+                    <div className="col-md-6">
+                        <div className="card">
+                            <div className="card-body">
+                                <div>
+                                    <h4 className="text-muted my-0 mt-4">{nfts.seller}</h4>
+                                    <h2 className="mt-0">{nfts.name}</h2>
+                                </div>
+                            </div>
+                        </div>
                     <br />
                     <p className="text-muted">
                         {nfts.description}
@@ -287,12 +305,24 @@ export const NFTDetails = () => {
                         <div className="col-md-6">
                             <br />
                             <br />
-                            <Line options={options1} data={IOT} />
+                            <div className="card">
+                                <div className="card-body">
+                                    <div>
+                                        <Line options={options1} data={IOT} />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div className="col-md-6">
                             <br />
                             <br />
-                        <Line options={options2} data={Pollution} />
+                            <div className="card">
+                                <div className="card-body">
+                                    <div>
+                                        <Line options={options2} data={Pollution} />
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
