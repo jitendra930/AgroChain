@@ -243,7 +243,7 @@ export const NFTDetails = () => {
             <br />
             <div className="row">
                 <div className="col-md-6">
-                    <div className="card">
+                        <div className="card zoom">
                         <div className="card-body">
                             <div>
                                 <img className="img-fluid" src={nfts.image} />
