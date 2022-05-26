@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import { ethers } from "ethers"
 import { create as ipfsHttpClient } from 'ipfs-http-client'
 
-import profile from './assets/profile.png'
+import farmer from './assets/farmer.jpg'
 import { Loading } from "./Loading";
 import { Footer } from "./Footer";
 import './loading.css';
@@ -193,7 +193,7 @@ const Profile = () => {
 						<div className="card-body">
 							<div className="row">
 								<div className="col-md-4 text-center">
-									<img src={profile} className="img-fluid" />
+									<img src={farmer} className="img-fluid" />
 								</div>
 								<div className="col-md-8 text-center">
 									<br />

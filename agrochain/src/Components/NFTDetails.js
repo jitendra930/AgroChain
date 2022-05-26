@@ -101,9 +101,9 @@ export const NFTDetails = () => {
         setgovtid(fam.govtId)
         setlocation(fam.location)
         setcontact(fam.contact)
-        /*LoadPollutionData()*/
-        setTimeout(() => { LoadPollutionIOTData() }, 10000);
-        setTimeout(() => { LoadPollutionData() }, 10000);
+        LoadPollutionData()
+        /*setTimeout(() => { LoadPollutionIOTData() }, 10000);*/
+        setTimeout(() => { LoadPollutionData() }, 1000);
         setpin(fam.pin)
         setLoading(false)
     }
@@ -143,8 +143,8 @@ export const NFTDetails = () => {
         /*console.log(datex)*/
         console.log(location);
         const locationarr = location.split(" ");
-        const lat = locationarr[0];
-        const log = locationarr[1];
+        const lat = locationarr[0].slice(0, 5);
+        const log = locationarr[1].slice(0, 5);
         console.log(lat, log);
         api.get('GetPolltionHistory?lat='+lat+'&lon='+log+'&currentDate='+datex).then(({ data }) => {
             const labelsx = data.map(val => val.DateTime.split('T')[0])
