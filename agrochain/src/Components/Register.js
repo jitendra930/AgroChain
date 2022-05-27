@@ -5,10 +5,12 @@ import { Footer } from "./Footer";
 
 import wheat from './assets/wheat.jpg'
 import { NftContext } from '../frontend/NftContext/NftProvider';
+import { useNavigate } from 'react-router-dom';
 
 
 export const Register = () => {
     const { account, marketplace } = useContext(NftContext);
+    const navigate = useNavigate();
     const [farmerId, setfarmerId] = useState('')
     const [name, setname] = useState('')
     const [govtid, setgovtid] = useState('')
@@ -23,7 +25,11 @@ export const Register = () => {
             types: [],
             componentRestrictions: { country: [] }
         },
-        onPlaceSelected: (place) => { setLatitude(place.geometry.location.lat()); setLongitude(place.geometry.location.lng()) },
+        onPlaceSelected: (place) => { 
+            setLatitude(place.geometry.location.lat());
+            setLongitude(place.geometry.location.lng());
+            console.log(place);
+        },
     });
 
     const RegisterFarmer = async () => {
@@ -35,6 +41,8 @@ export const Register = () => {
         console.log(lat_log);
 
         await (await marketplace.create_Farmer(account, name, govtid, lat_log, contact, pin)).wait();
+
+        navigate('/profile');
         /*<Route path="/" element={<Loading />} />*/
     }
 

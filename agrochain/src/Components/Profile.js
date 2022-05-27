@@ -182,7 +182,7 @@ const Profile = () => {
 		<div className="container mt-4 mb-4">
 			<div className="row">
 				<div className="col-md-12">
-					<h2 className="mb-0">Wallet</h2>
+					<h2 className="mb-0">{farmername ? 'Farmer': 'Customer'} Wallet</h2>
 					<p className="text-muted type-6 mt-0"><i className="fa fa-circle fa-fw fa-sm text-success"></i> Ethereum Main Network</p>
 				</div>
 			</div>
@@ -203,12 +203,14 @@ const Profile = () => {
 
 							<div className="row mt-2 text-center text-sm-left">
 								<div className="col-md-12">
-								<h3 className="mb-0">{farmername}</h3>
+								{farmername && <>
+									<h3 className="mb-0">{farmername}</h3>
 									<p className="mt-3 text-dark-grey">{account.slice(2,)}</p>
 									<p className="mt-3 text-dark-grey"><i className="fa fa-id-card" aria-hidden="true"></i> {govtid}</p>
 									<p className="mt-3 text-dark-grey"><i className="fa fa-compass" aria-hidden="true"></i> {location}</p>
 									<p className="mt-3 text-dark-grey"><i className="fa fa-address-book"></i> {contact}</p>
 									<p className="mt-4 text-dark-grey"><i className="fa fa-map-marker"></i> {pin}</p>
+									</>}
 
 									<div className="row mt-4 text-center">
 										<div className="col-md-3 col-sm-3 col-3">
@@ -241,11 +243,11 @@ const Profile = () => {
 						</div>
 					
 					</div>
-					<div className="d-grid gap-2">
+					{farmername && <div className="d-grid gap-2">
 						<button type="button" className="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">
 							Mint NFT
 						</button>
-					</div>
+					</div>}
 
 				</div>
 
