@@ -1,13 +1,17 @@
 import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { NftContext } from '../frontend/NftContext/NftProvider';
 import farmer from './farmer.png'
 
-const Navigation = ({web3Handler}) => {
-    const { account, setAccount } = useContext(NftContext);
+const Navigation = ({ web3Handler }) => {
+    const { account, setAccount, accountType, setAccountType } = useContext(NftContext);
+    const navigate = useNavigate();
 
     const logout = () => {
         setAccount('')
+        setAccountType(false);
+        localStorage.removeItem('account');
+        navigate('/');
     }
 
     return (
@@ -26,15 +30,15 @@ const Navigation = ({web3Handler}) => {
 
                     {!account &&
                         <li className="nav-item">
-                            <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/front`}>Home</NavLink>
+                            <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/`}>Home</NavLink>
                         </li>
                     }
                     <li className="nav-item">
                         <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/nft`}> NFT</NavLink>
                     </li>
-                    <li className="nav-item">
+                    {!accountType && <li className="nav-item">
                         <NavLink className="nav-btn btn btn-secondary btn-sm btn-block" to={`/register`}><i className="fa fa-sign-in-alt fa-fw"></i> Register </NavLink>
-                    </li>
+                    </li>}
                     <li className="nav-item nav-item-btn mb-2">
                         {account ? (<><button className="nav-btn btn btn-secondary btn-sm btn-block"><a href={`https://rinkeby.etherscan.io/address/${account}`} target="_blank"
                             rel="noopener noreferrer" > {account.slice(0, 5) + '...' + account.slice(38, 42)}</a></button>

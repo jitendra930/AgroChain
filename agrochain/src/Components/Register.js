@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 export const Register = () => {
-    const { account, marketplace } = useContext(NftContext);
+    const { account, marketplace, setAccountType } = useContext(NftContext);
     const navigate = useNavigate();
     const [farmerId, setfarmerId] = useState('')
     const [name, setname] = useState('')
@@ -25,7 +25,7 @@ export const Register = () => {
             types: [],
             componentRestrictions: { country: [] }
         },
-        onPlaceSelected: (place) => { 
+        onPlaceSelected: (place) => {
             setLatitude(place.geometry.location.lat());
             setLongitude(place.geometry.location.lng());
             console.log(place);
@@ -41,9 +41,8 @@ export const Register = () => {
         console.log(lat_log);
 
         await (await marketplace.create_Farmer(account, name, govtid, lat_log, contact, pin)).wait();
-
+        setAccountType(true);
         navigate('/profile');
-        /*<Route path="/" element={<Loading />} />*/
     }
 
     return (
@@ -96,9 +95,6 @@ export const Register = () => {
                                             <h6>PIN :</h6>
                                             <Form.Control onChange={(e) => setpin(e.target.value)} type="text" className="form-control" id="validationDefault05" placeholder="Enter PIN code" required />
                                         </div>
-
-
-
                                         <br />
                                         <hr />
                                         <div className="row">
@@ -128,7 +124,5 @@ export const Register = () => {
             </div>
             < Footer />
         </>
-
-
     )
 }
