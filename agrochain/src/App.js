@@ -20,16 +20,17 @@ import { NftContext } from "./frontend/NftContext/NftProvider";
 
 import './App.css';
 
-/*const RpcHttpUrl = "https://mainnet.infura.io/v3/9f37c36eaea34b42a0bce7936c691b67";*/
 
 function App() {
-    const { setAccount, setMarketplace, setNFT, setBalance, setIsLoading, account } = useContext(NftContext);
+    const { setAccount, setMarketplace, setNFT, setBalance, setIsLoading, account, setAccountType } = useContext(NftContext);
     const [loading, setLoading] = useState(true)
 
     const loadContracts = async (signer) => {
         // Get deployed copies of contracts
         const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer)
         setMarketplace(marketplace)
+        const fam = await marketplace.farmers(account)
+        setAccountType(fam.name ? true : false)
         const nft = new ethers.Contract(NFTAddress.address, NFTAbi.abi, signer)
         setNFT(nft)
         setLoading(false)
@@ -50,19 +51,21 @@ function App() {
         const balance = await provider.getBalance(accounts[0])
         const balances = ethers.utils.formatEther(balance);
         setBalance(balances)
-        console.log(balances);
-
-        window.ethereum.on('chainChanged', (chainId) => {
-            window.location.reload();
-        })
-
-        window.ethereum.on('accountsChanged', async function (accounts) {
-            setAccount(accounts[0])
-            await web3Handler()
-        })
-
         loadContracts(signer)
     };
+
+    useEffect(() => {
+        if (window.ethereum) {
+            window.ethereum.on('chainChanged', (chainId) => {
+                window.location.reload();
+            })
+
+            window.ethereum.on('accountsChanged', async function (accounts) {
+                setAccount(accounts[0])
+                await web3Handler()
+            });
+        }
+    });
 
     useEffect(() => {
         if (!!localStorage.getItem('account')) {
@@ -77,6 +80,8 @@ function App() {
                 const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer)
                 setMarketplace(marketplace)
                 const nft = new ethers.Contract(NFTAddress.address, NFTAbi.abi, signer)
+                const fam = await marketplace.farmers(account)
+                setAccountType(fam.name ? true : false)
                 setNFT(nft)
                 setIsLoading(true)
             })();
@@ -84,7 +89,6 @@ function App() {
     }, []);
 
     useEffect(() => {
-        console.log(account);
         if (!!account) {
             localStorage.setItem('account', account);
         }

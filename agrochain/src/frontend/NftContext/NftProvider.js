@@ -1,5 +1,7 @@
 import React, { useReducer } from "react";
 import { createContext } from "react";
+import { SET_ACCOUNT, SET_ACCOUNT_TYPE, SET_BALANCE, SET_LOADING, SET_MARKETPLACE, SET_NFT } from "./nftActions";
+import nftReducer from "./nftReducer";
 
 export const NftContext = createContext();
 
@@ -9,39 +11,27 @@ const NftProvider = ({ children }) => {
         nft: {},
         account: '',
         balance: 0,
-        isLoading: false
+        isLoading: false,
+        accountType: false
     };
-    const reducer = (state, action) => {
-        switch (action.type) {
-            case 'SET_ACCOUNT':
-                return { ...state, account: action.payload };
-            case 'SET_MARKETPLACE':
-                return { ...state, marketplace: action.payload };
-            case 'SET_NFT':
-                return { ...state, nft: action.payload };
-            case 'SET_BALANCE':
-                return { ...state, balance: action.payload };
-                case 'SET_LOADING':
-                    return { ...state, isLoading: action.payload };
-            default:
-                return state;
-        }
-    };
-    const [state, dispatch] = useReducer(reducer, initialState);
-    const setAccount = (account) => {
-        dispatch({ type: 'SET_ACCOUNT', payload: account })
+    const [state, dispatch] = useReducer(nftReducer, initialState);
+    const setAccount = (payload) => {
+        dispatch({ type: SET_ACCOUNT, payload })
     }
-    const setMarketplace = (account) => {
-        dispatch({ type: 'SET_MARKETPLACE', payload: account })
+    const setMarketplace = (payload) => {
+        dispatch({ type: SET_MARKETPLACE, payload })
     }
-    const setNFT = (account) => {
-        dispatch({ type: 'SET_NFT', payload: account })
+    const setNFT = (payload) => {
+        dispatch({ type: SET_NFT, payload })
     }
-    const setBalance = (account) => {
-        dispatch({ type: 'SET_BALANCE', payload: account })
+    const setBalance = (payload) => {
+        dispatch({ type: SET_BALANCE, payload })
     }
-    const setIsLoading = (account) => {
-        dispatch({ type: 'SET_LOADING', payload: account })
+    const setIsLoading = (payload) => {
+        dispatch({ type: SET_LOADING, payload })
+    }
+    const setAccountType = (payload) => {
+        dispatch({ type: SET_ACCOUNT_TYPE, payload })
     }
     return (
         <NftContext.Provider value={{
@@ -50,11 +40,13 @@ const NftProvider = ({ children }) => {
             nft: state.nft,
             balance: state.balance,
             isLoading: state.isLoading,
+            accountType: state.accountType,
             setAccount,
             setMarketplace,
             setNFT,
             setBalance,
-            setIsLoading
+            setIsLoading,
+            setAccountType
         }}>
             {children}
         </NftContext.Provider>
