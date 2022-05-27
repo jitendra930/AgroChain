@@ -16,7 +16,7 @@ const Navigation = ({ web3Handler }) => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-effects sticky-top">
-            <NavLink className="navbar-brand super-bold" to={`/front`}><img src={farmer} height="40" width="50" /> AGRO CHAIN </NavLink>
+            <NavLink className="navbar-brand super-bold" to={`/front`}><img src={farmer} style={{ width: "28px" }} /> AGRO CHAIN </NavLink>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i className="fa fa-bars fa-fw"></i>
             </button>

@@ -59,12 +59,12 @@ const Profile = () => {
 		}
 	}
 	const mintThenList = async (result) => {
-		
+
 		const uri = `https://ipfs.infura.io/ipfs/${result.path}`
 		console.log(uri);
-		// mint nft 
+		// mint nft
 		await (await nft.mint(uri)).wait()
-		// get tokenId of new nft 
+		// get tokenId of new nft
 		const id = await nft.tokenCount()
 		// approve marketplace to spend nft
 		await (await nft.setApprovalForAll(marketplace.address, true)).wait()
@@ -83,14 +83,14 @@ const Profile = () => {
 		const itemCount = await marketplace.itemCount()
 		let listedItems = []
 		let soldItems = []
-		let purchasedItems = [] 
+		let purchasedItems = []
 		for (let indx = 1; indx <= itemCount; indx++) {
 			console.log(marketplace.items(indx))
 			const i = await marketplace.items(indx)
 			if (i.seller.toLowerCase() === account) {
 				// get uri url from nft contract
 				const uri = await nft.tokenURI(i.tokenId)
-				// use uri to fetch the nft metadata stored on ipfs 
+				// use uri to fetch the nft metadata stored on ipfs
 				const response = await fetch(uri)
 				const metadata = await response.json()
 				// get total price of item (item price + fee)
@@ -112,7 +112,7 @@ const Profile = () => {
 			if (i.owner.toLowerCase() === account && i.sold) {
 				// get uri url from nft contract
 				const uri = await nft.tokenURI(i.tokenId)
-				// use uri to fetch the nft metadata stored on ipfs 
+				// use uri to fetch the nft metadata stored on ipfs
 				const response = await fetch(uri)
 				const metadata = await response.json()
 				// get total price of item (item price + fee)
@@ -176,7 +176,7 @@ const Profile = () => {
 
 	if (loading) return (
 		<Loading />
-	)	
+	)
 	return (
 		<>
 		<div className="container mt-4 mb-4">
@@ -201,15 +201,31 @@ const Profile = () => {
 								</div>
 							</div>
 
-							<div className="row mt-2 text-center text-sm-left">
+							<div className="row mt-2 text-sm-left">
 								<div className="col-md-12">
 								{farmername && <>
 									<h3 className="mb-0">{farmername}</h3>
-									<p className="mt-3 text-dark-grey">{account.slice(2,)}</p>
-									<p className="mt-3 text-dark-grey"><i className="fa fa-id-card" aria-hidden="true"></i> {govtid}</p>
-									<p className="mt-3 text-dark-grey"><i className="fa fa-compass" aria-hidden="true"></i> {location}</p>
-									<p className="mt-3 text-dark-grey"><i className="fa fa-address-book"></i> {contact}</p>
-									<p className="mt-4 text-dark-grey"><i className="fa fa-map-marker"></i> {pin}</p>
+                  <p className="type-6 text-blue mt-0">{account}</p>
+                  <div className="my-4">
+                    <h6 className="mb-0">
+                      <i className="fa fa-id-card fa-fw"></i>&nbsp; AADHAR NUMBER
+                    </h6>
+                    <p className="text-muted" style={{ marginLeft: "24px" }}>{govtid}</p>
+                    <h6 className="mb-0">
+                      <i className="fa fa-compass fa-fw"></i>&nbsp;
+                      LOCATION CO-ORDINATES
+                    </h6>
+                    <p className="text-muted" style={{ marginLeft: "24px" }}>{location}</p>
+                    <h6 className="mb-0">
+                      <i className="fa fa-address-book fa-fw"></i>&nbsp;  Contact No.
+                    </h6>
+                    <p className="text-muted" style={{ marginLeft: "24px" }}>{contact}</p>
+                    <h6 className="mb-0">
+                      <i className="fa fa-map-marker fa-fw"></i>&nbsp;
+                      PIN
+                    </h6>
+                    <p className="text-muted" style={{ marginLeft: "24px" }}>{pin}</p>
+                  </div>
 									</>}
 
 									<div className="row mt-4 text-center">
@@ -241,7 +257,7 @@ const Profile = () => {
 								</div>
 							</div>
 						</div>
-					
+
 					</div>
 					{farmername && <div className="d-grid gap-2">
 						<button type="button" className="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -316,7 +332,7 @@ const Profile = () => {
 													))}
 												</div>
 											</div>
-										</div>							
+										</div>
 										<div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 											<div className="col-md-12">
 												<div className="row no-gutters">
@@ -403,10 +419,8 @@ const Profile = () => {
 								<div className="modal-body">
 									<div className="card-body sidebar-image-card-body">
 										{selectedFile && <img src={preview} className="img-fluid sidebar-image" />}
-										
 									</div>
-								
-									<div className="mx-2 mt-2">
+									<div className="mx-2">
 										<div className="form-group">
 											<h6>Name: <span className="text-danger">*</span></h6>
 											<Form.Control onChange={(e) => setName(e.target.value)} className="form-control" placeholder="Enter Name" value={govtid + ' ' + new Date().getDate() + '/' + new Date().toLocaleString("en-US", { month: "long" }) + '/' + new Date().getFullYear() } required disabled />
@@ -427,10 +441,16 @@ const Profile = () => {
 											<h6>Price (ETH): <span className="text-danger">*</span></h6>
 											<Form.Control onChange={(e) => setPrice(e.target.value)} className="form-control" required type="number" placeholder="Enter Selling Price" />
 										</div>
+
+                    <div className="row mt-4">
+                      <div className="col-md-12">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                          <button class="btn btn-danger me-md-1" type="button" data-bs-dismiss="modal">Close</button>
+                          <button onClick={createNFT} class="btn btn-success" type="button">Mint</button>
+                        </div>
+                      </div>
+                    </div>
 									</div>
-								</div>
-								<div className="modal-footer">
-									<button onClick={createNFT} type="button" className="btn btn-success">Mint</button>
 								</div>
 							</div>
 						</div>
@@ -440,7 +460,7 @@ const Profile = () => {
 			</div>
 		</div>
 		<Footer />
-	</>                
+	</>
     )
 }
 
