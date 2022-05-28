@@ -56,7 +56,7 @@ npx hardhat run src/backend/scripts/deploy.js --network localhost
 
 ### 7. Run Tests
 ```
-$ npx hardhat test
+npx hardhat test
 ```
 
 ### 8. Launch Frontend
