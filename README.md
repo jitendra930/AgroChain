@@ -14,29 +14,29 @@
 ### 1. Clone/Download the Repository
 
 ```
-$ git clone https://github.com/IntelegixLabs/AgroChain
+git clone https://github.com/IntelegixLabs/AgroChain
 ```
 
 ### 2. Run the .NET Backend Application (fetches the historical pollution data from a public API):
 
 ```
-$ cd AgroChain/agrochain/src/backend/Pollution.API
-$ dotnet clean
-$ dotnet build Pollution.API.sln
-$ dotnet watch run --Pollution.API
+cd AgroChain/agrochain/src/backend/Pollution.API
+dotnet clean
+dotnet build Pollution.API.sln
+dotnet watch run --Pollution.API
 ```
 
 ### 3. Install Node/React Dependencies:
 
 ```
-$ cd AgroChain/agrochain
-$ npm install
+cd AgroChain/agrochain
+npm install
 ```
 
 ### 4. Boot up local Hardhat development blockchain
 
 ```
-$ npx hardhat node
+npx hardhat node
 ```
 
 ### 5. Connect development blockchain accounts to Metamask
@@ -61,7 +61,7 @@ $ npx hardhat test
 
 ### 8. Launch Frontend
 ```
-$ npm run start
+npm run start
 ```
 
 
