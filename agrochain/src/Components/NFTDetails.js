@@ -87,12 +87,21 @@ export const NFTDetails = () => {
     const { nfts } = state;
     const [farmername, setfarmername] = useState('')
     const [govtid, setgovtid] = useState('')
-    const [location, setlocation] = useState('')
+    const [location, setlocation] = useState('23.5 67.9')
     const [contact, setcontact] = useState('')
     const [iotdeviceid, setiotdeviceid] = useState('')
     const [loading, setLoading] = useState(true)
     const [IOT, setIOT] = useState(data)
     const [Pollution, setPollution] = useState(data)
+    const [aqi, setaqi] = useState(data)
+    const [avgco2, setavgco2] = useState(data)
+    const [avgno, setavgno] = useState(data)
+    const [avgno2, setavgno2] = useState(data)
+    const [avgo3, setavgo3] = useState(data)
+    const [avgso2, setavgso2] = useState(data)
+    const [avgpm25, setavgpm25] = useState(data)
+    const [avgpm10, setavgpm10] = useState(data)
+    const [avgnh3, setavgnh3] = useState(data)
 
     const LoadFarmer = async () => {
 
