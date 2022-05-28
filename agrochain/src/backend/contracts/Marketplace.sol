@@ -20,7 +20,7 @@ contract Marketplace is ReentrancyGuard {
         string govtId;
         string location;
         string contact;
-        string pin;
+        string iotid;
     }
 
     struct Item {
@@ -44,7 +44,7 @@ contract Marketplace is ReentrancyGuard {
         string govtId,
         string location,
         string contact,
-        string pin
+        string iotid
     );
 
     event Offered(
@@ -68,14 +68,14 @@ contract Marketplace is ReentrancyGuard {
         feePercent = _feePercent;
     }
 
-    function create_Farmer(address _id, string memory _name, string memory _govtId, string memory _location, string memory _contact, string memory _pin) external {
+    function create_Farmer(address _id, string memory _name, string memory _govtId, string memory _location, string memory _contact, string memory _iotid) external {
         farmers[_id] = Farmer (
             _id,
             _name,
             _govtId,
             _location,
             _contact,
-            _pin
+            _iotid
         );
         emit FarmerAdded(
             _id,
@@ -83,7 +83,7 @@ contract Marketplace is ReentrancyGuard {
             _govtId,
             _location,
             _contact,
-            _pin
+            _iotid
         );
     }
 
