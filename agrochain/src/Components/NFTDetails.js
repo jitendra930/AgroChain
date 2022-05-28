@@ -46,7 +46,7 @@ export const options1 = {
         },
         title: {
             display: true,
-            text: 'Live CO2 IOT Data',
+            text: 'Live CO2 in PPM IOT Data',
         },
     },
 };
@@ -87,12 +87,21 @@ export const NFTDetails = () => {
     const { nfts } = state;
     const [farmername, setfarmername] = useState('')
     const [govtid, setgovtid] = useState('')
-    const [location, setlocation] = useState('')
+    const [location, setlocation] = useState('23.5 67.9')
     const [contact, setcontact] = useState('')
     const [iotdeviceid, setiotdeviceid] = useState('')
     const [loading, setLoading] = useState(true)
     const [IOT, setIOT] = useState(data)
     const [Pollution, setPollution] = useState(data)
+    const [aqi, setaqi] = useState(data)
+    const [avgco2, setavgco2] = useState(data)
+    const [avgno, setavgno] = useState(data)
+    const [avgno2, setavgno2] = useState(data)
+    const [avgo3, setavgo3] = useState(data)
+    const [avgso2, setavgso2] = useState(data)
+    const [avgpm25, setavgpm25] = useState(data)
+    const [avgpm10, setavgpm10] = useState(data)
+    const [avgnh3, setavgnh3] = useState(data)
 
     const LoadFarmer = async () => {
 
@@ -157,7 +166,68 @@ export const NFTDetails = () => {
             const dataxPM25 = data.map(val => val.AveragePM25)
             const dataxPM10 = data.map(val => val.AveragePM10)
             const dataxNH3 = data.map(val => val.AverageNH3)
-            const datapol = {
+            //const datapol = {
+            //    labels: labelsx,
+            //    datasets: [
+            //        {
+            //            label: 'AverageAQI',
+            //            data: dataxAQI,
+            //            borderColor: 'rgb(255, 99, 132, 0.4)',
+            //            backgroundColor: 'rgba(255, 99, 132, 1)',
+            //        },
+            //        {
+            //            label: 'AverageCO',
+            //            data: dataxCO,
+            //            borderColor: 'rgba(75, 192, 192, 0.4)',
+            //            backgroundColor: 'rgba(75, 192, 192, 1)',
+            //        },
+            //        {
+            //            label: 'AverageNO',
+            //            data: dataxNO,
+            //            borderColor: 'rgba(153, 102, 255, 0.4)',
+            //            backgroundColor: 'rgba(153, 102, 255, 1)',
+            //        },
+            //        {
+            //            label: 'AverageNO2',
+            //            data: dataxNO2,
+            //            borderColor: 'rgba(255, 159, 64, 0.4)',
+            //            backgroundColor: 'rgba(255, 159, 64, 1)',
+            //        },
+            //        {
+            //            label: 'AverageO3',
+            //            data: dataxO3,
+            //            borderColor: 'rgba(255, 99, 132, 0.4)',
+            //            backgroundColor: 'rgba(255, 99, 132, 1)',
+            //        },
+            //        {
+            //            label: 'AverageSO2',
+            //            data: dataxSO2,
+            //            borderColor: 'rgba(54, 162, 235, 0.4)',
+            //            backgroundColor: 'rgba(54, 162, 235, 1)',
+            //        },
+            //        {
+            //            label: 'AveragePM25',
+            //            data: dataxPM25,
+            //            borderColor: 'rgba(255, 206, 86, 0.4)',
+            //            backgroundColor: 'rgba(255, 206, 86, 1)',
+            //        },
+            //        {
+            //            label: 'AveragePM10',
+            //            data: dataxPM10,
+            //            borderColor: 'rgba(134, 220, 50, 0.4)',
+            //            backgroundColor: 'rgba(134, 220, 50, 1)',
+            //        },
+            //        {
+            //            label: 'AverageNH3',
+            //            data: dataxNH3,
+            //            borderColor: 'rgba(134, 156, 200, 0.4)',
+            //            backgroundColor: 'rgba(134, 156, 200, 1)',
+            //        },
+            //    ],
+            //}
+            //setPollution(datapol)
+            //console.log(setPollution)
+            const datapol0 = {
                 labels: labelsx,
                 datasets: [
                     {
@@ -165,59 +235,115 @@ export const NFTDetails = () => {
                         data: dataxAQI,
                         borderColor: 'rgb(255, 99, 132, 0.4)',
                         backgroundColor: 'rgba(255, 99, 132, 1)',
-                    },
+                    }
+                ],
+            }
+            setaqi(datapol0)
+
+            const datapol1 = {
+                labels: labelsx,
+                datasets: [
                     {
                         label: 'AverageCO',
                         data: dataxCO,
                         borderColor: 'rgba(75, 192, 192, 0.4)',
                         backgroundColor: 'rgba(75, 192, 192, 1)',
-                    },
+                    }
+                ],
+            }
+            setavgco2(datapol1)
+
+            const datapol2 = {
+                labels: labelsx,
+                datasets: [
                     {
                         label: 'AverageNO',
                         data: dataxNO,
                         borderColor: 'rgba(153, 102, 255, 0.4)',
                         backgroundColor: 'rgba(153, 102, 255, 1)',
-                    },
+                    }
+                ],
+            }
+            setavgno(datapol2)
+
+            const datapol3 = {
+                labels: labelsx,
+                datasets: [
                     {
                         label: 'AverageNO2',
                         data: dataxNO2,
                         borderColor: 'rgba(255, 159, 64, 0.4)',
                         backgroundColor: 'rgba(255, 159, 64, 1)',
-                    },
+                    }
+                ],
+            }
+            setavgno2(datapol3)
+
+            const datapol4 = {
+                labels: labelsx,
+                datasets: [
                     {
                         label: 'AverageO3',
                         data: dataxO3,
                         borderColor: 'rgba(255, 99, 132, 0.4)',
                         backgroundColor: 'rgba(255, 99, 132, 1)',
-                    },
+                    }
+                ],
+            }
+            setavgo3(datapol4)
+
+            const datapol5 = {
+                labels: labelsx,
+                datasets: [
                     {
                         label: 'AverageSO2',
                         data: dataxSO2,
                         borderColor: 'rgba(54, 162, 235, 0.4)',
                         backgroundColor: 'rgba(54, 162, 235, 1)',
-                    },
+                    }
+                ],
+            }
+            setavgso2(datapol5)
+
+            const datapol6 = {
+                labels: labelsx,
+                datasets: [
                     {
                         label: 'AveragePM25',
                         data: dataxPM25,
                         borderColor: 'rgba(255, 206, 86, 0.4)',
                         backgroundColor: 'rgba(255, 206, 86, 1)',
-                    },
+                    }
+                ],
+            }
+            setavgpm25(datapol6)
+
+            const datapol7 = {
+                labels: labelsx,
+                datasets: [
                     {
                         label: 'AveragePM10',
                         data: dataxPM10,
                         borderColor: 'rgba(134, 220, 50, 0.4)',
                         backgroundColor: 'rgba(134, 220, 50, 1)',
-                    },
+                    }
+                ],
+            }
+            setavgpm10(datapol7)
+
+            const datapol8 = {
+                labels: labelsx,
+                datasets: [
                     {
                         label: 'AverageNH3',
                         data: dataxNH3,
                         borderColor: 'rgba(134, 156, 200, 0.4)',
                         backgroundColor: 'rgba(134, 156, 200, 1)',
-                    },
+                    }
                 ],
             }
-            setPollution(datapol)
-            console.log(setPollution)
+            setavgnh3(datapol8)
+            
         });
     }
 
@@ -301,7 +427,7 @@ export const NFTDetails = () => {
 
 
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-md-12">
                             <br />
                             <br />
                             <div className="card">
@@ -312,19 +438,144 @@ export const NFTDetails = () => {
                                 </div>
                             </div>
                         </div>
+                    {/*    <div className="col-md-6">*/}
+                    {/*        <br />*/}
+                    {/*        <br />*/}
+                    {/*        <div className="card">*/}
+                    {/*            <div className="card-body">*/}
+                    {/*                <div>*/}
+                    {/*                    <Line options={options2} data={aqi} />*/}
+                    {/*                </div>*/}
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*</div>*/}
+                    </div>
+
+                    <div className="row">
+                        {/*<div className="col-md-12">*/}
+                        {/*    <br />*/}
+                        {/*    <br />*/}
+                        {/*    <div className="card">*/}
+                        {/*        <div className="card-body">*/}
+                        {/*            <div>*/}
+                        {/*                <Line options={options1} data={IOT} />*/}
+                        {/*            </div>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
+                            <div className="col-md-12">
+                                <br />
+                                <br />
+                                <div className="card">
+                                    <div className="card-body">
+                                        <div>
+                                            <Line options={options2} data={aqi} />
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div className="row">
                         <div className="col-md-6">
                             <br />
                             <br />
                             <div className="card">
                                 <div className="card-body">
                                     <div>
-                                        <Line options={options2} data={Pollution} />
+                                        <Line options={options2} data={avgco2} />
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div className="col-md-6">
+                            <br />
+                            <br />
+                            <div className="card">
+                                <div className="card-body">
+                                    <div>
+                                        <Line options={options2} data={avgno} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-md-6">
+                            <br />
+                            <br />
+                            <div className="card">
+                                <div className="card-body">
+                                    <div>
+                                        <Line options={options2} data={avgno2} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <br />
+                            <br />
+                            <div className="card">
+                                <div className="card-body">
+                                    <div>
+                                        <Line options={options2} data={avgo3} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-md-6">
+                            <br />
+                            <br />
+                            <div className="card">
+                                <div className="card-body">
+                                    <div>
+                                        <Line options={options2} data={avgso2} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <br />
+                            <br />
+                            <div className="card">
+                                <div className="card-body">
+                                    <div>
+                                        <Line options={options2} data={avgpm25} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-md-6">
+                            <br />
+                            <br />
+                            <div className="card">
+                                <div className="card-body">
+                                    <div>
+                                        <Line options={options2} data={avgpm10} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <br />
+                            <br />
+                            <div className="card">
+                                <div className="card-body">
+                                    <div>
+                                        <Line options={options2} data={avgnh3} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
             <br />
             <br />
