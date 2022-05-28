@@ -89,7 +89,7 @@ export const NFTDetails = () => {
     const [govtid, setgovtid] = useState('')
     const [location, setlocation] = useState('')
     const [contact, setcontact] = useState('')
-    const [pin, setpin] = useState('')
+    const [iotdeviceid, setiotdeviceid] = useState('')
     const [loading, setLoading] = useState(true)
     const [IOT, setIOT] = useState(data)
     const [Pollution, setPollution] = useState(data)
@@ -101,15 +101,15 @@ export const NFTDetails = () => {
         setgovtid(fam.govtId)
         setlocation(fam.location)
         setcontact(fam.contact)
-        LoadPollutionData()
-        /*setTimeout(() => { LoadPollutionIOTData() }, 10000);*/
+        /*LoadPollutionData()*/
+        setTimeout(() => { LoadPollutionIOTData() }, 10000);
         setTimeout(() => { LoadPollutionData() }, 1000);
-        setpin(fam.pin)
+        setiotdeviceid(fam.iotid)
         setLoading(false)
     }
 
     const LoadPollutionIOTData = () => {
-    api.get('GetIotData?limit=100').then(({ data }) => {
+        api.get('GetIotData?limit=100').then(({ data }) => {
         console.log(data)
         console.log(typeof data)
         const labelsx = data.map(val => val.localDateTime.replace('T', ' ').replace('Z','').slice(0, -4))
@@ -143,10 +143,10 @@ export const NFTDetails = () => {
         /*console.log(datex)*/
         console.log(location);
         const locationarr = location.split(" ");
-        const lat = locationarr[0].slice(0, 5);
-        const log = locationarr[1].slice(0, 5);
+        const lat = locationarr[0];
+        const log = locationarr[1];
         console.log(lat, log);
-        api.get('GetPolltionHistory?lat='+lat+'&lon='+log+'&currentDate='+datex).then(({ data }) => {
+        api.get('GetPollutionHistory?lat='+lat+'&lon='+log+'&currentDate='+datex).then(({ data }) => {
             const labelsx = data.map(val => val.DateTime.split('T')[0])
             const dataxAQI = data.map(val => val.AverageAQI)
             const dataxCO = data.map(val => val.AverageCO)
@@ -264,7 +264,7 @@ export const NFTDetails = () => {
                     <p className="text-muted">
                         {nfts.description}
                     </p>
-                        <p className="mt-3 text-grey"> <i className="fa fa-copyright" aria-hidden="true"> {farmername} </i> <i className="fa fa-id-card" aria-hidden="true"></i> {govtid} <i className="fa fa-address-book"></i> {contact} <i className="fa fa-compass" aria-hidden="true"></i> {location} <i className="fa fa-map-marker"></i> {pin}</p>
+                        <p className="mt-3 text-grey"> <i className="fa fa-copyright" aria-hidden="true"> {farmername} </i> <i className="fa fa-id-card" aria-hidden="true"></i> {govtid} <i className="fa fa-address-book"></i> {contact} <i className="fa fa-compass" aria-hidden="true"></i> {location} <i className="fa fa-map-marker"></i> {iotdeviceid}</p>
                     <br />
                     <h4 className="text-success mb-0">Current Price:</h4>
                     <h2 className="text-success my-0">

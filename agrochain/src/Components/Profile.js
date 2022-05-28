@@ -7,6 +7,8 @@ import { ethers } from "ethers"
 import { create as ipfsHttpClient } from 'ipfs-http-client'
 
 import farmer from './assets/farmer.jpg'
+import business from './assets/business.png'
+
 import { Loading } from "./Loading";
 import { Footer } from "./Footer";
 import './loading.css';
@@ -26,7 +28,7 @@ const Profile = () => {
 	const [govtid, setgovtid] = useState('')
 	const [location, setlocation] = useState('')
 	const [contact, setcontact] = useState('')
-	const [pin, setpin] = useState('')
+	const [iotdeviceid, setiotdeviceid] = useState('')
 	const nft_name = govtid + ' ' + new Date().getDate() + '/' + new Date().toLocaleString("en-US", { month: "long" }) + '/' + new Date().getFullYear()
 	const uploadToIPFS = async (event) => {
 		event.preventDefault()
@@ -134,7 +136,7 @@ const Profile = () => {
 		setgovtid(fam.govtId)
 		setlocation(fam.location)
 		setcontact(fam.contact)
-		setpin(fam.pin)
+		setiotdeviceid(fam.iotid)
 
 
 		setLoading(false)
@@ -191,10 +193,15 @@ const Profile = () => {
 
 					<div className="card border-2x mb-3" id="basic-details-2">
 						<div className="card-body">
-							<div className="row">
-								<div className="col-md-4 text-center">
-									<img src={farmer} className="img-fluid" />
-								</div>
+								<div className="row">
+									{farmername ? (<>
+										<div className="col-md-4 text-center">
+											<img src={farmer} className="img-fluid" />
+										</div></>) :
+										(<>
+										<div className="col-md-4 text-center">
+											<img src={business} className="img-fluid" />
+										</div></>)}
 								<div className="col-md-8 text-center">
 									<br />
 									<h2 className="mt-1 text-dark-grey">{balance.slice(0, 5)} ETH</h2>
@@ -222,9 +229,9 @@ const Profile = () => {
                     <p className="text-muted" style={{ marginLeft: "24px" }}>{contact}</p>
                     <h6 className="mb-0">
                       <i className="fa fa-map-marker fa-fw"></i>&nbsp;
-                      PIN
+                      IOT DEVICE ID
                     </h6>
-                    <p className="text-muted" style={{ marginLeft: "24px" }}>{pin}</p>
+					<p className="text-muted" style={{ marginLeft: "24px" }}>{iotdeviceid}</p>
                   </div>
 									</>}
 
@@ -444,9 +451,9 @@ const Profile = () => {
 
                     <div className="row mt-4">
                       <div className="col-md-12">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                          <button class="btn btn-danger me-md-1" type="button" data-bs-dismiss="modal">Close</button>
-                          <button onClick={createNFT} class="btn btn-success" type="button">Mint</button>
+						<div className="d-grid gap-2 d-md-flex justify-content-md-end">
+						  <button className="btn btn-danger me-md-1" type="button" data-bs-dismiss="modal">Close</button>
+						  <button onClick={createNFT} className="btn btn-success" type="button">Mint</button>
                         </div>
                       </div>
                     </div>
