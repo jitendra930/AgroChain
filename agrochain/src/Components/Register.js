@@ -17,7 +17,7 @@ export const Register = () => {
     const [latitude, setLatitude] = useState('')
     const [longitude, setLongitude] = useState('')
     const [contact, setcontact] = useState('')
-    const [pin, setpin] = useState('')
+    const [iotdeviceid, setiotdeviceid] = useState('')
 
     const { ref: bootstrapRef } = usePlacesWidget({
         apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -34,13 +34,13 @@ export const Register = () => {
 
     const RegisterFarmer = async () => {
 
-        console.log(farmerId, name, govtid, latitude, longitude, contact, pin);
+        console.log(farmerId, name, govtid, latitude, longitude, contact, iotdeviceid);
 
         const lat_log = latitude.toString() + ' ' + longitude.toString();
 
         console.log(lat_log);
 
-        await (await marketplace.create_Farmer(account, name, govtid, lat_log, contact, pin)).wait();
+        await (await marketplace.create_Farmer(account, name, govtid, lat_log, contact, iotdeviceid)).wait();
         setAccountType(true);
         navigate('/profile');
     }
@@ -92,8 +92,8 @@ export const Register = () => {
                                         {/*    <input type="text" className="form-control" id="validationDefault04" placeholder="Enter State" required />*/}
                                         {/*</div>*/}
                                         <div className="form-group">
-                                            <h6>PIN :</h6>
-                                            <Form.Control onChange={(e) => setpin(e.target.value)} type="text" className="form-control" id="validationDefault05" placeholder="Enter PIN code" required />
+                                            <h6>IOT DEVICE ID :</h6>
+                                            <Form.Control onChange={(e) => setiotdeviceid(e.target.value)} type="text" className="form-control" id="validationDefault05" placeholder="Enter IOT DEVICE ID" required />
                                         </div>
                                         <br />
                                         <hr />
