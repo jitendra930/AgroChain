@@ -87,7 +87,7 @@ export const NFTDetails = () => {
     const { nfts } = state;
     const [farmername, setfarmername] = useState('')
     const [govtid, setgovtid] = useState('')
-    const [location, setlocation] = useState('23.5 67.9')
+    const [location, setlocation] = useState('')
     const [contact, setcontact] = useState('')
     const [iotdeviceid, setiotdeviceid] = useState('')
     const [loading, setLoading] = useState(true)
@@ -112,7 +112,6 @@ export const NFTDetails = () => {
         setcontact(fam.contact)
         /*LoadPollutionData()*/
         setTimeout(() => { LoadPollutionIOTData() }, 10000);
-        setTimeout(() => { LoadPollutionData() }, 1000);
         setiotdeviceid(fam.iotid)
         setLoading(false)
     }
@@ -144,7 +143,10 @@ export const NFTDetails = () => {
 }
 
 
-
+    useEffect(()=> {
+        const locationarr = location.split(" ");
+        locationarr[0] && LoadPollutionData();
+    }, [location])
     
 
     const LoadPollutionData = () => {
