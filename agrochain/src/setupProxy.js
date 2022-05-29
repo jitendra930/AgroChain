@@ -3,14 +3,14 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://localhost:7081/',
+      target: process.env.REACT_APP_API_URL,
       changeOrigin: true,
     })
   );
   app.use(
     '/ipfs', 
     createProxyMiddleware({
-      target: 'https://ipfs.infura.io/ipfs/',
+      target: process.env.REACT_APP_IPFS_URL,
       changeOrigin: true,
     })
   );
