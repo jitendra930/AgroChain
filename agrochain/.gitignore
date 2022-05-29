@@ -11,6 +11,10 @@
 # production
 /build
 
+.env
+src/backend/artifacts
+src/backend/cache
+
 # misc
 .DS_Store
 .env.local

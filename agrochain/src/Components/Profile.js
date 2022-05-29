@@ -302,7 +302,7 @@ const Profile = () => {
 											<div className="col-md-12">
 												<div className="row no-gutters">
 													{listedItems.map((item, idx) => (
-														<div className="col-6 col-sm-4 col-md-4">
+														<div className="col-6 col-sm-4 col-md-4" key={item}>
 															<div className="card mx-1 mb-3">
 																<img className="img-fluid" src={item.image} />
 																<div className="card-body">

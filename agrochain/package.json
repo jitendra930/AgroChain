@@ -17,6 +17,7 @@
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.6.5",
     "hardhat": "^2.8.4",
+    "http-proxy-middleware": "^2.0.6",
     "ipfs-http-client": "^56.0.3",
     "react": "^18.1.0",
     "react-bootstrap": "^2.3.1",
@@ -62,6 +63,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "https://localhost:7081/"
+  }
 }
