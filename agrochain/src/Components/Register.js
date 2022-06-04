@@ -1,6 +1,7 @@
 import { Form } from 'react-bootstrap'
-import { useState, React, useContext } from 'react'
+import { useState, React, useContext, useEffect } from 'react'
 import { usePlacesWidget } from "react-google-autocomplete";
+import { Loader } from '@googlemaps/js-api-loader';
 import { Footer } from "./Footer";
 
 import wheat from './assets/wheat.jpg'
@@ -14,11 +15,33 @@ export const Register = () => {
     const [farmerId, setfarmerId] = useState('')
     const [name, setname] = useState('')
     const [govtid, setgovtid] = useState('')
-    const [latitude, setLatitude] = useState('')
-    const [longitude, setLongitude] = useState('')
+    const [latitude, setLatitude] = useState(0)
+    const [longitude, setLongitude] = useState(0)
     const [contact, setcontact] = useState('')
     const [iotdeviceid, setiotdeviceid] = useState('')
 
+
+    const mapOptions = {
+        center: {
+          lat: longitude,
+          lng: longitude
+        },
+        zoom: 4   
+      };
+    
+    useEffect(()=>{
+        const loader = new Loader({
+            apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+            version: "weekly",
+            libraries: ["places"]
+            });
+
+        loader.load().then(loadMap)
+                    .catch(e => {
+                        console.log(e,'error in loading map')
+                    });
+    },[])  
+    
     const { ref: bootstrapRef } = usePlacesWidget({
         apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         options: {
@@ -44,6 +67,24 @@ export const Register = () => {
         setAccountType(true);
         navigate('/profile');
     }
+
+    const loadMap = (google) =>{
+        let map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        let marker = new google.maps.Marker({
+            position: {
+                lat: latitude,
+                lng: longitude
+            },
+            map,
+            title: "Hello World!",
+            draggable:true
+          });
+          marker.addListener(marker, 'dragend',(event)=>{
+                setLatitude(event.latLng.lat())
+                setLongitude(event.latLng.lng())
+                map.setCenter(event.latLng.lat(),event.latLng.lng())
+          })
+    } 
 
     return (
         <>
@@ -82,6 +123,10 @@ export const Register = () => {
                                             <Form.Control className="form-control" placeholder="Enter the Farm Address" ref={bootstrapRef} />
                                         </div>
                                         <br />
+                                        <div className="form-group">
+                                            <h6> Address :<span className="float-right"></span></h6>
+                                            <div id='map' className='googlemap' />
+                                        </div>
                                         <br />
                                         <div className="form-group">
                                             <h6>Contact :</h6>
