@@ -9,6 +9,7 @@ import cv2
 import regex as re
 import json
 
+
 app = FastAPI()
 
 origins = ["*"]
@@ -92,6 +93,9 @@ async def predict(file: UploadFile = File(...)):
     }
 
     return PAN
+
+
+
 
 
 
