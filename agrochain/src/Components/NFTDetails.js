@@ -17,6 +17,9 @@ import {
 
 import axios from 'axios';
 
+import aqix from './assets/aqix.png'
+import aqi_gases from './assets/aqi_gases.png'
+
 import { Line } from 'react-chartjs-2';
 import { Loading } from "./Loading";
 import { Footer } from "./Footer";
@@ -488,21 +491,15 @@ export const NFTDetails = () => {
                             </div>
                         </div>
                     {/*    <div className="col-md-6">*/}
-                    {/*        <br />*/}
-                    {/*        <br />*/}
-                    {/*        <div className="card">*/}
-                    {/*            <div className="card-body">*/}
-                    {/*                <div>*/}
-                    {/*                    <Line options={options2} data={aqi} />*/}
-                    {/*                </div>*/}
-                    {/*            </div>*/}
+                    {/*        <div className="card zoom">*/}
+                    {/*            <img className="img-fluid" src={aqi} />*/}
                     {/*        </div>*/}
                     {/*</div>*/}
                     </div>
 
                     <div className="row">
                        
-                            <div className="col-md-12">
+                            <div className="col-md-6">
                                 <br />
                                 <br />
                                 <div className="card">
@@ -511,8 +508,26 @@ export const NFTDetails = () => {
                                             <Line options={options2} data={aqi} />
                                         </div>
                                     </div>
+                            </div>
+                            <br />
+                            <div className="card zoom">
+                                <img className="img-fluid" src={aqix} />
+                            </div>
+                            </div>
+                            <div className="col-md-6">
+                                <br />
+                            <br />
+                            <br />
+                            <br />
+                            <div className="card">
+                                <div className="card-body">
+                                    <br />
+                                    <div className="card zoom">
+                                        <img className="img-fluid" src={aqi_gases} />
+                                    </div>
+                                    </div>
                                 </div>
-                        </div>
+                            </div>
                     </div>
 
                     <div className="row">
