@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 
 import { Form } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { ethers } from "ethers"
 import { create as ipfsHttpClient } from 'ipfs-http-client'
@@ -19,7 +20,7 @@ const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
 const Profile = () => {
 	const { account, nft, balance, marketplace, isLoading } = useContext(NftContext);
-
+	const navigate = useNavigate();
 	const [image, setImage] = useState('')
 	const [price, setPrice] = useState(null)
 	const [name, setName] = useState('')
@@ -103,6 +104,7 @@ const Profile = () => {
 				let item = {
 					totalPrice,
 					price: i.price,
+					seller: i.seller,
 					itemId: i.itemId,
 					name: metadata.name,
 					description: metadata.description,
@@ -402,6 +404,7 @@ const Profile = () => {
 																			<p className="text-info type-7 my-0">
 																				{item.description}
 																			</p>
+																			{/*<a onClick={() => navigate('/nft-details', { state: { nfts: item } })}>{item.description}</a>*/}
 																		</div>
 																	</div>
 																	<div className="row mt-3">
