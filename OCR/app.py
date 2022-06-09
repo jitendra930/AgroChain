@@ -5,9 +5,7 @@ from PIL import Image
 import numpy as np
 from io import BytesIO
 from fastapi.middleware.cors import CORSMiddleware
-import cv2
 import regex as re
-import json
 
 
 app = FastAPI()
@@ -22,6 +20,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get('/')
 def index():
     return {'message': 'Hello, This is an API for OCR'}
@@ -30,6 +29,7 @@ def index():
 def read_imagefile(file) -> Image.Image:
     image = Image.open(BytesIO(file))
     return image
+
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
@@ -44,11 +44,8 @@ async def predict(file: UploadFile = File(...)):
     DOB = 'NAN'
     reader = ocr.Reader(['en'], model_storage_directory='.')
     OCR_text = reader.readtext(image, detail=0, width_ths=0.9)
-    # print(OCR_text)
     datepatn = r'\d+[-/]\d+[-/]\d+'
     panpatn = r'([A-Z]){5}([O0-9]){4}([A-Z]){1}'
-    namepatn = r'([A-Z]+)\s([A-Z]+)\s([A-Z]+)'
-    fnamepatn = r'([A-Z]+)\s+?'
     godpatn = r'([A-Z]+)\s([A-Z]+)\s([A-Z]+)$|([A-Z]+)\s([A-Z]+)$'
 
     gov = [i for i, txt in enumerate(OCR_text) if 'GOVT' in txt][0]
@@ -56,7 +53,6 @@ async def predict(file: UploadFile = File(...)):
     temp = []
     for text in OCR_text:
         name = re.search(godpatn, text)
-        # print(name.group())
         if name:
             temp.append(name.group())
 
@@ -93,11 +89,6 @@ async def predict(file: UploadFile = File(...)):
     }
 
     return PAN
-
-
-
-
-
 
 
 if __name__ == "__main__":
