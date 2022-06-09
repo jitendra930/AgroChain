@@ -27,6 +27,7 @@ const Profile = () => {
 	const [farmername, setfarmername] = useState('')
 	const [govtid, setgovtid] = useState('')
 	const [location, setlocation] = useState('')
+	const [area, setarea] = useState('')
 	const [contact, setcontact] = useState('')
 	const [iotdeviceid, setiotdeviceid] = useState('')
 	const nft_name = govtid + ' ' + new Date().getDate() + '/' + new Date().toLocaleString("en-US", { month: "long" }) + '/' + new Date().getFullYear()
@@ -135,6 +136,7 @@ const Profile = () => {
 		setfarmername(fam.name)
 		setgovtid(fam.govtId)
 		setlocation(fam.location)
+		setarea(fam.landarea)
 		setcontact(fam.contact)
 		setiotdeviceid(fam.iotid)
 
@@ -222,7 +224,12 @@ const Profile = () => {
                       <i className="fa fa-compass fa-fw"></i>&nbsp;
                       LOCATION CO-ORDINATES
                     </h6>
-                    <p className="text-muted" style={{ marginLeft: "24px" }}>{location}</p>
+					<p className="text-muted" style={{ marginLeft: "24px" }}>{location}</p>
+					<h6 className="mb-0">
+						<i className="fa fa-tree fa-fw"></i>&nbsp;
+						Total Farm Land Area
+					</h6>
+					<p className="text-muted" style={{ marginLeft: "24px" }}>{area}</p>
                     <h6 className="mb-0">
                       <i className="fa fa-address-book fa-fw"></i>&nbsp;  Contact No.
                     </h6>

@@ -17,6 +17,7 @@ export const Register = () => {
     const [govtid, setgovtid] = useState('')
     const [latitude, setLatitude] = useState(0)
     const [longitude, setLongitude] = useState(0)
+    const [area, setarea] = useState('')
     const [contact, setcontact] = useState('')
     const [iotdeviceid, setiotdeviceid] = useState('')
 
@@ -57,13 +58,13 @@ export const Register = () => {
 
     const RegisterFarmer = async () => {
 
-        console.log(farmerId, name, govtid, latitude, longitude, contact, iotdeviceid);
+        console.log(farmerId, name, govtid, latitude, longitude, area, contact, iotdeviceid);
 
         const lat_log = latitude.toString() + ' ' + longitude.toString();
 
         console.log(lat_log);
 
-        await (await marketplace.create_Farmer(account, name, govtid, lat_log, contact, iotdeviceid)).wait();
+        await (await marketplace.create_Farmer(account, name, govtid, lat_log, area, contact, iotdeviceid)).wait();
         setAccountType(true);
         navigate('/profile');
     }
@@ -119,15 +120,19 @@ export const Register = () => {
                                             <Form.Control onChange={(e) => setgovtid(e.target.value)} className="form-control" placeholder="ENTER AADHAR NUMBER/ PAN CARD" required />
                                         </div>
                                         <div className="form-group">
-                                            <h6> Address :<span className="float-right"></span></h6>
+                                            <h6> Farm Address :<span className="float-right"></span></h6>
                                             <Form.Control className="form-control" placeholder="Enter the Farm Address" ref={bootstrapRef} />
                                         </div>
                                         <br />
                                         <div className="form-group">
-                                            <h6> Address :<span className="float-right"></span></h6>
+                                            <h6> Farm Address :<span className="float-right"></span></h6>
                                             <div id='map' className='googlemap' />
                                         </div>
                                         <br />
+                                        <div className="form-group">
+                                            <h6>Total Farm Land Area :</h6>
+                                            <Form.Control onChange={(e) => setarea(e.target.value)} className="form-control" id="validationDefault03" placeholder="Enter Total Farm Land Area" required />
+                                        </div>
                                         <div className="form-group">
                                             <h6>Contact :</h6>
                                             <Form.Control onChange={(e) => setcontact(e.target.value)} className="form-control" id="validationDefault03" placeholder="Enter Contact Details" required />
