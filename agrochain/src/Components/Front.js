@@ -4,6 +4,7 @@ import carbon from './assets/carbon.mp4'
 import mint from './assets/mint.svg'
 import data from './assets/data.png'
 import security from './assets/security.png'
+import farm_nft from './assets/farm_nft.jpg'
 
 import './loading.css';
 import { Footer } from "./Footer";
@@ -20,11 +21,12 @@ export const Front = () => {
                             <div className="container">
                                 <div className="row">
                                     <div className="col-md-4">
-                                        <div className="video-load">
-                                            <video id="home-video" loop muted autoPlay controls=''>
-                                                <source src={carbon} type="video/mp4" />
-                                            </video>
-                                            </div>
+                                        <img className="img-fluid" src={farm_nft} />
+                                        {/*<div className="video-load">*/}
+                                        {/*    <video id="home-video" loop muted autoPlay controls=''>*/}
+                                        {/*        <source src={carbon} type="video/mp4" />*/}
+                                        {/*    </video>*/}
+                                        {/*</div>*/}
                                     </div>
                                     <div className="col-md-4">
                                         
