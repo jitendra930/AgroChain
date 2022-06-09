@@ -19,6 +19,7 @@ contract Marketplace is ReentrancyGuard {
         string name;
         string govtId;
         string location;
+        string landarea;
         string contact;
         string iotid;
     }
@@ -43,6 +44,7 @@ contract Marketplace is ReentrancyGuard {
         string name,
         string govtId,
         string location,
+        string landarea,
         string contact,
         string iotid
     );
@@ -68,12 +70,13 @@ contract Marketplace is ReentrancyGuard {
         feePercent = _feePercent;
     }
 
-    function create_Farmer(address _id, string memory _name, string memory _govtId, string memory _location, string memory _contact, string memory _iotid) external {
+    function create_Farmer(address _id, string memory _name, string memory _govtId, string memory _location, string memory _area, string memory _contact, string memory _iotid) external {
         farmers[_id] = Farmer (
             _id,
             _name,
             _govtId,
             _location,
+            _area,
             _contact,
             _iotid
         );
@@ -82,6 +85,7 @@ contract Marketplace is ReentrancyGuard {
             _name,
             _govtId,
             _location,
+            _area,
             _contact,
             _iotid
         );

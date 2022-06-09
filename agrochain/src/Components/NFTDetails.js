@@ -91,6 +91,7 @@ export const NFTDetails = () => {
     const [farmername, setfarmername] = useState('')
     const [govtid, setgovtid] = useState('')
     const [location, setlocation] = useState('')
+    const [area, setarea] = useState('')
     const [contact, setcontact] = useState('')
     const [iotdeviceid, setiotdeviceid] = useState('')
     const [loading, setLoading] = useState(true)
@@ -113,6 +114,7 @@ export const NFTDetails = () => {
         setgovtid(fam.govtId)
         setlocation(fam.location)
         setcontact(fam.contact)
+        setarea(fam.landarea)
         /*LoadPollutionData()*/
         setTimeout(() => { LoadPollutionIOTData() }, 10000);
         setiotdeviceid(fam.iotid)
@@ -423,6 +425,16 @@ export const NFTDetails = () => {
                         <div className="row">
                             <div className="col-4 col-md-4">
                                 <p className="my-0">
+                                    <span className="semi-bold">Total Farm Land Area:</span>
+                                </p>
+                            </div>
+                            <div className="col-8 col-md-8">
+                                <p className="text-muted my-0">{area}</p>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4 col-md-4">
+                                <p className="my-0">
                                     <span className="semi-bold">IOT Device ID :</span>
                                 </p>
                             </div>
@@ -467,6 +479,8 @@ export const NFTDetails = () => {
                                                     Aadhar No.: {govtid}
                                                     <br />
                                                     Co-ordinates: {location}
+                                                    <br />
+                                                    Farm Land: {area}
                                                     <br />
                                                     IOT Device ID: {iotdeviceid}
                                                 </p>
