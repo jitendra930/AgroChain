@@ -8,6 +8,7 @@ import { create as ipfsHttpClient } from 'ipfs-http-client'
 
 import farmer from './assets/farmer.jpg'
 import business from './assets/business.png'
+import farm_nft from './assets/farm_nft.jpg'
 
 import { Loading } from "./Loading";
 import { Footer } from "./Footer";
@@ -443,17 +444,19 @@ const Profile = () => {
 										<div className="form-group">
 											<h6>Link to asset:<span className="text-danger">*</span></h6>
 											<Form.Control className="form-control" placeholder="Enter Link" type="file" id="file" name="file" required accept="image/*" onChange={uploadToIPFS} />
-											<p className="text-muted type-7 mt-1 mb-0">Link your NFT to external link so that person can view.</p>
+											<p className="text-muted type-7 mt-1 mb-0">Link your Farm Image to external link so that person can view.</p>
 										</div>
 										<br />
 										<div className="form-group">
 											<h6>Description: <span className="text-danger">*</span></h6>
-											<Form.Control onChange={(e) => setDescription(e.target.value)} className="form-control" required as="textarea" placeholder="Enter Description..." />
+												<Form.Control onChange={(e) => setDescription(e.target.value)} className="form-control" required as="textarea" placeholder="Enter Description..." />
+												<p className="text-muted type-7 mt-1 mb-0">Describe how have you adopted sustainable farming practice to reduce carbon emissions.</p>
 										</div>
 										<br />
 										<div className="form-group">
-											<h6>Price (ETH): <span className="text-danger">*</span></h6>
-											<Form.Control onChange={(e) => setPrice(e.target.value)} className="form-control" required type="number" placeholder="Enter Selling Price" />
+												<h6><i className="fa fa-dollar-sign"> </i> Price (USDC): <span className="text-danger">*</span></h6>
+												<Form.Control onChange={(e) => setPrice(e.target.value)} className="form-control" required type="number" placeholder="Enter Selling Price" />
+												<p className="text-muted type-7 mt-1 mb-0">Enter the Price in USDC for selling the Carbon credits.</p>
 										</div>
 
                     <div className="row mt-4">
