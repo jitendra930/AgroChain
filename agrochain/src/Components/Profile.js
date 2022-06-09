@@ -209,7 +209,7 @@ const Profile = () => {
 										</div></>)}
 								<div className="col-md-8 text-center">
 									<br />
-									<h2 className="mt-1 text-dark-grey">{balance.slice(0, 5)} ETH</h2>
+										<h2 className="mt-1 text-dark-grey">{balance.slice(0, 5)} USDC</h2>
 								</div>
 							</div>
 
@@ -328,10 +328,10 @@ const Profile = () => {
 																	<div className="row mt-3">
 																		<div className="col-md-6">
 																			<p className="text-success type-6 my-0">
-																				<i className="fab fa-ethereum"></i> {ethers.utils.formatEther(item.totalPrice)}
+																				<i className="fa fa-dollar-sign"> </i> {ethers.utils.formatEther(item.totalPrice)}
 																			</p>
 																			{/*<p className="text-primary type-7 my-0">*/}
-																			{/*	Offer <i className="fab fa-ethereum"></i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)}*/}
+																			{/*	Offer <i className="fa fa-dollar-sign"> </i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)}*/}
 																			{/*</p>*/}
 																		</div>
 																		<div className="col-md-6">
@@ -339,7 +339,7 @@ const Profile = () => {
 																			{/*	<button type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nft2">Buy Now</button>*/}
 																			{/*</div>*/}
 																			<p className="text-danger type-6 my-0">
-																				<i className="fab fa-ethereum"></i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)} ETH
+																				<i className="fa fa-dollar-sign"> </i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)}
 																			</p>
 																		</div>
 																	</div>
@@ -370,10 +370,10 @@ const Profile = () => {
 																	<div className="row mt-3">
 																		<div className="col-md-6">
 																			<p className="text-danger type-6 my-0">
-																				<i className="fab fa-ethereum"></i>{ethers.utils.formatEther(item.totalPrice)} ETH
+																				<i className="fa fa-dollar-sign"> </i>{ethers.utils.formatEther(item.totalPrice)} USDC
 																			</p>
 																			<p className="text-success type-6 my-0">
-																				<i className="fab fa-ethereum"></i>{ethers.utils.formatEther(item.price)} ETH Recived
+																				<i className="fa fa-dollar-sign"> </i>{ethers.utils.formatEther(item.price)} USDC Recived
 																			</p>
 																		</div>
 																		<div className="col-md-6">
@@ -410,7 +410,7 @@ const Profile = () => {
 																	<div className="row mt-3">
 																		<div className="col-md-6">
 																			<p className="text-success type-6 my-0">
-																				<i className="fab fa-ethereum"></i>{ethers.utils.formatEther(item.totalPrice)} ETH
+																				<i className="fa fa-dollar-sign"> </i>{ethers.utils.formatEther(item.totalPrice)} USDC
 																			</p>
 																		</div>
 																		<div className="col-md-6">
