@@ -376,82 +376,140 @@ export const NFTDetails = () => {
                 <div className="col-md-6">
                     <div className="card zoom">
                          <img className="img-fluid" src={nfts.image} />
-                    </div>
-                </div>
-                <div className="col-md-6">
-                   <div className="mt-4 mt-md-0 mx-4">
-                       <h2 className="mb-0">{nfts.name}</h2>
-                       <h4 className="text-blue type-6 mb-0 mt-1"><span className="bold">Seller: </span>{nfts.seller}</h4>
-                       <br />
-                       <div className="row">
-                           <div className="col-4 col-md-4">
-                               <p className="my-0">
-                                   <span className="semi-bold">Name :</span>
-                               </p>
-                           </div>
-                           <div className="col-8 col-md-8">
-                               <p className="text-muted my-0">{farmername}</p>
-                           </div>
-                       </div>
-                       <div className="row">
-                           <div className="col-4 col-md-4">
-                               <p className="my-0">
-                                   <span className="semi-bold">Contact No.:</span>
-                               </p>
-                           </div>
-                           <div className="col-8 col-md-8">
-                               <p className="text-muted my-0">{contact}</p>
-                           </div>
-                       </div>
-                       <div className="row">
-                           <div className="col-4 col-md-4">
-                               <p className="my-0">
-                                   <span className="semi-bold">Aadhar No. :</span>
-                               </p>
-                           </div>
-                           <div className="col-8 col-md-8">
-                               <p className="text-muted my-0">{govtid}</p>
-                           </div>
-                       </div>
-                       <div className="row">
-                           <div className="col-4 col-md-4">
-                               <p className="my-0">
-                                   <span className="semi-bold">Co-ordinates :</span>
-                               </p>
-                           </div>
-                           <div className="col-8 col-md-8">
-                               <p className="text-muted my-0">{location}</p>
-                           </div>
-                       </div>
-                       <div className="row">
-                           <div className="col-4 col-md-4">
-                               <p className="my-0">
-                                   <span className="semi-bold">IOT Device ID :</span>
-                               </p>
-                           </div>
-                           <div className="col-8 col-md-8">
-                               <p className="text-muted my-0">{iotdeviceid}</p>
-                           </div>
-                       </div>
-                       <div className="row">
-                           <div className="col-4 col-md-4">
-                               <p className="my-0">
-                                   <span className="semi-bold">Description :</span>
-                               </p>
-                           </div>
-                           <div className="col-8 col-md-8">
-                               <p className="text-muted my-0">{nfts.description}</p>
-                           </div>
                         </div>
-
+                        <h2 className="mb-0 text-center">{nfts.name}</h2>
+                        <h4 className="text-blue type-6 text-center mb-0 mt-1"><span className="bold">Seller: </span>{nfts.seller}</h4>
                         <br />
+                        <div className="row">
+                            <div className="col-4 col-md-4">
+                                <p className="my-0">
+                                    <span className="semi-bold">Name :</span>
+                                </p>
+                            </div>
+                            <div className="col-8 col-md-8">
+                                <p className="text-muted my-0">{farmername}</p>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4 col-md-4">
+                                <p className="my-0">
+                                    <span className="semi-bold">Contact No.:</span>
+                                </p>
+                            </div>
+                            <div className="col-8 col-md-8">
+                                <p className="text-muted my-0">{contact}</p>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4 col-md-4">
+                                <p className="my-0">
+                                    <span className="semi-bold">Aadhar No. :</span>
+                                </p>
+                            </div>
+                            <div className="col-8 col-md-8">
+                                <p className="text-muted my-0">{govtid}</p>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4 col-md-4">
+                                <p className="my-0">
+                                    <span className="semi-bold">Co-ordinates :</span>
+                                </p>
+                            </div>
+                            <div className="col-8 col-md-8">
+                                <p className="text-muted my-0">{location}</p>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4 col-md-4">
+                                <p className="my-0">
+                                    <span className="semi-bold">IOT Device ID :</span>
+                                </p>
+                            </div>
+                            <div className="col-8 col-md-8">
+                                <p className="text-muted my-0">{iotdeviceid}</p>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-4 col-md-4">
+                                <p className="my-0">
+                                    <span className="semi-bold">Description :</span>
+                                </p>
+                            </div>
+                            <div className="col-8 col-md-8">
+                                <p className="text-muted my-0">{nfts.description}</p>
+                            </div>
+                        </div>
+                </div>
+                    <div className="col-md-6">
+
+
+
+                   <div className="mt-4 mt-md-0 mx-4">
+                       
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <h2 className="text-info super-bold mt-2 mb-0">Carbon Credit Certificate</h2>
+                                            <p className="text-muted mt-0 mb-0">{nfts.seller}</p>
+                                        </div>
+                                    </div>
+                                    <div className="row mt-4">
+                                        <div className="col-md-5">
+                                            
+                                                <img className="img-fluid" src={nfts.image} />
+                                                <p className="text-muted text-center semi-bold">{nfts.name}</p>
+
+                                                <p className="text-muted type-7 my-0 mx-2">
+                                                    Contact No.: {contact}
+                                                    <br />
+                                                    Aadhar No.: {govtid}
+                                                    <br />
+                                                    Co-ordinates: {location}
+                                                    <br />
+                                                    IOT Device ID: {iotdeviceid}
+                                                </p>
+                                            
+
+                                        </div>
+                                        <div className="col-md-7">
+                                            <div className="mx-4 mt-4 mt-md-0">
+                                                <h3 className="bold mb-0">{farmername}</h3>
+                                                <h6 className="text-blue bold mt-1">{nfts.seller}</h6>
+
+                                                <p className="type-6 mt-4">
+                                                    This is to Certify that the owner of the NFT has contributed momeny to of the famers to
+                                                    adopt sustainable farming methods.
+                                                </p>
+
+                                                
+
+                                                <p className="text-info type-7 mt-4">
+                                                    This certificate is issued by Agrochain.
+                                                    <br />
+                                                    Verify at <span className="bold">www.agrochain.com/verify-cert/</span>
+                                                </p>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <br />
                         <h4 className="text-success mb-0">Current Price:</h4>
                         <h2 className="text-success my-0">
                             <i className="fab fa-ethereum"></i> {ethers.utils.formatEther(nfts.totalPrice)}
                         </h2>
                         <h4 className="text-danger mt-1">
                             Last <i className="fab fa-ethereum"></i> {ethers.utils.formatEther(nfts.totalPrice)}
-                        </h4>
+                            </h4>
+
+
 
                         <br />
                         <div className="row">
