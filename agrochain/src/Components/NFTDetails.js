@@ -469,10 +469,12 @@ export const NFTDetails = () => {
                                     </div>
                                     <div className="row mt-4">
                                         <div className="col-md-5">
-                                            
-                                                <img className="img-fluid" src={nfts.image} />
-                                                <p className="text-muted text-center semi-bold">{nfts.name}</p>
-
+                                            <iframe src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBkLaIXSCFGM_7JuaoJomvhtIz1TKZSBCY&center=-33.8569,151.2152&zoom=20&maptype=satellite" width="200" height="200"></iframe>
+                                                {/*<img className="img-fluid" src={nfts.image} />*/}
+                                                {/*<p className="text-muted text-center semi-bold">{nfts.name}</p>*/}
+                                            <br />
+                                            <br />
+                                            <br />
                                                 <p className="text-muted type-7 my-0 mx-2">
                                                     Contact No.: {contact}
                                                     <br />
@@ -490,11 +492,16 @@ export const NFTDetails = () => {
                                         <div className="col-md-7">
                                             <div className="mx-4 mt-4 mt-md-0">
                                                 <h3 className="bold mb-0">{farmername}</h3>
+                                                <h6 className="text-grey bold mt-1">{nfts.name}</h6>
                                                 <h6 className="text-blue bold mt-1">{nfts.seller}</h6>
 
                                                 <p className="type-6 mt-4">
                                                     This is to Certify that the owner of the NFT has contributed momeny to of the famers to
                                                     adopt sustainable farming methods.
+                                                </p>
+
+                                                <p className="text-success type-6 mt-4">
+                                                    {nfts.description}
                                                 </p>
 
                                                 
@@ -512,7 +519,6 @@ export const NFTDetails = () => {
 
                                 </div>
                             </div>
-                            <br />
                             <br />
                             <br />
                         <h4 className="text-success mb-0">Current Price:</h4>
