@@ -92,6 +92,7 @@ export const NFTDetails = () => {
     const [govtid, setgovtid] = useState('')
     const [location, setlocation] = useState('')
     const [area, setarea] = useState('')
+    const [map, setmap] = useState('')
     const [contact, setcontact] = useState('')
     const [iotdeviceid, setiotdeviceid] = useState('')
     const [loading, setLoading] = useState(true)
@@ -162,6 +163,7 @@ export const NFTDetails = () => {
         const lat = locationarr[0];
         const log = locationarr[1];
         console.log(lat, log);
+        setmap('https://www.google.com/maps/embed/v1/view?key='+process.env.REACT_APP_GOOGLE_MAPS_API_KEY+'&center=' + lat + ',' + log+'&zoom=20&maptype=satellite');
         api.get('GetPollutionHistory?lat='+lat+'&lon='+log+'&currentDate='+datex).then(({ data }) => {
             const labelsx = data.map(val => val.DateTime.split('T')[0])
             const dataxAQI = data.map(val => val.AverageAQI)
@@ -469,7 +471,7 @@ export const NFTDetails = () => {
                                     </div>
                                     <div className="row mt-4">
                                         <div className="col-md-5">
-                                            <iframe src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBkLaIXSCFGM_7JuaoJomvhtIz1TKZSBCY&center=-33.8569,151.2152&zoom=20&maptype=satellite" width="200" height="200"></iframe>
+                                            <iframe src={map} width="200" height="200"></iframe>
                                                 {/*<img className="img-fluid" src={nfts.image} />*/}
                                                 {/*<p className="text-muted text-center semi-bold">{nfts.name}</p>*/}
                                             <br />

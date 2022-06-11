@@ -98,7 +98,7 @@ export const Register = () => {
                             <div className="row">
                                 <div className="col-md-5 d-sm-none d-none d-md-block">
                                     <div className="card-body sidebar-image-card-body">
-                                        <img src={wheat} height="600" className="img-fluid sidebar-image" />
+                                        <img className="img-fluid sidebar-image" src={wheat} height="1200" />
                                     </div>
                                 </div>
                                 <div className="col-md-7 col-sm-12 col-12">
@@ -120,12 +120,12 @@ export const Register = () => {
                                             <Form.Control onChange={(e) => setgovtid(e.target.value)} className="form-control" placeholder="ENTER AADHAR NUMBER/ PAN CARD" required />
                                         </div>
                                         <div className="form-group">
-                                            <h6> Farm Address :<span className="float-right"></span></h6>
-                                            <Form.Control className="form-control" placeholder="Enter the Farm Address" ref={bootstrapRef} />
+                                            <h6> Farm Location :<span className="float-right"></span></h6>
+                                            <Form.Control className="form-control" placeholder="Enter the Farm Location" ref={bootstrapRef} />
                                         </div>
                                         <br />
                                         <div className="form-group">
-                                            <h6> Farm Address :<span className="float-right"></span></h6>
+                                            <h6> Farm Location :<span className="float-right"></span></h6>
                                             <div id='map' className='googlemap' />
                                         </div>
                                         <br />
