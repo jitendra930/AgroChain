@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import { Form } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
 
 import { ethers } from "ethers"
 import { create as ipfsHttpClient } from 'ipfs-http-client'
@@ -18,6 +19,11 @@ import { NftContext } from '../frontend/NftContext/NftProvider'
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
+const api = axios.create({
+	baseURL: `https://min-api.cryptocompare.com/`
+})
+
+
 const Profile = () => {
 	const { account, nft, balance, marketplace, isLoading } = useContext(NftContext);
 	const navigate = useNavigate();
@@ -28,6 +34,7 @@ const Profile = () => {
 	const [farmerId, setfarmerId] = useState('')
 	const [farmername, setfarmername] = useState('')
 	const [govtid, setgovtid] = useState('')
+	const [usd, setusd] = useState(0)
 	const [location, setlocation] = useState('')
 	const [area, setarea] = useState('')
 	const [contact, setcontact] = useState('')
@@ -51,6 +58,15 @@ const Profile = () => {
 		}
 		setSelectedFile(event.target.files[0])
 	}
+
+	const ETH_to_USD = () => {
+		console.log("Hello")
+		api.get('data/price?fsym=ETH&tsyms=USD').then(({ data }) => {
+			console.log(data["USD"]);
+			setusd(data["USD"])
+		})
+	}
+
 	const createNFT = async () => {
 		console.log("NFT");
 		console.log(nft_name);
@@ -176,7 +192,8 @@ const Profile = () => {
 	}
 
 	useEffect(() => {
-		if(isLoading) {
+		if (isLoading) {
+			ETH_to_USD()
 			loadListedItems()
 		}
 	}, [isLoading]);
@@ -457,9 +474,9 @@ const Profile = () => {
 										</div>
 										<br />
 										<div className="form-group">
-												<h6><i className="fab fa-ethereum"> </i> Price (ETH): <span className="text-danger">*</span></h6>
+												<h6><i className="fab fa-ethereum"> </i> Price (ETH) = { usd * price } USD <span className="text-danger">*</span></h6>
 												<Form.Control onChange={(e) => setPrice(e.target.value)} className="form-control" required type="number" placeholder="Enter Selling Price" />
-												<p className="text-muted type-7 mt-1 mb-0">Enter the Price in USDC for selling the Carbon credits.</p>
+												<p className="text-muted type-7 mt-1 mb-0">Enter the Price in ETH for selling the Carbon credits.</p>
 										</div>
 
                     <div className="row mt-4">
