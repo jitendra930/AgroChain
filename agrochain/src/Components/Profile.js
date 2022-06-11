@@ -35,6 +35,7 @@ const Profile = () => {
 	const [farmername, setfarmername] = useState('')
 	const [govtid, setgovtid] = useState('')
 	const [usd, setusd] = useState(0)
+	const [co2, setco2] = useState('')
 	const [location, setlocation] = useState('')
 	const [area, setarea] = useState('')
 	const [contact, setcontact] = useState('')
@@ -60,7 +61,6 @@ const Profile = () => {
 	}
 
 	const ETH_to_USD = () => {
-		console.log("Hello")
 		api.get('data/price?fsym=ETH&tsyms=USD').then(({ data }) => {
 			console.log(data["USD"]);
 			setusd(data["USD"])
@@ -71,6 +71,8 @@ const Profile = () => {
 		console.log("NFT");
 		console.log(nft_name);
 		const name = nft_name;
+		setDescription(co2 + " KG Carbon Emission Saved By " + description)
+		console.log(description)
 		if (!image || !price || !nft_name || !description) return
 		try {
 			const result = await client.add(JSON.stringify({ image, price, name, description }))
@@ -462,13 +464,19 @@ const Profile = () => {
 										</div>
 										<br />
 										<div className="form-group">
-											<h6>Link to asset:<span className="text-danger">*</span></h6>
+											<h6>Add a Picture of your Farm:<span className="text-danger">*</span></h6>
 											<Form.Control className="form-control" placeholder="Enter Link" type="file" id="file" name="file" required accept="image/*" onChange={uploadToIPFS} />
 											<p className="text-muted type-7 mt-1 mb-0">Link your Farm Image to external link so that person can view.</p>
 										</div>
 										<br />
 										<div className="form-group">
-											<h6>Description: <span className="text-danger">*</span></h6>
+											<h6>Co2 Emission Saved (KG): <span className="text-danger">*</span></h6>
+												<Form.Control onChange={(e) => setco2(e.target.value)} className="form-control" required placeholder="Enter Co2 Emission Saved" />
+											<p className="text-muted type-7 mt-1 mb-0">Estimated Co2 Emission Saved by adopting sustainable farming practice</p>
+										</div>
+										<br />
+										<div className="form-group">
+											<h6>Sustainable Farming Practice Adopted: <span className="text-danger">*</span></h6>
 												<Form.Control onChange={(e) => setDescription(e.target.value)} className="form-control" required as="textarea" placeholder="Enter Description..." />
 												<p className="text-muted type-7 mt-1 mb-0">Describe how have you adopted sustainable farming practice to reduce carbon emissions.</p>
 										</div>
