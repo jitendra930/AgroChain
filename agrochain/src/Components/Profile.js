@@ -209,7 +209,7 @@ const Profile = () => {
 										</div></>)}
 								<div className="col-md-8 text-center">
 									<br />
-										<h2 className="mt-1 text-dark-grey">{balance.slice(0, 5)} USDC</h2>
+										<h2 className="mt-1 text-dark-grey">{balance.slice(0, 5)} ETH</h2>
 								</div>
 							</div>
 
@@ -328,7 +328,7 @@ const Profile = () => {
 																	<div className="row mt-3">
 																		<div className="col-md-6">
 																			<p className="text-success type-6 my-0">
-																				<i className="fa fa-dollar-sign"> </i> {ethers.utils.formatEther(item.totalPrice)}
+																				<i className="fab fa-ethereum"> </i> {ethers.utils.formatEther(item.totalPrice)}
 																			</p>
 																			{/*<p className="text-primary type-7 my-0">*/}
 																			{/*	Offer <i className="fa fa-dollar-sign"> </i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)}*/}
@@ -339,7 +339,7 @@ const Profile = () => {
 																			{/*	<button type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nft2">Buy Now</button>*/}
 																			{/*</div>*/}
 																			<p className="text-danger type-6 my-0">
-																				<i className="fa fa-dollar-sign"> </i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)}
+																				<i className="fab fa-ethereum"> </i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)}
 																			</p>
 																		</div>
 																	</div>
@@ -370,10 +370,10 @@ const Profile = () => {
 																	<div className="row mt-3">
 																		<div className="col-md-6">
 																			<p className="text-danger type-6 my-0">
-																				<i className="fa fa-dollar-sign"> </i>{ethers.utils.formatEther(item.totalPrice)} USDC
+																				<i className="fab fa-ethereum"> </i>{ethers.utils.formatEther(item.totalPrice)} USDC
 																			</p>
 																			<p className="text-success type-6 my-0">
-																				<i className="fa fa-dollar-sign"> </i>{ethers.utils.formatEther(item.price)} USDC Recived
+																				<i className="fab fa-ethereum"> </i>{ethers.utils.formatEther(item.price)} USDC Recived
 																			</p>
 																		</div>
 																		<div className="col-md-6">
@@ -410,7 +410,7 @@ const Profile = () => {
 																	<div className="row mt-3">
 																		<div className="col-md-6">
 																			<p className="text-success type-6 my-0">
-																				<i className="fa fa-dollar-sign"> </i>{ethers.utils.formatEther(item.totalPrice)} USDC
+																				<i className="fab fa-ethereum"> </i>{ethers.utils.formatEther(item.totalPrice)} USDC
 																			</p>
 																		</div>
 																		<div className="col-md-6">
@@ -457,7 +457,7 @@ const Profile = () => {
 										</div>
 										<br />
 										<div className="form-group">
-												<h6><i className="fa fa-dollar-sign"> </i> Price (USDC): <span className="text-danger">*</span></h6>
+												<h6><i className="fab fa-ethereum"> </i> Price (ETH): <span className="text-danger">*</span></h6>
 												<Form.Control onChange={(e) => setPrice(e.target.value)} className="form-control" required type="number" placeholder="Enter Selling Price" />
 												<p className="text-muted type-7 mt-1 mb-0">Enter the Price in USDC for selling the Carbon credits.</p>
 										</div>

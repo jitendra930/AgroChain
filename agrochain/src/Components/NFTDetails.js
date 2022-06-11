@@ -525,10 +525,10 @@ export const NFTDetails = () => {
                             <br />
                         <h4 className="text-success mb-0">Current Price:</h4>
                         <h2 className="text-success my-0">
-                                <i className="fa fa-dollar-sign"> </i> {ethers.utils.formatEther(nfts.totalPrice)}
+                                <i className="fab fa-ethereum"> </i> {ethers.utils.formatEther(nfts.totalPrice)}
                         </h2>
                         <h4 className="text-danger mt-1">
-                                Last <i className="fa fa-dollar-sign"> </i> {ethers.utils.formatEther(nfts.totalPrice)}
+                                Last <i className="fab fa-ethereum"> </i> {ethers.utils.formatEther(nfts.totalPrice)}
                             </h4>
 
 

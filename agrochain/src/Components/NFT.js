@@ -110,7 +110,7 @@ export const NFT = () => {
                                     <div className="card border-secondary  mb-3" >
                                         <div className="card-header">{account.slice(0, 12) + '...' + account.slice(29,)}</div>
                                         <div className="card-body text-success ">
-                                            <h5 className="card-title"><i className="fa fa-dollar-sign"> </i>   {balance.slice(0, 6)} USDC</h5>
+                                            <h5 className="card-title"><i className="fab fa-ethereum"> </i>   {balance.slice(0, 6)} USDC</h5>
                                             <p className="card-text">Invest in the Greener Future, but buying NFT from farmers, and providing them resources to invest in sustainable farming methods</p>
                                         </div>
                                     </div>
@@ -153,7 +153,7 @@ export const NFT = () => {
                                                 <div className="row mt-3">
                                                     <div className="col-md-6">
                                                         <p className="text-success type-6 my-0">
-                                                            <i className="fa fa-dollar-sign"> </i> {ethers.utils.formatEther(item.totalPrice)} USDC
+                                                            <i className="fab fa-ethereum"> </i> {ethers.utils.formatEther(item.totalPrice)} USDC
                                                         </p>
                                                     </div>
                                                     <div className="col-md-6">
