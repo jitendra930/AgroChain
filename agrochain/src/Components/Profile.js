@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import { Form } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
 
 import { ethers } from "ethers"
 import { create as ipfsHttpClient } from 'ipfs-http-client'
@@ -18,6 +19,11 @@ import { NftContext } from '../frontend/NftContext/NftProvider'
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
+const api = axios.create({
+	baseURL: `https://min-api.cryptocompare.com/`
+})
+
+
 const Profile = () => {
 	const { account, nft, balance, marketplace, isLoading } = useContext(NftContext);
 	const navigate = useNavigate();
@@ -28,6 +34,8 @@ const Profile = () => {
 	const [farmerId, setfarmerId] = useState('')
 	const [farmername, setfarmername] = useState('')
 	const [govtid, setgovtid] = useState('')
+	const [usd, setusd] = useState(0)
+	const [co2, setco2] = useState('')
 	const [location, setlocation] = useState('')
 	const [area, setarea] = useState('')
 	const [contact, setcontact] = useState('')
@@ -51,10 +59,20 @@ const Profile = () => {
 		}
 		setSelectedFile(event.target.files[0])
 	}
+
+	const ETH_to_USD = () => {
+		api.get('data/price?fsym=ETH&tsyms=USD').then(({ data }) => {
+			console.log(data["USD"]);
+			setusd(data["USD"])
+		})
+	}
+
 	const createNFT = async () => {
 		console.log("NFT");
 		console.log(nft_name);
 		const name = nft_name;
+		setDescription(co2 + " KG Carbon Emission Saved By " + description)
+		console.log(description)
 		if (!image || !price || !nft_name || !description) return
 		try {
 			const result = await client.add(JSON.stringify({ image, price, name, description }))
@@ -176,7 +194,8 @@ const Profile = () => {
 	}
 
 	useEffect(() => {
-		if(isLoading) {
+		if (isLoading) {
+			ETH_to_USD()
 			loadListedItems()
 		}
 	}, [isLoading]);
@@ -209,7 +228,7 @@ const Profile = () => {
 										</div></>)}
 								<div className="col-md-8 text-center">
 									<br />
-										<h2 className="mt-1 text-dark-grey">{balance.slice(0, 5)} USDC</h2>
+										<h2 className="mt-1 text-dark-grey">{balance.slice(0, 5)} ETH</h2>
 								</div>
 							</div>
 
@@ -328,7 +347,7 @@ const Profile = () => {
 																	<div className="row mt-3">
 																		<div className="col-md-6">
 																			<p className="text-success type-6 my-0">
-																				<i className="fa fa-dollar-sign"> </i> {ethers.utils.formatEther(item.totalPrice)}
+																				<i className="fab fa-ethereum"> </i> {ethers.utils.formatEther(item.totalPrice)}
 																			</p>
 																			{/*<p className="text-primary type-7 my-0">*/}
 																			{/*	Offer <i className="fa fa-dollar-sign"> </i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)}*/}
@@ -339,7 +358,7 @@ const Profile = () => {
 																			{/*	<button type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nft2">Buy Now</button>*/}
 																			{/*</div>*/}
 																			<p className="text-danger type-6 my-0">
-																				<i className="fa fa-dollar-sign"> </i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)}
+																				<i className="fab fa-ethereum"> </i> {ethers.utils.formatEther(item.totalPrice) * (100 / 101)}
 																			</p>
 																		</div>
 																	</div>
@@ -370,10 +389,10 @@ const Profile = () => {
 																	<div className="row mt-3">
 																		<div className="col-md-6">
 																			<p className="text-danger type-6 my-0">
-																				<i className="fa fa-dollar-sign"> </i>{ethers.utils.formatEther(item.totalPrice)} USDC
+																				<i className="fab fa-ethereum"> </i>{ethers.utils.formatEther(item.totalPrice)} USDC
 																			</p>
 																			<p className="text-success type-6 my-0">
-																				<i className="fa fa-dollar-sign"> </i>{ethers.utils.formatEther(item.price)} USDC Recived
+																				<i className="fab fa-ethereum"> </i>{ethers.utils.formatEther(item.price)} USDC Recived
 																			</p>
 																		</div>
 																		<div className="col-md-6">
@@ -410,7 +429,7 @@ const Profile = () => {
 																	<div className="row mt-3">
 																		<div className="col-md-6">
 																			<p className="text-success type-6 my-0">
-																				<i className="fa fa-dollar-sign"> </i>{ethers.utils.formatEther(item.totalPrice)} USDC
+																				<i className="fab fa-ethereum"> </i>{ethers.utils.formatEther(item.totalPrice)} USDC
 																			</p>
 																		</div>
 																		<div className="col-md-6">
@@ -445,21 +464,27 @@ const Profile = () => {
 										</div>
 										<br />
 										<div className="form-group">
-											<h6>Link to asset:<span className="text-danger">*</span></h6>
+											<h6>Add a Picture of your Farm:<span className="text-danger">*</span></h6>
 											<Form.Control className="form-control" placeholder="Enter Link" type="file" id="file" name="file" required accept="image/*" onChange={uploadToIPFS} />
 											<p className="text-muted type-7 mt-1 mb-0">Link your Farm Image to external link so that person can view.</p>
 										</div>
 										<br />
 										<div className="form-group">
-											<h6>Description: <span className="text-danger">*</span></h6>
+											<h6>Co2 Emission Saved (KG): <span className="text-danger">*</span></h6>
+												<Form.Control onChange={(e) => setco2(e.target.value)} className="form-control" required placeholder="Enter Co2 Emission Saved" />
+											<p className="text-muted type-7 mt-1 mb-0">Estimated Co2 Emission Saved by adopting sustainable farming practice</p>
+										</div>
+										<br />
+										<div className="form-group">
+											<h6>Sustainable Farming Practice Adopted: <span className="text-danger">*</span></h6>
 												<Form.Control onChange={(e) => setDescription(e.target.value)} className="form-control" required as="textarea" placeholder="Enter Description..." />
 												<p className="text-muted type-7 mt-1 mb-0">Describe how have you adopted sustainable farming practice to reduce carbon emissions.</p>
 										</div>
 										<br />
 										<div className="form-group">
-												<h6><i className="fa fa-dollar-sign"> </i> Price (USDC): <span className="text-danger">*</span></h6>
+												<h6><i className="fab fa-ethereum"> </i> Price (ETH) = { usd * price } USD <span className="text-danger">*</span></h6>
 												<Form.Control onChange={(e) => setPrice(e.target.value)} className="form-control" required type="number" placeholder="Enter Selling Price" />
-												<p className="text-muted type-7 mt-1 mb-0">Enter the Price in USDC for selling the Carbon credits.</p>
+												<p className="text-muted type-7 mt-1 mb-0">Enter the Price in ETH for selling the Carbon credits.</p>
 										</div>
 
                     <div className="row mt-4">
