@@ -21,6 +21,10 @@ export const Register = () => {
     const [contact, setcontact] = useState('')
     const [iotdeviceid, setiotdeviceid] = useState('')
 
+    navigator.geolocation.getCurrentPosition(function(position) {
+        latitude != position.coords.latitude && setLatitude(position.coords.latitude);
+        longitude != position.coords.longitude && setLongitude(position.coords.longitude);
+    });
 
     const mapOptions = {
         center: {
@@ -41,14 +45,26 @@ export const Register = () => {
                     .catch(e => {
                         console.log(e,'error in loading map')
                     });
-    },[])  
-    
+    },[latitude,longitude])
+
+    const options = Object.assign({
+        types: [],
+        componentRestrictions: { country: [] }
+
+    }, (latitude && longitude ?
+        {
+            PlaceGeometry: {
+                location: {
+                    "lat": latitude,
+                    "lng": longitude
+                }
+            }
+        }
+        : {}))
+
     const { ref: bootstrapRef } = usePlacesWidget({
         apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-        options: {
-            types: [],
-            componentRestrictions: { country: [] }
-        },
+        options:{...options},
         onPlaceSelected: (place) => {
             setLatitude(place.geometry.location.lat());
             setLongitude(place.geometry.location.lng());
