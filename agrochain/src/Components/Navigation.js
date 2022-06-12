@@ -16,8 +16,8 @@ const Navigation = ({ web3Handler }) => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-effects sticky-top">
-            <NavLink className="navbar-brand super-bold" to={`/front`}><img src={farmer} style={{ width: "28px" }} /> AGRO CHAIN </NavLink>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <NavLink className="navbar-brand super-bold" to={`/front`}><img src={farmer} style={{ width: "32px" }} /> AGRO CHAIN </NavLink>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i className="fa fa-bars fa-fw"></i>
             </button>
 
@@ -42,8 +42,8 @@ const Navigation = ({ web3Handler }) => {
                     <li className="nav-item nav-item-btn mb-2">
                         {account ? (<><button className="nav-btn btn btn-secondary btn-sm btn-block"><a href={`https://rinkeby.etherscan.io/address/${account}`} target="_blank"
                             rel="noopener noreferrer" > {account.slice(0, 5) + '...' + account.slice(38, 42)}</a></button>
-                            <button onClick={logout} className="nav-btn btn btn-danger btn-sm btn-block"><i className="fa fa-sign-out-alt fa-fw"></i> Disconnect Wallet </button></>) : (
-                            <button onClick={web3Handler} className="nav-btn btn btn-success btn-sm btn-block"><i className="fa fa-user-plus fa-fw"></i> Connect Wallet </button>)}
+                            <button onClick={logout} className="nav-btn btn btn-danger btn-sm btn-block ms-2"><i className="fa fa-sign-out-alt fa-fw"></i> Disconnect Wallet </button></>) : (
+                            <button onClick={web3Handler} className="nav-btn btn btn-success btn-sm btn-block ms-2"><i className="fa fa-user-plus fa-fw"></i> Connect Wallet </button>)}
                     </li>
                 </ul>
             </div>
