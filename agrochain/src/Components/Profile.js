@@ -71,7 +71,6 @@ const Profile = () => {
 		console.log("NFT");
 		console.log(nft_name);
 		const name = nft_name;
-		setDescription(co2 + " KG Carbon Emission Saved By " + description)
 		console.log(description)
 		if (!image || !price || !nft_name || !description) return
 		try {
@@ -470,14 +469,14 @@ const Profile = () => {
 										</div>
 										<br />
 										<div className="form-group">
-											<h6>Co2 Emission Saved (KG): <span className="text-danger">*</span></h6>
+											<h6>Carbon Emission Saved (KG): <span className="text-danger">*</span></h6>
 												<Form.Control onChange={(e) => setco2(e.target.value)} className="form-control" required placeholder="Enter Co2 Emission Saved" />
 											<p className="text-muted type-7 mt-1 mb-0">Estimated Co2 Emission Saved by adopting sustainable farming practice</p>
 										</div>
 										<br />
 										<div className="form-group">
 											<h6>Sustainable Farming Practice Adopted: <span className="text-danger">*</span></h6>
-												<Form.Control onChange={(e) => setDescription(e.target.value)} className="form-control" required as="textarea" placeholder="Enter Description..." />
+												<Form.Control onChange={(e) => setDescription(co2 + " KG Carbon Emission Saved By "+ e.target.value)} className="form-control" required as="textarea" placeholder="Enter Description..." />
 												<p className="text-muted type-7 mt-1 mb-0">Describe how have you adopted sustainable farming practice to reduce carbon emissions.</p>
 										</div>
 										<br />
