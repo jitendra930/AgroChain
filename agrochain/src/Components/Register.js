@@ -31,7 +31,7 @@ export const Register = () => {
           lat: longitude,
           lng: longitude
         },
-        zoom: 4   
+        zoom: 0 
       };
     
     useEffect(()=>{
@@ -93,7 +93,7 @@ export const Register = () => {
                 lng: longitude
             },
             map,
-            title: "Hello World!",
+            title: "Location!",
             draggable:true
           });
           marker.addListener(marker, 'dragend',(event)=>{
@@ -141,12 +141,12 @@ export const Register = () => {
                                         </div>
                                         <br />
                                         <div className="form-group">
-                                            <h6> Farm Location :<span className="float-right"></span></h6>
+                                            <h6> Farm Location : ( Latitude : {latitude}, Longitude: {longitude} )<span className="float-right"></span></h6>
                                             <div id='map' className='googlemap' />
                                         </div>
                                         <br />
                                         <div className="form-group">
-                                            <h6>Total Farm Land Area :</h6>
+                                            <h6>Total Farm Land Area : </h6>
                                             <Form.Control onChange={(e) => setarea(e.target.value)} className="form-control" id="validationDefault03" placeholder="Enter Total Farm Land Area" required />
                                         </div>
                                         <div className="form-group">
