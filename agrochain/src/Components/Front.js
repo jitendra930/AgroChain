@@ -19,18 +19,19 @@ export const Front = () => {
                         <div className="col-md-12">
                             <div className="container">
                                 <div className="row">
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                         <div className="video-load">
-                                            <video id="home-video" loop muted autoPlay controls=''>
+                                            
+
+                                                    <video className="img-fluid" id="home-video" loop muted autoPlay controls=''>
                                                 <source src={carbon} type="video/mp4" />
-                                            </video>
+                                                    </video>
+                                            
                                             </div>
                                     </div>
-                                    <div className="col-md-4">
-                                        
-                                    </div>
+                                    
 
-                                    <div className="col-md-4">
+                                    <div className="col-md-6">
                                         <div className="container">
                                             <div className="row pt-4 pb-3">
                                                 <div className="col-md-12 text-center">

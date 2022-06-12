@@ -42,8 +42,8 @@ const Navigation = ({ web3Handler }) => {
                     <li className="nav-item nav-item-btn mb-2">
                         {account ? (<><button className="nav-btn btn btn-secondary btn-sm btn-block"><a href={`https://rinkeby.etherscan.io/address/${account}`} target="_blank"
                             rel="noopener noreferrer" > {account.slice(0, 5) + '...' + account.slice(38, 42)}</a></button>
-                            <button onClick={logout} className="nav-btn btn btn-danger btn-sm btn-block"><i className="fa fa-sign-out-alt fa-fw"></i> Disconnect Wallet </button></>) : (
-                            <button onClick={web3Handler} className="nav-btn btn btn-success btn-sm btn-block"><i className="fa fa-user-plus fa-fw"></i> Connect Wallet </button>)}
+                            <button onClick={logout} className="nav-btn btn btn-danger btn-sm btn-block ms-2"><i className="fa fa-sign-out-alt fa-fw"></i> Disconnect Wallet </button></>) : (
+                            <button onClick={web3Handler} className="nav-btn btn btn-success btn-sm btn-block ms-2"><i className="fa fa-user-plus fa-fw"></i> Connect Wallet </button>)}
                     </li>
                 </ul>
             </div>
