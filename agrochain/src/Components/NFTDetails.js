@@ -511,7 +511,7 @@ export const NFTDetails = () => {
                                                 <p className="text-info type-7 mt-4">
                                                     This certificate is issued by Agrochain.
                                                     <br />
-                                                    Verify at <span className="bold">www.agrochain.com/verify-cert/</span>
+                                                    Verify at <span className="bold">www.agrochain.com/verify-cert/{nfts.name}</span>
                                                 </p>
 
 
