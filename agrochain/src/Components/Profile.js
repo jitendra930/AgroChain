@@ -420,7 +420,7 @@ const Profile = () => {
 																		<div className="col-md-12">
 																			<p className="text-muted type-6 my-0">{item.name}</p>
 																			<p className="text-info type-7 my-0">
-																				{item.description}
+																				{/*{item.description}*/}
 																				<a onClick={() => navigate('/certificate', { state: { nfts: item } })}>{item.description}</a>
 																			</p>
 																			{/*<a onClick={() => navigate('/nft-details', { state: { nfts: item } })}>{item.description}</a>*/}
