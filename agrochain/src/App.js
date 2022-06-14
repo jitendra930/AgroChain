@@ -16,7 +16,7 @@ import { NFTDetails } from "./Components/NFTDetails";
 import Profile from "./Components/Profile";
 import { Register } from "./Components/Register";
 import { Front } from "./Components/Front";
-import Certificate from "./Components/Certificate/certificate";
+import Certificate from "./Components/Certificate/Certificate";
 import { NftContext } from "./frontend/NftContext/NftProvider";
 
 import './App.css';
