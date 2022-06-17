@@ -80,11 +80,15 @@ npm run start
 
 <br />
 <p align="center">
-  <img src="DATA/1.png" width="400"/>
-  <img src="DATA/2.png" width="400"/>
-  <img src="DATA/3.png" width="400"/>
-  <img src="DATA/4.png" width="400"/>
-  <img src="DATA/5.png" width="400"/>	
+  <img src="DATA/screenshots/0.png" width="400"/>
+  <img src="DATA/screenshots/1.png" width="400"/>
+  <img src="DATA/screenshots/2.png" width="400"/>
+  <img src="DATA/screenshots/3.png" width="400"/>
+  <img src="DATA/screenshots/4.png" width="400"/>
+  <img src="DATA/screenshots/5.png" width="400"/>
+  <img src="DATA/screenshots/6.png" width="400"/>
+  <img src="DATA/screenshots/7.png" width="400"/>
+  <img src="DATA/screenshots/8.png" width="400"/>
 </p>
 <br />
 
