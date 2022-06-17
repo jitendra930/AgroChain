@@ -497,7 +497,7 @@ export const NFTDetails = () => {
                                                 <h6 className="text-blue bold mt-1">{nfts.seller}</h6>
 
                                                 <p className="type-6 mt-4">
-                                                    This is to Certify that the owner of the NFT has contributed momeny to of the famers to
+                                                    This is to Certify that the owner of the NFT has contributed money to of the famers to
                                                     adopt sustainable farming methods.
                                                 </p>
 
