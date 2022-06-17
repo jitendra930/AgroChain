@@ -10,10 +10,12 @@ It provides a way for farmers to sell carbon credits in the form of NFT to indus
 
 
 ## Features
-- Mint NFT.
-- Sell NFT in Marketplace.
-- Buy NFT from Marketplace.
+- Farmer Registration.
+- Mint NFT for Cabon Credits using Verification from IoT Data to prove sustainable farming practice is adopted.
+- IoT Device data is Directly streamed to NFT for verification using Device ID and Azure IoT Hub.
 - User Dashboard to view all the NFT Minted, sold, and Purchased.
+- Customer/ Industries can buy NFT carbon credits to meet their ESG Goals, and remain Carbon neutral companies.
+- Money in form of Cryptocurrency is directly transferred to farmers without commission and middlemen, so they can invest the money in adopting more sustainable farming methods.
 
 
 ### 1. Clone/Download the Repository
