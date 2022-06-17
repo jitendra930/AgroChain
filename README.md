@@ -1,5 +1,7 @@
 <h1 align="center">AgroChain</h1>
 
+<h3> Problem Statement</h3>
+
 The United States Environmental Protection Agency (EPA) estimates that 10% of CO2 is emitted by the Agri sector. On one hand, Agri companies have sustainable products and services to offer to the growers. On the other hand, without proper economic incentives, farmers are reluctant to adopt sustainable practices. Centralized platform business models have so far not succeeded in creating economic value for the farmers, even while the demand for a voluntary carbon market is increasing. What technologies and business models can enable financially incentivize farmers for implementing climate-smart practices? What are the ways the buyer has proof of authenticity? In what ways the participants including investors can derive economic value?
 	
 <strong>ArgoChain </strong>is an NFT application Based on KardiaChain Blockchain written in Solidity Smart Contract, and using the power of React Frontend, and ether.js to interact with the Smart Contract present in the KardiaChain Blockchain, a user can Upload & Mint (In IPFs), buy and Sell NFT, in the ArgoChain NFT marketplace.
