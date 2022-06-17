@@ -10,7 +10,6 @@ import { create as ipfsHttpClient } from 'ipfs-http-client'
 
 import farmer from './assets/farmer.jpg'
 import business from './assets/business.png'
-import farm_nft from './assets/farm_nft.jpg'
 
 import { Loading } from "./Loading";
 import { Footer } from "./Footer";

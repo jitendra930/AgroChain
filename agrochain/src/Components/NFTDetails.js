@@ -97,7 +97,6 @@ export const NFTDetails = () => {
     const [iotdeviceid, setiotdeviceid] = useState('')
     const [loading, setLoading] = useState(true)
     const [IOT, setIOT] = useState(data)
-    const [Pollution, setPollution] = useState(data)
     const [aqi, setaqi] = useState(data)
     const [avgco2, setavgco2] = useState(data)
     const [avgno, setavgno] = useState(data)
