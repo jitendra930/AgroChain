@@ -207,7 +207,7 @@ const Profile = () => {
 			<div className="row">
 				<div className="col-md-12">
 					<h2 className="mb-0">{farmername ? 'Farmer': 'Customer'} Wallet</h2>
-					<p className="text-muted type-6 mt-0"><i className="fa fa-circle fa-fw fa-sm text-success"></i> Ethereum Main Network</p>
+					<p className="text-muted type-6 mt-0"><i className="fa fa-circle fa-fw fa-sm text-success"></i> Ethereum Rinkeby Network</p>
 				</div>
 			</div>
 			<div className="row">
