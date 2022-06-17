@@ -46,7 +46,7 @@ const Profile = () => {
 		if (typeof file !== 'undefined') {
 			try {
 				const result = await client.add(file)
-				console.log(result)
+				/*console.log(result)*/
 				setImage(`https://ipfs.infura.io/ipfs/${result.path}`)
 			} catch (error) {
 				console.log("ipfs image upload error: ", error)
@@ -61,16 +61,16 @@ const Profile = () => {
 
 	const ETH_to_USD = () => {
 		api.get('data/price?fsym=ETH&tsyms=USD').then(({ data }) => {
-			console.log(data["USD"]);
+			/*console.log(data["USD"]);*/
 			setusd(data["USD"])
 		})
 	}
 
 	const createNFT = async () => {
-		console.log("NFT");
-		console.log(nft_name);
+		/*console.log("NFT");*/
+		/*console.log(nft_name);*/
 		const name = nft_name;
-		console.log(description)
+		/*console.log(description)*/
 		if (!image || !price || !nft_name || !description) return
 		try {
 			const result = await client.add(JSON.stringify({ image, price, name, description }))
@@ -106,7 +106,7 @@ const Profile = () => {
 		let soldItems = []
 		let purchasedItems = []
 		for (let indx = 1; indx <= itemCount; indx++) {
-			console.log(marketplace.items(indx))
+			/*console.log(marketplace.items(indx))*/
 			const i = await marketplace.items(indx)
 			if (i.seller.toLowerCase() === account) {
 				// get uri url from nft contract
