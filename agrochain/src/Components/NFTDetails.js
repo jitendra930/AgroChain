@@ -27,7 +27,7 @@ import { NftContext } from '../frontend/NftContext/NftProvider';
 
 
 const api = axios.create({
-    baseURL: `https://localhost:7081/api/Pollution/`
+    baseURL: process.env.REACT_APP_API_URL
 })
 
 
