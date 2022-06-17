@@ -68,7 +68,7 @@ export const Register = () => {
         onPlaceSelected: (place) => {
             setLatitude(place.geometry.location.lat());
             setLongitude(place.geometry.location.lng());
-            console.log(place);
+            /*console.log(place);*/
         },
     });
 
@@ -78,7 +78,7 @@ export const Register = () => {
 
         const lat_log = latitude.toString() + ' ' + longitude.toString();
 
-        console.log(lat_log);
+        /*console.log(lat_log);*/
 
         await (await marketplace.create_Farmer(account, name, govtid, lat_log, area, contact, iotdeviceid)).wait();
         setAccountType(true);

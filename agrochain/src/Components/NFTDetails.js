@@ -123,12 +123,12 @@ export const NFTDetails = () => {
 
     const LoadPollutionIOTData = () => {
         api.get('GetIotData?limit=100').then(({ data }) => {
-        console.log(data)
-        console.log(typeof data)
+        //console.log(data)
+        //console.log(typeof data)
         const labelsx = data.map(val => val.localDateTime.replace('T', ' ').replace('Z','').slice(0, -4))
         const datax = data.map(val => val.co2InPpm)
-        console.log(labelsx)
-        console.log(datax)
+        //console.log(labelsx)
+        //console.log(datax)
         const dataxx = {
             labels: labelsx,
             datasets: [
@@ -141,7 +141,7 @@ export const NFTDetails = () => {
             ],
         }
         setIOT(dataxx)
-        console.log(IOT)
+        /*console.log(IOT)*/
     });
 
     
@@ -157,11 +157,11 @@ export const NFTDetails = () => {
     const LoadPollutionData = () => {
         const datex = new Date().getDate() + '%2F' + new Date().toLocaleString("en-US", { month: "long" }) + '%2F' + new Date().getFullYear()
         /*console.log(datex)*/
-        console.log(location);
+        /*console.log(location);*/
         const locationarr = location.split(" ");
         const lat = locationarr[0];
         const log = locationarr[1];
-        console.log(lat, log);
+        /*console.log(lat, log);*/
         setmap('https://www.google.com/maps/embed/v1/view?key='+process.env.REACT_APP_GOOGLE_MAPS_API_KEY+'&center=' + lat + ',' + log+'&zoom=20&maptype=satellite');
         api.get('GetPollutionHistory?lat='+lat+'&lon='+log+'&currentDate='+datex).then(({ data }) => {
             const labelsx = data.map(val => val.DateTime.split('T')[0])
