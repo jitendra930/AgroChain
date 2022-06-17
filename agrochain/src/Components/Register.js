@@ -121,36 +121,36 @@ export const Register = () => {
                                     <div className="card-body form-contents">
                                         <h3 className="no-td-space">Register the Account</h3>
                                         <p className="type-7-2 text-muted">
-                                            If You already have a account then <a href="https://metamask.io/" target="_blank">Connect Wallet.</a>
+                                            If You already have a account then install and <a href="https://metamask.io/" target="_blank">Connect Metamask Wallet.</a>
                                         </p>
                                         <div className="form-group">
-                                            <h6>Public Crypto Id : <a href="https://www.youtube.com/watch?v=LmWbDDaU5fE" target="_blank">(Create a Crypto Account using MetaMask)</a></h6>
+                                            <h6>Public Crypto Id  <a href="https://www.youtube.com/watch?v=LmWbDDaU5fE" target="_blank">(Create a Crypto Account using MetaMask) <span className="text-danger">*</span></a></h6>
                                             <Form.Control onChange={(e) => setfarmerId(e.target.value)} type="text" className="form-control" value={account} required disabled />
                                         </div>
                                         <div className="form-group">
-                                            <h6>User Name :</h6>
+                                            <h6>User Name  <span className="text-danger">*</span></h6>
                                             <Form.Control onChange={(e) => setname(e.target.value)} type="text" className="form-control" placeholder="Enter User Name" required />
                                         </div>
                                         <div className="form-group">
-                                            <h6> AADHAR NUMBER/ PAN CARD :</h6>
+                                            <h6> AADHAR NUMBER/ PAN CARD  <span className="text-danger">*</span></h6>
                                             <Form.Control onChange={(e) => setgovtid(e.target.value)} className="form-control" placeholder="ENTER AADHAR NUMBER/ PAN CARD" required />
                                         </div>
                                         <div className="form-group">
-                                            <h6> Farm Location :<span className="float-right"></span></h6>
+                                            <h6> Farm Location <span className="text-success">*</span><span className="float-right"></span></h6>
                                             <Form.Control className="form-control" placeholder="Enter the Farm Location" ref={bootstrapRef} />
                                         </div>
                                         <br />
                                         <div className="form-group">
-                                            <h6> Farm Location : ( Latitude : {latitude}, Longitude: {longitude} )<span className="float-right"></span></h6>
+                                            <h6> Farm Location : ( Latitude : {latitude}, Longitude: {longitude} )<span className="float-right"></span><span className="text-danger">*</span></h6>
                                             <div id='map' className='googlemap' />
                                         </div>
                                         <br />
                                         <div className="form-group">
-                                            <h6>Total Farm Land Area : </h6>
+                                            <h6>Total Farm Land Area (In Hectare)<span className="text-danger">*</span> </h6>
                                             <Form.Control onChange={(e) => setarea(e.target.value)} className="form-control" id="validationDefault03" placeholder="Enter Total Farm Land Area" required />
                                         </div>
                                         <div className="form-group">
-                                            <h6>Contact :</h6>
+                                            <h6>Contact <span className="text-danger">*</span></h6>
                                             <Form.Control onChange={(e) => setcontact(e.target.value)} className="form-control" id="validationDefault03" placeholder="Enter Contact Details" required />
                                         </div>
                                         {/*<div className="form-group">*/}
@@ -158,7 +158,7 @@ export const Register = () => {
                                         {/*    <input type="text" className="form-control" id="validationDefault04" placeholder="Enter State" required />*/}
                                         {/*</div>*/}
                                         <div className="form-group">
-                                            <h6>IOT DEVICE ID :</h6>
+                                            <h6>IOT DEVICE ID <span className="text-danger">*</span></h6>
                                             <Form.Control onChange={(e) => setiotdeviceid(e.target.value)} type="text" className="form-control" id="validationDefault05" placeholder="Enter IOT DEVICE ID" required />
                                         </div>
                                         <br />
