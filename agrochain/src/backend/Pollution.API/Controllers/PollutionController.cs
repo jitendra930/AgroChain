@@ -95,7 +95,7 @@ namespace Pollution.API.Controllers
         [HttpGet(Name = "GetIotData/{limit}")]
         public async Task<IEnumerable<SensorDatum>> GetIotData(int limit = 1)
         {
-            return (await _dbContext.SensorData.OrderBy(x => x.EventEnqueuedUtcTime).ToListAsync()).Take(limit);
+            return (await _dbContext.SensorData.OrderByDescending(x => x.EventEnqueuedUtcTime).ToListAsync()).Take(limit);
         }
 
         private long ConvertDateTimeToUnix(string dateTime)
