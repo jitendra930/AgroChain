@@ -21,18 +21,22 @@ export const Register = () => {
     const [contact, setcontact] = useState('')
     const [iotdeviceid, setiotdeviceid] = useState('')
 
-    navigator.geolocation.getCurrentPosition(function(position) {
-        latitude != position.coords.latitude && setLatitude(position.coords.latitude);
-        longitude != position.coords.longitude && setLongitude(position.coords.longitude);
-    });
-
     const mapOptions = {
         center: {
           lat: longitude,
           lng: longitude
         },
-        zoom: 0 
+        zoom: 11 
       };
+
+    useEffect(() => {
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                setLatitude(position.coords.latitude);
+                setLongitude(position.coords.longitude);
+            });
+        }
+    },[]);
     
     useEffect(()=>{
         const loader = new Loader({
@@ -85,6 +89,7 @@ export const Register = () => {
         navigate('/profile');
     }
 
+
     const loadMap = (google) =>{
         let map = new google.maps.Map(document.getElementById("map"), mapOptions);
         let marker = new google.maps.Marker({
@@ -96,11 +101,17 @@ export const Register = () => {
             title: "Location!",
             draggable:true
           });
-          marker.addListener(marker, 'dragend',(event)=>{
-                setLatitude(event.latLng.lat())
-                setLongitude(event.latLng.lng())
-                map.setCenter(event.latLng.lat(),event.latLng.lng())
-          })
+          marker.setMap(map);
+          map.setCenter(marker.getPosition());
+          google.maps.event.addListener(marker, 'click', ()=> {
+            map.setCenter(marker.getPosition());
+          });
+
+          google.maps.event.addListener(marker, 'dragend', ()=>{
+            setLatitude(marker.position.lat());
+            setLongitude(marker.position.lng());
+            map.setCenter(marker.getPosition());
+           });
     } 
 
     return (
