@@ -247,7 +247,7 @@ const Profile = () => {
 					<p className="text-muted" style={{ marginLeft: "24px" }}>{location}</p>
 					<h6 className="mb-0">
 						<i className="fa fa-tree fa-fw"></i>&nbsp;
-						Total Farm Land Area
+						Total Farm Land Area (In Hectare)
 					</h6>
 					<p className="text-muted" style={{ marginLeft: "24px" }}>{area}</p>
                     <h6 className="mb-0">
