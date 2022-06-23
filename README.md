@@ -83,6 +83,16 @@ npm run start
   <img src="DATA/0.png" width="450" height="650" />
 </p>
 
+### 10. IOT Screenshots
+
+<br />
+<p align="center">
+  <img src="DATA/screenshots/9.png" width="400"/>
+  <img src="DATA/screenshots/10.png" width="400"/>
+</p>
+<br />
+
+
 ### 10. Application Screenshots
 
 <br />
