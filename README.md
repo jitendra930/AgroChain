@@ -17,6 +17,10 @@ It provides a way for farmers to sell carbon credits in the form of NFT to indus
 - Customer/ Industries can buy NFT carbon credits to meet their ESG Goals, and remain Carbon neutral companies.
 - Money in form of Cryptocurrency is directly transferred to farmers without commission and middlemen, so they can invest the money in adopting more sustainable farming methods.
 
+### Live Application Demo
+
+For video demostration refer to the YouTube link <a href="https://www.youtube.com/watch?v=aemzIIQrIPU">here.</a> 
+
 
 ### 1. Clone/Download the Repository
 
