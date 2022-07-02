@@ -8,13 +8,14 @@ import farmer from './farmer.png'
 import udomain from './udomain.png'
 
 const Navigation = ({ web3Handler }) => {
-    const { account, setAccount, accountType, setAccountType } = useContext(NftContext);
-    const { active, accounts, activate, deactivate } = useWeb3React()
+    const { accounts, setAccount, accountType, setAccountType } = useContext(NftContext);
+    const { active, account, activate, deactivate } = useWeb3React()
     const navigate = useNavigate();
 
     const logout = () => {
         setAccount('')
         setAccountType(false);
+        deactivate()
         localStorage.removeItem('account');
         navigate('/');
     }
@@ -39,22 +40,22 @@ const Navigation = ({ web3Handler }) => {
         }
     }
 
-    async function handleDisconnect() {
-        try {
-            deactivate()
-        } catch (error) {
-            console.error(error)
-        }
-    }
+    //async function handleDisconnect() {
+    //    try {
+    //        deactivate()
+    //    } catch (error) {
+    //        console.error(error)
+    //    }
+    //}
 
-    if (active) {
-        return (
-            <>
-                <div>Connected to {accounts}</div>
-                <button onClick={handleDisconnect}>Disconnect</button>
-            </>
-        )
-    }
+    //if (active) {
+    //    return (
+    //        <>
+    //            <div>Connected to {account}</div>
+    //            <button onClick={handleDisconnect}>Disconnect</button>
+    //        </>
+    //    )
+    //}
 
     return (
         <nav className="navbar navbar-expand-lg navbar-effects sticky-top">
