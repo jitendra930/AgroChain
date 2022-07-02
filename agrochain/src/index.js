@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Web3Provider } from '@ethersproject/providers'
+import { Web3ReactProvider } from '@web3-react/core'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -7,12 +9,20 @@ import { BrowserRouter } from 'react-router-dom';
 import NftProvider from './frontend/NftContext/NftProvider';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
+function getLibrary(provider: any): Web3Provider {
+    const library = new Web3Provider(provider)
+    library.pollingInterval = 12000
+    return library
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <NftProvider>
-      <BrowserRouter>
-        <App />
+        <BrowserRouter>
+            <Web3ReactProvider getLibrary={getLibrary}>
+                <App />
+            </Web3ReactProvider>
       </BrowserRouter>
     </NftProvider>
   </React.StrictMode>
