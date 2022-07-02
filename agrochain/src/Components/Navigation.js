@@ -86,10 +86,10 @@ const Navigation = ({ web3Handler }) => {
                             rel="noopener noreferrer" > {account.slice(0, 5) + '...' + account.slice(38, 42)}</a></button>
                             <button onClick={logout} className="nav-btn btn btn-danger btn-sm btn-block ms-2"><i className="fa fa-sign-out-alt fa-fw"></i> Disconnect Wallet </button></>) : (
                                 <><button onClick={web3Handler} className="nav-btn btn btn-success btn-sm btn-block ms-2"><i className="fa fa-user-plus fa-fw"></i> Connect Wallet </button><>{Object.keys(connectors).map(v => (
-                                    <><img src={udomain} className="ms-2" /><button className="nav-btn btn btn-primary btn-sm btn-block ms-2" key={v} onClick={createConnectHandler(v)}>
-                                        Connect to {v}
+                                    <><button className="nav-btn btn btn-primary btn-sm btn-block ms-2" key={v} onClick={createConnectHandler(v)}>
+                                        Login with Unstoppable
                                     </button></>
-                                ))}</></>
+                                ))}<img src={udomain} className="ms-2 mt-2" style={{ width: "38px" }} /></></>
                                                          )}
                     </li>
                 </ul>

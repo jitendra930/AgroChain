@@ -22,8 +22,8 @@ export const uauth = new UAuthConnector({
 })
 
 const connectors: Record<string, AbstractConnector> = {
-    injected,
-    walletconnect,
+    //injected,
+    //walletconnect,
     uauth,
 }
 
