@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom'
 import jsPDF from "jspdf";
 import { ethers } from "ethers"
 
-import "./certificate.css";
+import "./certificate.scss";
 
 export const Certificate = () => {
 
