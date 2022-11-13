@@ -16,6 +16,7 @@ import { NFTDetails } from "./Components/NFTDetails";
 import Profile from "./Components/Profile";
 import { Register } from "./Components/Register";
 import { Front } from "./Components/Front";
+import { Payment } from "./Components/Payment/Payment";
 import Certificate from "./Components/Certificate/Certificate";
 import { NftContext } from "./frontend/NftContext/NftProvider";
 
@@ -105,6 +106,7 @@ function App() {
                 <Route path="nft" element={<NFT />} />
                 <Route path="nft-details" element={<NFTDetails />} />
                 <Route path="certificate" element={<Certificate />} />
+                <Route path="payment" element={<Payment />} />
                 <Route path="*" element={<Front />} />
             </Routes>
         </>
