@@ -191,6 +191,14 @@ export default function CForm({
                     </div>
                 </div>
             </div>
+            <br/>
+                {/*<div>*/}
+                {/*    <button className="btn btn-success">*/}
+                {/*        <i className="fa fa-user-plus fa-fw"></i>*/}
+                {/*        Create Account*/}
+                {/*    </button>*/}
+                {/*</div>*/}
         </div>
+
     );
 }
