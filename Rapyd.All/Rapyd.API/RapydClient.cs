@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Rapyd.API.Dto;
+using Rapyd.API.Dto.Response;
 using RestSharp;
 
 namespace Rapyd.API
@@ -26,27 +28,48 @@ namespace Rapyd.API
             _client = new RestClient(_baseUrl);
         }
 
-        public async Task<T> MakeRequest<T>(Method method, string urlPath, object body = null)
+        #region Card related
+        public async Task<CardIssueResponse> IssueCard(CardIssue cardDetails)
         {
-            try
-            {
-                var request = PrepareRequest(method, urlPath, body);
-
-                var response = await _client.ExecuteAsync<T>(request);
-
-                if (response.ResponseStatus != ResponseStatus.Completed)
-                {
-                    throw new Exception(response.Data != null ? JsonSerializer.Serialize(response.Data) : response.Content);
-                }
-                return response.Data;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error during API request: {ex}");
-                throw;
-            }
+            return await MakeRequest<CardIssueResponse>(Method.Post, "/v1/issuing/cards", cardDetails);
         }
 
+        public async Task<CardIssueResponse> ActivateIssuedCard(string cardId)
+        {
+            return await MakeRequest<CardIssueResponse>(Method.Post, "/v1/issuing/cards/activate", cardId);
+        }
+
+        public async Task<ListOfIssuedCards> ListOfIssueCard(string walletId, int pagenumber = 0, int pageSize = 0)
+        {
+            return await MakeRequest<ListOfIssuedCards>(Method.Post, $"/v1/issuing/cards?{walletId}&{pagenumber}&{pageSize}");
+        }
+
+        public async Task<CardIssueResponse> GetIssuedCardById(string cardId)
+        {
+            return await MakeRequest<CardIssueResponse>(Method.Get, $"/v1/issuing/cards?{cardId}");
+        }
+        #endregion
+
+        #region Wallet
+        public async Task<bool> EnableWallet(string ewallet = null, string phone_number = null)
+        {
+            var apiResponse = await MakeRequest<BaseApiResponse>(Method.Post, $"/v1/user/enable", ewallet ?? phone_number);
+            return apiResponse.Status.OperationStatus == "SUCCESS";
+        }
+
+        public async Task<ListOfWallet> GetListOfWallet(string type, Guid referenceId, int pagenumber = 0, int pageSize = 0)
+        {
+            return await MakeRequest<ListOfWallet>(Method.Get, $"/v1/user/wallets?{type}&{referenceId}&{pagenumber}&{pageSize}");
+        }
+
+        public async Task<CreateWalletResponse> CreateNewWallet(CreateWallet walletDetails)
+        {
+            var apiResponse = await MakeRequest<CreateWalletResponse>(Method.Post, "/v1/user", walletDetails);
+            return apiResponse;
+        }
+        #endregion
+
+        #region customer related
         public async Task<List<Customer>> GetCustomers()
         {
             var apiResponse = await MakeRequest<Response<List<Customer>>>(Method.Get, "/v1/customers");
@@ -60,7 +83,9 @@ namespace Rapyd.API
             var result = apiResponse;
             return result?.Data;
         }
+        #endregion
 
+        #region payment related
         public async Task<Checkout> CreatePaymentCheckout(CreateCheckoutBody body)
         {
             var apiResponse = await MakeRequest<Response<Checkout>>(Method.Post, "/v1/checkout", body);
@@ -102,8 +127,30 @@ namespace Rapyd.API
             var result = apiResponse.Data;
             return result;
         }
+        #endregion
 
         #region private methods
+        private async Task<T> MakeRequest<T>(Method method, string urlPath, object body = null)
+        {
+            try
+            {
+                var request = PrepareRequest(method, urlPath, body);
+
+                var response = await _client.ExecuteAsync<T>(request);
+
+                if (response.ResponseStatus != ResponseStatus.Completed)
+                {
+                    throw new Exception(response.Data != null ? JsonSerializer.Serialize(response.Data) : response.Content);
+                }
+                return response.Data;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error during API request: {ex}");
+                throw;
+            }
+        }
+
         private string GenerateSign(string method, string urlPath, string salt, long timestamp, string body)
         {
             try
@@ -181,7 +228,7 @@ namespace Rapyd.API
                 Console.WriteLine($"Error generating request options: {ex}");
                 throw;
             }
-        } 
+        }
         #endregion
     }
 }
