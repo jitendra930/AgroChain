@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Rapyd.API.Dto;
+using Rapyd.API.Dto.Response;
+using RestSharp;
+using System.Security.Cryptography.Xml;
 
 namespace Rapyd.API.Controllers
 {
@@ -17,6 +20,60 @@ namespace Rapyd.API.Controllers
             _client = rapydClient;
         }
 
+        #region Card API
+        [HttpPost("card/issue")]
+        public async Task<ActionResult<CardIssueResponse>> IssueCard([FromBody] CardIssue cardDetails)
+        {
+            var apiResponse = await _client.IssueCard(cardDetails);
+            return Ok(apiResponse);
+        }
+
+        [HttpPost("card/activate/{cardId}")]
+        public async Task<ActionResult<CardIssueResponse>> ActivateIssuedCard([FromRoute] string cardId)
+        {
+            var apiResponse = await _client.ActivateIssuedCard(cardId);
+            return Ok(apiResponse);
+        }
+
+        [HttpGet("card/{walletId}/all")]
+        public async Task<ActionResult<ListOfIssuedCards>> ListOfIssueCard([FromRoute] string walletId, [FromQuery] int pagenumber = 0, [FromQuery] int pageSize = 0)
+        {
+            var apiResponse = await _client.ListOfIssueCard(walletId, pagenumber, pageSize);
+            return Ok(apiResponse);
+        }
+
+        [HttpGet("card/{cardId}")]
+        public async Task<ActionResult<CardIssueResponse>> GetIssuedCardById([FromRoute] string cardId)
+        {
+            var apiResponse = await _client.GetIssuedCardById(cardId);
+            return Ok(apiResponse);
+        }
+        #endregion
+
+        //#region Wallet API
+        //[HttpPost("wallet/enable/{ewallet}")]
+        //public async Task<ActionResult<bool>> EnableWallet([FromRoute] string ewallet = null)
+        //{
+        //    var apiResponse = await _client.EnableWallet(ewallet);
+        //    return Ok(apiResponse);
+        //}
+
+        //[HttpGet("wallet/all")]
+        //public async Task<ActionResult<ListOfWallet>> GetListOfWallet(string type, Guid referenceId, int pagenumber = 0, int pageSize = 0)
+        //{
+        //    var apiResponse = await _client.GetListOfWallet(type, referenceId, pagenumber, pageSize);
+        //    return Ok(apiResponse); ;
+        //}
+
+        //[HttpPost("wallet/new")]
+        //public async Task<ActionResult<CreateWalletResponse?>> CreateNewWallet([FromBody] CreateWallet walletDetails)
+        //{
+        //    var apiResponse = await _client.CreateNewWallet(walletDetails);
+        //    return Ok(apiResponse); ;
+        //}
+        //#endregion
+
+        #region customer APIs
         [HttpGet("customers")]
         public async Task<ActionResult<IList<Customer>>> GetCustomers()
         {
@@ -30,7 +87,9 @@ namespace Rapyd.API.Controllers
             var customer = await _client.CreateCustomer(body);
             return Ok(customer);
         }
+        #endregion
 
+        #region payment APIs
         [HttpGet("customers/{customerId}/paymentMethods")]
         public async Task<ActionResult<List<CustomerPaymentMethod>>> GetCustomerPaymentMethods([FromRoute] string customerId)
         {
@@ -72,5 +131,6 @@ namespace Rapyd.API.Controllers
             var payment = await _client.CancelPayment(paymentId);
             return Ok(payment);
         }
+        #endregion
     }
 }
