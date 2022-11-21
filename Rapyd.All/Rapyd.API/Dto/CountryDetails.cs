@@ -9,15 +9,6 @@ namespace Rapyd.Sandbox.Dto
 {
     public class CountryDetails
     {
-        [JsonPropertyName("status")]
-        public MetaData MetaData { get; set; }
-
-        [JsonPropertyName("data")]
-        public List<Datum> Data { get; set; }
-    }
-
-    public class Datum
-    {
         [JsonPropertyName("id")]
         public int Id { get; set; }
 
