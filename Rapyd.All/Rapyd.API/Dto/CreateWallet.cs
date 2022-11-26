@@ -98,7 +98,7 @@ namespace Agrochain.API.Dto
         public string last_name { get; set; }
 
         [JsonPropertyName("ewallet_reference_id")]
-        public Guid ewallet_reference_id { get; set; }
+        public string ewallet_reference_id { get; set; }
 
         [JsonPropertyName("metadata")]
         public Metadata metadata { get; set; }

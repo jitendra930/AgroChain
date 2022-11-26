@@ -110,7 +110,7 @@ namespace Agrochain.API.Dto.Response
         public string nationality { get; set; }
 
         [JsonPropertyName("address")]
-        public Address address { get; set; }
+        public AddressForWallet address { get; set; }
 
         [JsonPropertyName("ewallet")]
         public string ewallet { get; set; }

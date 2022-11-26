@@ -4,6 +4,8 @@ using Agrochain.API.Dto;
 using Agrochain.API.Dto.Response;
 using RestSharp;
 using System.Security.Cryptography.Xml;
+using Newtonsoft.Json.Linq;
+using System.Text.Json;
 
 namespace Agrochain.API.Controllers
 {
@@ -51,10 +53,13 @@ namespace Agrochain.API.Controllers
         #endregion
 
         #region Wallet API
-        [HttpPost("wallet/enable/{ewallet}")]
-        public async Task<ActionResult<bool>> EnableWallet([FromRoute] string ewallet)
+        [HttpPost("wallet/enable/{ewalletId}")]
+        public async Task<ActionResult<bool>> EnableWallet([FromRoute] string ewalletId)
         {
-            var apiResponse = await _client.EnableWallet(ewallet);
+            dynamic obj = new JObject();
+            obj.ewallet = ewalletId;
+
+            var apiResponse = await _client.EnableWallet(obj);
             return Ok(apiResponse);
         }
 
@@ -68,7 +73,57 @@ namespace Agrochain.API.Controllers
         [HttpPost("wallet/new")]
         public async Task<ActionResult<CreateWalletResponse?>> CreateNewWallet([FromBody] CreateWallet walletDetails)
         {
-            var apiResponse = await _client.CreateNewWallet(walletDetails);
+            var address = new
+            {
+                name = "John Doe",
+                line_1 = "123 Main Street",
+                line_2 = "",
+                line_3 = "",
+                city = "Anytown",
+                state = "NY",
+                country = "US",
+                zip = "12345",
+                metadata = new { },
+                canton = "",
+                district = ""
+            };
+
+            var metadata = new
+            {
+                merchant_defined = true
+            };
+
+            var contact = new
+            {
+                email = "johndoe@rapyd.net",
+                first_name = "John",
+                last_name = "Doe",
+                mothers_name = "Jane Smith",
+                contact_type = "personal",
+                address,
+                identification_type = "PA",
+                identification_number = "1234567890",
+                date_of_birth = "11/22/2000",
+                country = "US",
+                metadata,
+            };
+
+            var requestObj = new
+            {
+                first_name = "John",
+                last_name = "Doe",
+                email = "",
+                ewallet_reference_id = "John-Doe-02152020",
+                metadata,
+                phone_number = "",
+                type = "person",
+                contact,
+                country = "US",
+            };
+
+            string request = JsonSerializer.Serialize(requestObj);
+
+            var apiResponse = await _client.CreateNewWallet(request);
             return Ok(apiResponse); ;
         }
         #endregion

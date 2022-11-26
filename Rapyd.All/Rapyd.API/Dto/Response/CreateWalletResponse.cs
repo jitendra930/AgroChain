@@ -2,7 +2,7 @@
 
 namespace Agrochain.API.Dto.Response
 {
-    public class Address
+    public class AddressForWallet
     {
         [JsonPropertyName("id")]
         public string id { get; set; }
@@ -34,9 +34,6 @@ namespace Agrochain.API.Dto.Response
         [JsonPropertyName("phone_number")]
         public string phone_number { get; set; }
 
-        [JsonPropertyName("metadata")]
-        public Metadata metadata { get; set; }
-
         [JsonPropertyName("canton")]
         public string canton { get; set; }
 
@@ -47,7 +44,7 @@ namespace Agrochain.API.Dto.Response
         public int created_at { get; set; }
     }
 
-    public class Contacts
+    public class ContactsForWallet
     {
         [JsonPropertyName("data")]
         public List<Data> data { get; set; }
@@ -95,13 +92,13 @@ namespace Agrochain.API.Dto.Response
         public Metadata metadata { get; set; }
 
         [JsonPropertyName("ewallet_reference_id")]
-        public Guid ewallet_reference_id { get; set; }
+        public string ewallet_reference_id { get; set; }
 
         [JsonPropertyName("category")]
         public object category { get; set; }
 
         [JsonPropertyName("contacts")]
-        public Contacts contacts { get; set; }
+        public ContactsForWallet contacts { get; set; }
 
         [JsonPropertyName("middle_name")]
         public string middle_name { get; set; }
@@ -140,7 +137,7 @@ namespace Agrochain.API.Dto.Response
         public string nationality { get; set; }
 
         [JsonPropertyName("address")]
-        public Address address { get; set; }
+        public AddressForWallet address { get; set; }
 
         [JsonPropertyName("ewallet")]
         public string ewallet { get; set; }
@@ -171,12 +168,6 @@ namespace Agrochain.API.Dto.Response
 
         [JsonPropertyName("role_in_company")]
         public string role_in_company { get; set; }
-    }
-
-    public class Metadata
-    {
-        [JsonPropertyName("merchant_defined")]
-        public bool merchant_defined { get; set; }
     }
 
     public class CreateWalletResponse

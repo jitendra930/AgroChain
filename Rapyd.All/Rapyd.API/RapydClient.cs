@@ -51,7 +51,7 @@ namespace Agrochain.API
         #endregion
 
         #region Wallet
-        public async Task<bool> EnableWallet(string ewallet = null, string phone_number = null)
+        public async Task<bool> EnableWallet(object ewallet = null, string phone_number = null)
         {
             var apiResponse = await MakeRequest<BaseApiResponse>(Method.Post, $"/v1/user/enable", ewallet ?? phone_number);
             return apiResponse.Status.OperationStatus == "SUCCESS";
@@ -62,7 +62,7 @@ namespace Agrochain.API
             return await MakeRequest<ListOfWallet>(Method.Get, $"/v1/user/wallets?{type}&{referenceId}&{pagenumber}&{pageSize}");
         }
 
-        public async Task<CreateWalletResponse> CreateNewWallet(CreateWallet walletDetails)
+        public async Task<CreateWalletResponse> CreateNewWallet(string walletDetails)
         {
             var apiResponse = await MakeRequest<CreateWalletResponse>(Method.Post, "/v1/user", walletDetails);
             return apiResponse;
