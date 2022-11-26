@@ -1,4 +1,4 @@
-﻿namespace Rapyd.API.Dto
+﻿namespace Agrochain.API.Dto
 {
     public class CardIssue
     {

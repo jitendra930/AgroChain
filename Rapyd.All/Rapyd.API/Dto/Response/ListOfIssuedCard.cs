@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Rapyd.API.Dto.Response
+namespace Agrochain.API.Dto.Response
 {
     public class Datum
     {

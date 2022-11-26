@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Rapyd.API.Dto;
-using Rapyd.API.Dto.Response;
+using Agrochain.API.Dto;
+using Agrochain.API.Dto.Response;
 using RestSharp;
 using System.Security.Cryptography.Xml;
 
-namespace Rapyd.API.Controllers
+namespace Agrochain.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class RapydController : ControllerBase
     {
@@ -50,28 +50,28 @@ namespace Rapyd.API.Controllers
         }
         #endregion
 
-        //#region Wallet API
-        //[HttpPost("wallet/enable/{ewallet}")]
-        //public async Task<ActionResult<bool>> EnableWallet([FromRoute] string ewallet = null)
-        //{
-        //    var apiResponse = await _client.EnableWallet(ewallet);
-        //    return Ok(apiResponse);
-        //}
+        #region Wallet API
+        [HttpPost("wallet/enable/{ewallet}")]
+        public async Task<ActionResult<bool>> EnableWallet([FromRoute] string ewallet)
+        {
+            var apiResponse = await _client.EnableWallet(ewallet);
+            return Ok(apiResponse);
+        }
 
-        //[HttpGet("wallet/all")]
-        //public async Task<ActionResult<ListOfWallet>> GetListOfWallet(string type, Guid referenceId, int pagenumber = 0, int pageSize = 0)
-        //{
-        //    var apiResponse = await _client.GetListOfWallet(type, referenceId, pagenumber, pageSize);
-        //    return Ok(apiResponse); ;
-        //}
+        [HttpGet("wallet/all")]
+        public async Task<ActionResult<ListOfWallet>> GetListOfWallet(string type, Guid referenceId, int pagenumber = 0, int pageSize = 0)
+        {
+            var apiResponse = await _client.GetListOfWallet(type, referenceId, pagenumber, pageSize);
+            return Ok(apiResponse); ;
+        }
 
-        //[HttpPost("wallet/new")]
-        //public async Task<ActionResult<CreateWalletResponse?>> CreateNewWallet([FromBody] CreateWallet walletDetails)
-        //{
-        //    var apiResponse = await _client.CreateNewWallet(walletDetails);
-        //    return Ok(apiResponse); ;
-        //}
-        //#endregion
+        [HttpPost("wallet/new")]
+        public async Task<ActionResult<CreateWalletResponse?>> CreateNewWallet([FromBody] CreateWallet walletDetails)
+        {
+            var apiResponse = await _client.CreateNewWallet(walletDetails);
+            return Ok(apiResponse); ;
+        }
+        #endregion
 
         #region customer APIs
         [HttpGet("customers")]

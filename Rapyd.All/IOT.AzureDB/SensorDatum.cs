@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace IOT.AzureDB
+namespace AgrochainIOT.AzureDB
 {
     public partial class SensorDatum
     {

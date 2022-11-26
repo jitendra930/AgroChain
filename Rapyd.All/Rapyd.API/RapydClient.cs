@@ -6,11 +6,11 @@ using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Rapyd.API.Dto;
-using Rapyd.API.Dto.Response;
+using Agrochain.API.Dto;
+using Agrochain.API.Dto.Response;
 using RestSharp;
 
-namespace Rapyd.API
+namespace Agrochain.API
 {
     public class RapydClient
     {
