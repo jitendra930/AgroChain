@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace IOT.AzureDB
+namespace AgrochainIOT.AzureDB
 {
     public partial class IotDBContext : DbContext
     {

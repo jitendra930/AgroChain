@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Rapyd.API.Dto
+namespace Agrochain.API.Dto
 {
     public class CreateCustomerBody
     {

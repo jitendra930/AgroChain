@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Rapyd.API": {
+    "Agrochain.API": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

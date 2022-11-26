@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Rapyd.Sandbox.Dto
+namespace Agrochain.Sandbox.Dto
 {
     public class CountryDetails
     {
