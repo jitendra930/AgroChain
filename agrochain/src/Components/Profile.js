@@ -4,6 +4,7 @@ import { Form } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { Buffer } from 'buffer';
 
 import { ethers } from "ethers"
 import { create as ipfsHttpClient } from 'ipfs-http-client'
@@ -16,7 +17,24 @@ import { Footer } from "./Footer";
 import './loading.css';
 import { NftContext } from '../frontend/NftContext/NftProvider'
 
-const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
+/*const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')*/
+
+const projectId = process.env.REACT_APP_IPFS_PROJECT_KEY;   // <---------- your Infura Project ID
+
+const projectSecret = process.env.REACT_APP_IPFS_SECRECT_KEY;  // <---------- your Infura Secret
+// (for security concerns, consider saving these values in .env files)
+
+const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+
+const client = ipfsHttpClient({
+	host: process.env.REACT_APP_IPFS_URL,
+	port: process.env.REACT_APP_IPFS_PORT,
+	protocol: process.env.REACT_APP_IPFS_PROTOCOL,
+	headers: {
+		authorization: auth,
+	},
+});
+
 
 const api = axios.create({
 	baseURL: `https://min-api.cryptocompare.com/`
