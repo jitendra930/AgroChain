@@ -97,7 +97,7 @@ const Card = ({
                 <div className="card-item__cover">
                     <img
                         alt=""
-                        src={'/6.jpeg'}
+                        src={'/6.png'}
                         className="card-item__bg"
                     />
                 </div>
