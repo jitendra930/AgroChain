@@ -16,20 +16,12 @@ const generateRandomString = (size) =>  {
 
 
 const api = axios.create({
-  baseURL: 'https://sandboxapi.rapyd.net/v1'
+  baseURL: process.env.REACT_APP_API_URL,
+  headers: {
+    'Content-Type': 'application/json'
+  },
 });
 
-api.interceptors.request.use(req => {
-  const method = req.method;
-  const salt = generateRandomString(8);
-  const timestamp = Math.floor(Date.now() / 1000);
-  const signature = 'M2ViYmU4ZWZjOWE2YjZjNTBkZmFhNjM0ZDkxNGZkZmYwOTQ5NzIyMjQ4M2UxNTQ5NWI2YTUxMzNlYTI5MzJmYQ';
-  req.headers.salt = salt;
-  req.headers.timestamp = timestamp;
-  req.headers.access_key = process.env.REACT_APP_RAPYD_ACCESS_KEY;
-  req.headers.signature = signature;
-  return req;
-});
 
 const initialState = {
   cardNumber: "#### #### #### ####",
@@ -90,8 +82,8 @@ const MainScreen = () => {
       payment_method: {
         type: "in_amex_card",
         fields: {
-          number: state.cardNumber,
-          expiration_month: state.cardNumber,
+          number: state.cardNumber.split(' ').join(''),
+          expiration_month: state.cardMonth,
           expiration_year: state.cardYear,
           name: state.cardHolder,
           cvv: state.cardCvv,
@@ -99,10 +91,10 @@ const MainScreen = () => {
         metadata: {
           merchant_defined: true,
         },
-      },
-      capture: true,
+      }
     };
-    api.post("payments", request)
+
+    api.post("api/payment", request)
          .then((resp) => {
         console.log(resp);
       }).catch((err) => {
