@@ -3,6 +3,33 @@ import axios from "axios";
 import CForm from "./form";
 import Card from "./card";
 import { Button } from "react-bootstrap";
+import { nanoid } from "nanoid";
+
+const generateRandomString = (size) =>  {
+  try {
+    return nanoid(64);
+  } catch (error) {
+    console.error('Error generating salt');
+    throw error;
+  }
+};
+
+
+const api = axios.create({
+  baseURL: 'https://sandboxapi.rapyd.net/v1'
+});
+
+api.interceptors.request.use(req => {
+  const method = req.method;
+  const salt = generateRandomString(8);
+  const timestamp = Math.floor(Date.now() / 1000);
+  const signature = 'M2ViYmU4ZWZjOWE2YjZjNTBkZmFhNjM0ZDkxNGZkZmYwOTQ5NzIyMjQ4M2UxNTQ5NWI2YTUxMzNlYTI5MzJmYQ';
+  req.headers.salt = salt;
+  req.headers.timestamp = timestamp;
+  req.headers.access_key = process.env.REACT_APP_RAPYD_ACCESS_KEY;
+  req.headers.signature = signature;
+  return req;
+});
 
 const initialState = {
   cardNumber: "#### #### #### ####",
@@ -75,16 +102,8 @@ const MainScreen = () => {
       },
       capture: true,
     };
-    axios.post("https://sandboxapi.rapyd.net/v1", request, {
-        headers: {
-        'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, salt, timestamp',
-          'Content-Type': 'application/json',
-          'access_key': process.env.REACT_APP_RAPYD_ACCESS_KEY,
-          'salt': 'baaa50f09a7168db9acb065e',
-          'timestamp': '1670080149',
-          'signature': 'M2ViYmU4ZWZjOWE2YjZjNTBkZmFhNjM0ZDkxNGZkZmYwOTQ5NzIyMjQ4M2UxNTQ5NWI2YTUxMzNlYTI5MzJmYQ==',
-        },
-      }).then((resp) => {
+    api.post("payments", request)
+         .then((resp) => {
         console.log(resp);
       }).catch((err) => {
         console.error(err);
