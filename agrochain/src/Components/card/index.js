@@ -18,7 +18,7 @@ const CARDS = {
 
 const cardBackgroundName = () => {
     let random = Math.floor(Math.random() * 25 + 1);
-    return `${random}.jpeg`;
+    return `${random}.png`;
 };
 
 const BACKGROUND_IMG = cardBackgroundName();
@@ -97,7 +97,7 @@ const Card = ({
                 <div className="card-item__cover">
                     <img
                         alt=""
-                        src={'/6.png'}
+                        src={`/card-background/${BACKGROUND_IMG}`}
                         className="card-item__bg"
                     />
                 </div>
