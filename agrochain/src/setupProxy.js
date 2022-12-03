@@ -14,4 +14,11 @@ module.exports = function(app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    '/sandboxapi', 
+    createProxyMiddleware({
+      target: 'https://sandboxapi.rapyd.net/v1',
+      changeOrigin: true,
+    })
+  );
 };
