@@ -65,7 +65,7 @@ const Profile = () => {
 			try {
 				const result = await client.add(file)
 				/*console.log(result)*/
-				setImage(`https://ipfs.infura.io/ipfs/${result.path}`)
+				setImage(`https://ipfs.io/ipfs/${result.path}`)
 			} catch (error) {
 				console.log("ipfs image upload error: ", error)
 			}
@@ -99,7 +99,7 @@ const Profile = () => {
 	}
 	const mintThenList = async (result) => {
 
-		const uri = `https://ipfs.infura.io/ipfs/${result.path}`
+		const uri = `https://ipfs.io/ipfs/${result.path}`
 		console.log(uri);
 		// mint nft
 		await (await nft.mint(uri)).wait()
