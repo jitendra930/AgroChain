@@ -6,8 +6,11 @@ const monthsArr = Array.from({ length: 12 }, (x, i) => {
     return month <= 9 ? '0' + month : month;
 });
 const yearsArr = Array.from({ length: 9 }, (_x, i) => currentYear + i);
+const currencyArr = ['INR', 'USD'];
 
 export default function CForm({
+    cardAmountRef,
+    cardCurrency,
     cardMonth,
     cardYear,
     onUpdateState,
@@ -86,6 +89,53 @@ export default function CForm({
         <div className="card-form">
             <div className="card-list">{children}</div>
             <div className="card-form__inner">
+
+                <div className="card-form__row">
+                    <div className="card-form__col">
+                        <div className="card-form__group">
+                            <label
+                                htmlFor="cardInfo"
+                                className="card-input__label"
+                            >
+                                AMOUNT
+                            </label>
+                            <select
+
+
+                                className="card-input__input -select"
+                                value={cardCurrency}
+                                name="cardCurrency"
+                                onChange={handleFormChange}
+
+
+                            >
+                                <option value="" disabled>
+                                    CURRENCY
+                                </option>
+
+                                {currencyArr.map((val, index) => (
+                                    <option key={index} value={val}>
+                                        {val}
+                                    </option>
+                                ))}
+                            </select>
+
+                            <input
+                                type="text"
+                                className="card-input__input"
+                                autoComplete="off"
+                                name="cardAmount"
+                                onChange={handleFormChange}
+                                ref={cardAmountRef}
+                                
+                            >
+                                
+                            </input>
+                        </div>
+                    </div>
+                    
+                </div>
+
                 <div className="card-input">
                     <label htmlFor="cardNumber" className="card-input__label">
                         Card Number
@@ -190,14 +240,17 @@ export default function CForm({
                         </div>
                     </div>
                 </div>
+                <br />
+                <div className="card-form__row">
+                    <button className="btn btn-success btn-lg btn-block">
+                        <i className="fa fa-user-plus fa-fw"></i>
+                         PAY
+                    </button>
+                </div>
+                
             </div>
-            <br/>
-                {/*<div>*/}
-                {/*    <button className="btn btn-success">*/}
-                {/*        <i className="fa fa-user-plus fa-fw"></i>*/}
-                {/*        Create Account*/}
-                {/*    </button>*/}
-                {/*</div>*/}
+            
+                
         </div>
 
     );

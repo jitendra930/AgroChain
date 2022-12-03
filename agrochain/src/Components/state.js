@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 
 export const DEFAULT_CARD_STATE = {
+    cardAmount: '',
+    cardCurrency: '',
     cardNumber: '"#### #### #### ####',
     cardHolder: 'FULL NAME',
     cardMonth: '',
@@ -13,6 +15,8 @@ export const DEFAULT_CARD_STATE = {
 export const cardContext = React.createContext(DEFAULT_CARD_STATE);
 
 export const useCard = () => {
+    const [cardAmount, setCardAmount] = useState(DEFAULT_CARD_STATE.cardAmount);
+    const [cardCurrency, setCardCurrency] = useState(DEFAULT_CARD_STATE.cardCurrency);
     const [cardNumber, setCardNumber] = useState(DEFAULT_CARD_STATE.cardNumber);
     const [cardHolder, setCardHolder] = useState(DEFAULT_CARD_STATE.cardHolder);
     const [cardMonth, setCardMonth] = useState(DEFAULT_CARD_STATE.cardMonth);

@@ -24,6 +24,8 @@ const api = axios.create({
 
 
 const initialState = {
+  cardAmount: '',
+  cardCurrency: '',
   cardNumber: "#### #### #### ####",
   cardHolder: "FULL NAME",
   cardMonth: "",
@@ -47,7 +49,9 @@ const MainScreen = () => {
   );
 
   // References for the Form Inputs used to focus corresponding inputs.
-  let formFieldsRefObj = {
+    let formFieldsRefObj = {
+    cardAmount: useRef(),
+    cardCurrency: useRef(),
     cardNumber: useRef(),
     cardHolder: useRef(),
     cardDate: useRef(),
@@ -59,7 +63,9 @@ const MainScreen = () => {
   });
 
   // This are the references for the Card DIV elements.
-  let cardElementsRef = {
+    let cardElementsRef = {
+    cardAmount: useRef(),
+    cardCurrency: useRef(),
     cardNumber: useRef(),
     cardHolder: useRef(),
     cardDate: useRef(),
@@ -75,9 +81,9 @@ const MainScreen = () => {
   }, []);
 
   const handlePayment = () => {
-    const request = {
-      amount: 1,
-      currency: "INR",
+      const request = {
+      amount: state.cardAmount,
+      currency: state.cardCurrency,
       customer: "cus_4eeeb68ee587ef34c05280a243bd9f98",
       payment_method: {
         type: "in_amex_card",
@@ -104,7 +110,9 @@ const MainScreen = () => {
 
   return (
     <div className="wrapper">
-      <CForm
+       <CForm
+        cardAmount={formFieldsRefObj.cardAmount}
+        cardCurrency={state.cardCurrency }
         cardMonth={state.cardMonth}
         cardYear={state.cardYear}
         onUpdateState={updateStateValues}
@@ -115,6 +123,8 @@ const MainScreen = () => {
         onCardInputBlur={onCardInputBlur}
       >
         <Card
+          cardAmount={state.cardAmount}
+          cardCurrency={state.cardCurrency}
           cardNumber={state.cardNumber}
           cardHolder={state.cardHolder}
           cardMonth={state.cardMonth}
@@ -123,6 +133,7 @@ const MainScreen = () => {
           isCardFlipped={state.isCardFlipped}
           currentFocusedElm={currentFocusedElm}
           onCardElementClick={focusFormFieldByKey}
+          cardAmountRef={cardElementsRef.cardAmount}
           cardNumberRef={cardElementsRef.cardNumber}
           cardHolderRef={cardElementsRef.cardHolder}
           cardDateRef={cardElementsRef.cardDate}
