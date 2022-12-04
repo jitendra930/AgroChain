@@ -65,9 +65,9 @@ npx hardhat node
 npx hardhat run src/backend/scripts/deploy.js --network localhost
 ```
 
-### 6(b). Migrate Smart Contracts (Rinkeby Network)
+### 6(b). Migrate Smart Contracts (Goerli Network)
 ```
-npx hardhat run src/backend/scripts/deploy.js --network rinkeby
+npx hardhat run src/backend/scripts/deploy.js --network goerli
 ```
 
 ### 7. Run Tests
