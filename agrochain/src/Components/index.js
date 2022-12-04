@@ -4,7 +4,7 @@ import CForm from "./form";
 import Card from "./card";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: process.env.REACT_APP_API_URL_RAPYD,
   headers: {
     'Content-Type': 'application/json'
   },
@@ -88,7 +88,7 @@ const MainScreen = () => {
       }
     };
 
-    api.post("api/payment", request)
+    api.post("CreatePayment/payment", request)
          .then((resp) => {
         console.log(resp);
       }).catch((err) => {
