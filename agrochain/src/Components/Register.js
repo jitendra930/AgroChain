@@ -117,13 +117,13 @@ export const Register = () => {
 
     const RegisterFarmer = async () => {
 
-        console.log(farmerId, name, govtid, latitude, longitude, area, contact, iotdeviceid);
+        console.log(farmerId, name, rapydId, govtid, latitude, longitude, area, contact, iotdeviceid);
 
         const lat_log = latitude.toString() + ' ' + longitude.toString();
 
         /*console.log(lat_log);*/
 
-        await (await marketplace.create_Farmer(account, name, govtid, lat_log, area, contact, iotdeviceid)).wait();
+        await (await marketplace.create_Farmer(account, name, rapydId, govtid, lat_log, area, contact, iotdeviceid)).wait();
         setAccountType(true);
         navigate('/profile');
     }

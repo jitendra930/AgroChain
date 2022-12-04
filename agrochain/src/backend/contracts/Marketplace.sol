@@ -17,6 +17,7 @@ contract Marketplace is ReentrancyGuard {
     struct Farmer {
         address Id;
         string name;
+        string rapydId;
         string govtId;
         string location;
         string landarea;
@@ -42,6 +43,7 @@ contract Marketplace is ReentrancyGuard {
     event FarmerAdded(
         address Id,
         string name,
+        string rapydId,
         string govtId,
         string location,
         string landarea,
@@ -70,10 +72,11 @@ contract Marketplace is ReentrancyGuard {
         feePercent = _feePercent;
     }
 
-    function create_Farmer(address _id, string memory _name, string memory _govtId, string memory _location, string memory _area, string memory _contact, string memory _iotid) external {
+    function create_Farmer(address _id, string memory _name, string memory _rapydId, string memory _govtId, string memory _location, string memory _area, string memory _contact, string memory _iotid) external {
         farmers[_id] = Farmer (
             _id,
             _name,
+            _rapydId,
             _govtId,
             _location,
             _area,
@@ -83,6 +86,7 @@ contract Marketplace is ReentrancyGuard {
         emit FarmerAdded(
             _id,
             _name,
+            _rapydId,
             _govtId,
             _location,
             _area,
