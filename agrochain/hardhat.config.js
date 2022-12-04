@@ -1,17 +1,16 @@
 require("@nomiclabs/hardhat-waffle");
 
-const INFURA_URL = 'infura_url';
-const PRIVATE_KEY = 'private_key';
-const POCKET_ENDPOINT = 'pocket_endpoint';
+const INFURA_URL = '';
+const PRIVATE_KEY = '';
 
 module.exports = {
     solidity: "0.8.4",
-    //networks: {
-    //    rinkeby: {
-    //        url: INFURA_URL,
-    //        accounts: [`0x${PRIVATE_KEY}`]
-    //    }
-    //},
+    networks: {
+        goerli: {
+            url: INFURA_URL,
+            accounts: [`0x${PRIVATE_KEY}`]
+        }
+    },
     paths: {
     artifacts: "./src/backend/artifacts",
     sources: "./src/backend/contracts",
