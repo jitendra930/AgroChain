@@ -1,12 +1,23 @@
-import { Form } from 'react-bootstrap'
+import { Form } from 'react-bootstrap';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Button from 'react-bootstrap/Button';
 import { useState, React, useContext, useEffect } from 'react'
 import { usePlacesWidget } from "react-google-autocomplete";
 import { Loader } from '@googlemaps/js-api-loader';
 import { Footer } from "./Footer";
 
+import axios from 'axios';
+
 import wheat from './assets/wheat.jpg'
 import { NftContext } from '../frontend/NftContext/NftProvider';
 import { useNavigate } from 'react-router-dom';
+
+const api = axios.create({
+    baseURL: process.env.REACT_APP_API_URL_RAPYD,
+    headers: {
+        'Content-Type': 'application/json'
+    },
+});
 
 
 export const Register = () => {
@@ -14,6 +25,7 @@ export const Register = () => {
     const navigate = useNavigate();
     const [farmerId, setfarmerId] = useState('')
     const [name, setname] = useState('')
+    const [rapydId, setrapydId] = useState('')
     const [govtid, setgovtid] = useState('')
     const [latitude, setLatitude] = useState(0)
     const [longitude, setLongitude] = useState(0)
@@ -23,33 +35,33 @@ export const Register = () => {
 
     const mapOptions = {
         center: {
-          lat: longitude,
-          lng: longitude
+            lat: longitude,
+            lng: longitude
         },
-        zoom: 11 
-      };
+        zoom: 11
+    };
 
     useEffect(() => {
-        if(navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
                 setLatitude(position.coords.latitude);
                 setLongitude(position.coords.longitude);
             });
         }
-    },[]);
-    
-    useEffect(()=>{
+    }, []);
+
+    useEffect(() => {
         const loader = new Loader({
             apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
             version: "weekly",
             libraries: ["places"]
-            });
+        });
 
         loader.load().then(loadMap)
-                    .catch(e => {
-                        console.log(e,'error in loading map')
-                    });
-    },[latitude,longitude])
+            .catch(e => {
+                console.log(e, 'error in loading map')
+            });
+    }, [latitude, longitude])
 
     const options = Object.assign({
         types: [],
@@ -68,13 +80,40 @@ export const Register = () => {
 
     const { ref: bootstrapRef } = usePlacesWidget({
         apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-        options:{...options},
+        options: { ...options },
         onPlaceSelected: (place) => {
             setLatitude(place.geometry.location.lat());
             setLongitude(place.geometry.location.lng());
             /*console.log(place);*/
         },
     });
+
+    const GenerateRapydId = async () => {
+
+        console.log(name);
+
+        const request = {
+            name: name
+        }
+    
+
+    api.post("CreateCustomer/customers", request)
+            .then((resp) => {
+                console.log(resp);
+                setrapydId(resp["data"]["id"]);
+            }).catch((err) => {
+                console.error(err);
+            });
+
+
+        //const lat_log = latitude.toString() + ' ' + longitude.toString();
+
+        ///*console.log(lat_log);*/
+
+        //await (await marketplace.create_Farmer(account, name, govtid, lat_log, area, contact, iotdeviceid)).wait();
+        //setAccountType(true);
+        //navigate('/profile');
+    };
 
     const RegisterFarmer = async () => {
 
@@ -138,9 +177,25 @@ export const Register = () => {
                                             <h6>Public Crypto Id  <a href="https://www.youtube.com/watch?v=LmWbDDaU5fE" target="_blank">(Create a Crypto Account using MetaMask) <span className="text-danger">*</span></a></h6>
                                             <Form.Control onChange={(e) => setfarmerId(e.target.value)} type="text" className="form-control" value={account} required disabled />
                                         </div>
-                                        <div className="form-group">
+                                        <div className="form">
                                             <h6>User Name  <span className="text-danger">*</span></h6>
+                                            
+                                                
+                                            
                                             <Form.Control onChange={(e) => setname(e.target.value)} type="text" className="form-control" placeholder="Enter User Name" required />
+                                            <br />
+                                            <InputGroup className="mb-3">
+                                                <Form.Control
+                                                    onChange={(e) => setfarmerId(e.target.value)}
+                                                    placeholder="Rapyd User Id"
+                                                    aria-label="Rapyd User Id"
+                                                    value={rapydId}
+                                                    aria-describedby="basic-addon2" required disabled
+                                                />
+                                                <Button variant="outline-secondary" id="button-addon2" onClick={GenerateRapydId}>
+                                                    Generate Rapyd User Id
+                                                </Button>
+                                            </InputGroup>
                                         </div>
                                         <div className="form-group">
                                             <h6> AADHAR NUMBER/ PAN CARD  <span className="text-danger">*</span></h6>
