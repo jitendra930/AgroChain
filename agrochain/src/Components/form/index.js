@@ -20,7 +20,8 @@ export default function CForm({
     onCardInputFocus,
     onCardInputBlur,
     cardCvv,
-    children
+    children,
+    handlePayment
 }) {
     const [cardNumber, setCardNumber] = useState('');
 
@@ -244,7 +245,7 @@ export default function CForm({
                 </div>
                 <br />
                 <div className="card-form__row">
-                    <button className="btn btn-success btn-lg btn-block">
+                    <button className="btn btn-success btn-lg btn-block" onClick={handlePayment}>
                         <i className="fa fa-user-plus fa-fw"></i>
                          PAY
                     </button>
