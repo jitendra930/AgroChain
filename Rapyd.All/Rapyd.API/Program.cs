@@ -1,4 +1,5 @@
 using Agrochain.API;
+using AgrochainIOT.AzureDB;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<RapydClient>();
+builder.Services.AddScoped<IotDBContext>();
 
 var app = builder.Build();
 
