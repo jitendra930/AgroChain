@@ -121,6 +121,7 @@ const MainScreen = () => {
         cardDateRef={formFieldsRefObj.cardDate}
         onCardInputFocus={onCardFormInputFocus}
         onCardInputBlur={onCardInputBlur}
+        handlePayment={handlePayment}
       >
         <Card
           cardAmount={state.cardAmount}
@@ -139,9 +140,6 @@ const MainScreen = () => {
           cardDateRef={cardElementsRef.cardDate}
         ></Card>
       </CForm>
-      <div>
-          <Button onClick={handlePayment}>Make Payment</Button>
-        </div>
     </div>
   );
 };
