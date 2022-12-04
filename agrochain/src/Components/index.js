@@ -2,18 +2,6 @@ import React, { useState, useRef, useCallback } from "react";
 import axios from "axios";
 import CForm from "./form";
 import Card from "./card";
-import { Button } from "react-bootstrap";
-import { nanoid } from "nanoid";
-
-const generateRandomString = (size) =>  {
-  try {
-    return nanoid(64);
-  } catch (error) {
-    console.error('Error generating salt');
-    throw error;
-  }
-};
-
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
