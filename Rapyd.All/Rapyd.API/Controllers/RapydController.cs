@@ -152,19 +152,19 @@ namespace Agrochain.API.Controllers
             return Ok(customer);
         }
 
-        [HttpGet("paymentMethods")]
-        public async Task<ActionResult<IList<PaymentMethod>>> GetPaymentMethods([FromQuery] string country)
-        {
-            var methods = await _client.GetPaymentMethods(country);
-            return Ok(methods);
-        }
+        //[HttpGet("paymentMethods")]
+        //public async Task<ActionResult<IList<PaymentMethod>>> GetPaymentMethods([FromQuery] string country)
+        //{
+        //    var methods = await _client.GetPaymentMethods(country);
+        //    return Ok(methods);
+        //}
 
-        [HttpGet("paymentMethodRequiredFields/{type}")]
-        public async Task<ActionResult<PaymentMethodRequiredFields>> GetPaymentMethodRequiredFields([FromRoute] string type)
-        {
-            var methods = await _client.GetPaymentMethodRequiredFields(type);
-            return Ok(methods);
-        }
+        //[HttpGet("paymentMethodRequiredFields/{type}")]
+        //public async Task<ActionResult<PaymentMethodRequiredFields>> GetPaymentMethodRequiredFields([FromRoute] string type)
+        //{
+        //    var methods = await _client.GetPaymentMethodRequiredFields(type);
+        //    return Ok(methods);
+        //}
 
         [HttpPost("checkout")]
         public async Task<ActionResult<Checkout>> CreateCheckout([FromBody] CreateCheckoutBody body)
@@ -174,7 +174,7 @@ namespace Agrochain.API.Controllers
         }
 
         [HttpPost("payment")]
-        public async Task<ActionResult<Payment>> CreatePayment([FromBody] CreatePaymentBody body)
+        public async Task<ActionResult<CardPaymentResponse>> CreatePayment([FromBody] CardPayment body)
         {
             var payment = await _client.CreatePayment(body);
             return Ok(payment);

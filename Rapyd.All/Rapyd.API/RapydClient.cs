@@ -93,23 +93,23 @@ namespace Agrochain.API
             return result;
         }
 
-        public async Task<List<PaymentMethod>> GetPaymentMethods(string country)
-        {
-            var apiResponse = await MakeRequest<Response<List<PaymentMethod>>>(Method.Get, $"/v1/payment_methods/country?country={country}");
-            var result = apiResponse.Data;
-            return result;
-        }
+        //public async Task<List<PaymentMethod>> GetPaymentMethods(string country)
+        //{
+        //    var apiResponse = await MakeRequest<Response<List<PaymentMethod>>>(Method.Get, $"/v1/payment_methods/country?country={country}");
+        //    var result = apiResponse.Data;
+        //    return result;
+        //}
 
-        public async Task<PaymentMethodRequiredFields> GetPaymentMethodRequiredFields(string type)
-        {
-            var apiResponse = await MakeRequest<Response<PaymentMethodRequiredFields>>(Method.Get, $"/v1/payment_methods/required_fields/{type}");
-            var result = apiResponse.Data;
-            return result;
-        }
+        //public async Task<PaymentMethodRequiredFields> GetPaymentMethodRequiredFields(string type)
+        //{
+        //    var apiResponse = await MakeRequest<Response<PaymentMethodRequiredFields>>(Method.Get, $"/v1/payment_methods/required_fields/{type}");
+        //    var result = apiResponse.Data;
+        //    return result;
+        //}
 
-        public async Task<Payment> CreatePayment(CreatePaymentBody body)
+        public async Task<CardPaymentResponse> CreatePayment(CardPayment body)
         {
-            var apiResponse = await MakeRequest<Response<Payment>>(Method.Post, $"/v1/payments", body);
+            var apiResponse = await MakeRequest<Response<CardPaymentResponse>>(Method.Post, $"/v1/payments", body);
             var result = apiResponse.Data;
             return result;
         }

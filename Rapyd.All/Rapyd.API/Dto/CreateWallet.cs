@@ -83,12 +83,6 @@ namespace Agrochain.API.Dto
         public Metadata metadata { get; set; }
     }
 
-    public class Metadata
-    {
-        [JsonPropertyName("merchant_defined")]
-        public bool merchant_defined { get; set; }
-    }
-
     public class CreateWallet
     {
         [JsonPropertyName("first_name")]
