@@ -50,6 +50,7 @@ const Profile = () => {
 	const [description, setDescription] = useState('')
 	const [farmerId, setfarmerId] = useState('')
 	const [farmername, setfarmername] = useState('')
+	const [rapydId, setrapydId] = useState('')
 	const [govtid, setgovtid] = useState('')
 	const [usd, setusd] = useState(0)
 	const [co2, setco2] = useState('')
@@ -171,6 +172,7 @@ const Profile = () => {
 		}
 		const fam = await marketplace.farmers(account)
 		setfarmername(fam.name)
+		setrapydId(fam.rapydId)
 		setgovtid(fam.govtId)
 		setlocation(fam.location)
 		setarea(fam.landarea)
@@ -225,7 +227,7 @@ const Profile = () => {
 			<div className="row">
 				<div className="col-md-12">
 					<h2 className="mb-0">{farmername ? 'Farmer': 'Customer'} Wallet</h2>
-					<p className="text-muted type-6 mt-0"><i className="fa fa-circle fa-fw fa-sm text-success"></i> Ethereum Rinkeby Network</p>
+					<p className="text-muted type-6 mt-0"><i className="fa fa-circle fa-fw fa-sm text-success"></i> Ethereum Test Network</p>
 				</div>
 			</div>
 			<div className="row">
@@ -257,7 +259,11 @@ const Profile = () => {
                     <h6 className="mb-0">
                       <i className="fa fa-id-card fa-fw"></i>&nbsp; AADHAR NUMBER
                     </h6>
-                    <p className="text-muted" style={{ marginLeft: "24px" }}>{govtid}</p>
+					<p className="text-muted" style={{ marginLeft: "24px" }}>{rapydId}</p>
+					<h6 className="mb-0">
+                      <i className="fa fa-user-circle fa-fw"></i>&nbsp; RAPYD CUSTOMER ID
+                    </h6>
+                    <p className="text-muted" style={{ marginLeft: "24px" }}>{rapydId}</p>
                     <h6 className="mb-0">
                       <i className="fa fa-compass fa-fw"></i>&nbsp;
                       LOCATION CO-ORDINATES
