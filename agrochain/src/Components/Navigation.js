@@ -37,7 +37,7 @@ const Navigation = ({ web3Handler }) => {
                         <NavLink className={({ isActive }) => `nav-link ${isActive ? "active-route" : ""}`} to={`/nft`}> NFT</NavLink>
                     </li>
                     <li className="nav-item">
-                        <button onClick={web3Handler} className="nav-btn btn btn-warning btn-sm btn-block ms-2"><i className="fa fa-ambulance fa-fw"></i> <a href={`https://sandboxcheckout.rapyd.net/?token=checkout_6057ce4ab53d03438d143bd72dc5406b`} target="_blank"
+                        <button onClick={web3Handler} className="nav-btn btn btn-warning btn-sm btn-block ms-2"><i className="fa fa-ambulance fa-fw"></i> <a href={`https://sandboxcheckout.rapyd.net?token=checkout_12b1f2bffaf6422dd939234754c23f06`} target="_blank"
                             rel="noopener noreferrer" >Donate Us </a></button>
                     </li>
                     {!accountType && <li className="nav-item">
