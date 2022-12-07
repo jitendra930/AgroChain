@@ -12,6 +12,8 @@ and orientation.
 We pledge to act and interact in ways that contribute to an open, welcoming,
 diverse, inclusive, and healthy community.
 
+We want to create a open society, based on equal laws and rules for everyone. 
+
 ## Our Standards
 
 Examples of behavior that contributes to a positive environment for our
