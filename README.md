@@ -37,6 +37,10 @@ dotnet build Agrochain.All.sln
 cd Rapyd.API
 dotnet watch run --Rapyd.API
 ```
+<p align="center">
+  <img src="DATA/dotnet_swagger_ui.png" />
+</p>
+
 
 ### 3. Install Node/React Dependencies:
 
