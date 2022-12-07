@@ -259,7 +259,7 @@ const Profile = () => {
                     <h6 className="mb-0">
                       <i className="fa fa-id-card fa-fw"></i>&nbsp; AADHAR NUMBER
                     </h6>
-					<p className="text-muted" style={{ marginLeft: "24px" }}>{rapydId}</p>
+					<p className="text-muted" style={{ marginLeft: "24px" }}>{govtid}</p>
 					<h6 className="mb-0">
                       <i className="fa fa-user-circle fa-fw"></i>&nbsp; RAPYD CUSTOMER ID
                     </h6>
