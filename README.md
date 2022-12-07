@@ -120,6 +120,18 @@ npm run start
 <br />
 
 ### 12. Raypd API Integration Screenshots
+- Rapyd Payments Dashbaord  
+<img src="DATA/Rapyd/1.png" width="400"/>
+
+- AgroChain Rapyd WebPage for Donations 
+<img src="DATA/Rapyd/2.png" width="400"/>
+
+- AgroChain Rapyd Customer Id creation
+<img src="DATA/Rapyd/3.png" width="400"/>
+
+- AgroChain Rapyd Card Payemnts
+<img src="DATA/Rapyd/4.png" width="400"/>
+
 
 ### Thank You
 
