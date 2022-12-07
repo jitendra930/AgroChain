@@ -115,7 +115,7 @@ npm run start
   <img src="DATA/screenshots/6.png" width="400"/>
   <img src="DATA/screenshots/7.png" width="400"/>
   <img src="DATA/screenshots/8.png" width="400"/>
-  <img src="DATA/screenshots/10.png" width="400"/>
+  <img src="DATA/screenshots/11.png" width="400"/>
 </p>
 <br />
 
