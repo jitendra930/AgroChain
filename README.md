@@ -31,10 +31,11 @@ git clone https://github.com/IntelegixLabs/AgroChain
 ### 2. Run the .NET Backend Application (fetches the historical pollution data from a public API):
 
 ```
-cd AgroChain/agrochain/src/backend/Pollution.API
+cd AgroChain/Rapyd.All
 dotnet clean
-dotnet build Pollution.API.sln
-dotnet watch run --Pollution.API
+dotnet build Agrochain.All.sln
+cd Rapyd.API
+dotnet watch run --Rapyd.API
 ```
 
 ### 3. Install Node/React Dependencies:
