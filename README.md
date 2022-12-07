@@ -102,7 +102,7 @@ npm run start
 <br />
 
 
-### 10. Application Screenshots
+### 11. Application Screenshots
 
 <br />
 <p align="center">
