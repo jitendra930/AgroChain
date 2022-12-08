@@ -19,7 +19,7 @@ It provides a way for farmers to sell carbon credits in the form of NFT to indus
 
 ### Live Application Demo
 
-For video demostration refer to the YouTube link <a href="https://www.youtube.com/watch?v=aemzIIQrIPU">here.</a> 
+For video demostration refer to the YouTube link <a href="https://www.youtube.com/watch?v=eBz3w8_5sUw">here.</a> 
 
 
 ### 1. Clone/Download the Repository
