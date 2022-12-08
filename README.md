@@ -125,13 +125,13 @@ npm run start
 - AgroChain Rapyd WebPage for Donations 
 - AgroChain Rapyd Customer Id creation
 - AgroChain Rapyd Card Payemnts
-
-
-<img src="DATA/Rapyd/1.png" width="400"/>
-<img src="DATA/Rapyd/2.png" width="400"/>
-<img src="DATA/Rapyd/3.png" width="400"/>
-<img src="DATA/Rapyd/4.png" width="400"/>
-
+<br />
+<p align="center">
+  <img src="DATA/Rapyd/1.png" width="400"/>
+  <img src="DATA/Rapyd/2.png" width="400"/>
+  <img src="DATA/Rapyd/3.png" width="400"/>
+  <img src="DATA/Rapyd/4.png" width="400"/>
+</p>
 
 ### Thank You
 
